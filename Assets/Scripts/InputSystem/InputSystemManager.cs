@@ -4,9 +4,15 @@ using UnityEngine.InputSystem;
 
 public class InputSystemManager : MonoBehaviour
 {
-    public static event UnityAction<Vector2> OnTouch;
+    public static event UnityAction<Vector2> OnTouchAtPosition;
+    public static event UnityAction OnTouch;
 
     InputSystem_Actions _inputSystem;
+
+    void Awake()
+    {
+        _inputSystem = new();
+    }
 
     void OnEnable()
     {
@@ -26,6 +32,7 @@ public class InputSystemManager : MonoBehaviour
         
         Vector2 screenPosition = Touchscreen.current.primaryTouch.position.ReadValue();
 
-        OnTouch?.Invoke(screenPosition);
+        OnTouch?.Invoke();
+        OnTouchAtPosition?.Invoke(screenPosition);
     }
 }
