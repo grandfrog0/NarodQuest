@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DroppedItem : MonoBehaviour
+public class DroppedItem : InteractableObject
 {
     [SerializeField] private SpriteRenderer _renderer;
     [SerializeField] private ItemCountPair _drop;
@@ -24,5 +24,10 @@ public class DroppedItem : MonoBehaviour
     private void Start()
     {
         Initialize(_drop);
+    }
+
+    public override void Interact()
+    {
+        PickUp();
     }
 }

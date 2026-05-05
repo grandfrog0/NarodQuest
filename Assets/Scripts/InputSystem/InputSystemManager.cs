@@ -8,6 +8,11 @@ public class InputSystemManager : MonoBehaviour
 
     InputSystem_Actions _inputSystem;
 
+    private void Awake()
+    {
+        _inputSystem = new InputSystem_Actions();   
+    }
+
     void OnEnable()
     {
         _inputSystem.Player.Enable();

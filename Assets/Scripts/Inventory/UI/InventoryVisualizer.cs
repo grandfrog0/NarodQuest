@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class InventoryVisualizer : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class InventoryVisualizer : MonoBehaviour
     [SerializeField] private ItemView _itemViewPrefab;
     [SerializeField] private RectTransform _selectionMark;
     private List<ItemView> _itemViews = new();
+
+    [SerializeField] private SpriteRenderer _selectedRenderer;
 
     public void Refresh()
     {
@@ -25,8 +28,11 @@ public class InventoryVisualizer : MonoBehaviour
         _selectionMark.gameObject.SetActive(true);
         _selectionMark.transform.position = itemView.transform.position;
         _inventoryManager.SelectItem(pair.Item);
+
+        _selectedRenderer.gameObject.SetActive(pair?.Item != null);
+        _selectedRenderer.sprite = pair?.Item.Icon;
     }
-    
+
     public void Clear()
     {
         foreach (ItemView itemView in _itemViews)
