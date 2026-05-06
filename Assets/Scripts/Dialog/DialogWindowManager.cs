@@ -1,27 +1,30 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class DialogWindowManager : MonoBehaviour
 {
-    [SerializeField] RectTransform window;
+    [SerializeField] RectTransform cloudWindow;
+    [SerializeField] GameObject bottomPanel;
     [SerializeField] TextMeshProUGUI person;
     [SerializeField] TextMeshProUGUI message;
     [SerializeField] DialogManagerConfig config;
 
-    public void ShowWindow(Vector2 position)
+    public void ShowWindow()
     {
-        window.gameObject.SetActive(true);
-        window.anchoredPosition = position;
+        bottomPanel.gameObject.SetActive(true);
     }
+
     public void HideWindow()
     {
-        window.gameObject.SetActive(false);
+        bottomPanel.gameObject.SetActive(false);
     }
 
-
-    public void SetLog(LogSerializable log)
+    public void SetLog(LogSerializable log, Vector2 position)
     {
         person.text = config.GetPersonName(log.person);
         message.text = log.message;
+        cloudWindow.anchoredPosition = position;
+
     }
 }

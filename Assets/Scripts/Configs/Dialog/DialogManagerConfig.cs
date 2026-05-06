@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "DialogManagerConfig", menuName = "Scriptable Objects/DialogManagerConfig")]
 public class DialogManagerConfig : ScriptableObject
 {
+    public Vector2 cloudWindowOffsset = new(0, 1f);
     public List<PersonSerializable> personsSerializable;
 
     public string GetPersonName(Person person)

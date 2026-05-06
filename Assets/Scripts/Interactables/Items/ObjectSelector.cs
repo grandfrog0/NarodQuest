@@ -9,12 +9,12 @@ public class ObjectSelector : MonoBehaviour
 
     private void Start()
     {
-        InputSystemManager.OnTouch += OnScreenTouched;
+        InputSystemManager.OnTouchAtPosition += OnScreenTouched;
     }
 
     private void OnScreenTouched(Vector2 screenPos)
     {
-        if (EventSystem.current.IsPointerOverGameObject())
+        if (_target == null || EventSystem.current.IsPointerOverGameObject())
         {
             return;
         }
