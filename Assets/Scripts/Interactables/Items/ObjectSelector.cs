@@ -36,7 +36,13 @@ public class ObjectSelector : MonoBehaviour
         {
             if (collision.CompareTag("Interactable"))
             {
-                if (!HasTarget || Vector3.Distance(transform.position, _target.transform.position) > Vector3.Distance(transform.position, collision.transform.position))
+                if (_target != null && _target == collision.gameObject && !_target.IsActive)
+                {
+                    _target = null;
+                    return;
+                }
+
+                if (_target == null || !_target.IsActive || Vector3.Distance(transform.position, _target.transform.position) > Vector3.Distance(transform.position, collision.transform.position))
                 {
                     _target = collision.GetComponent<InteractableObject>();
 
@@ -46,8 +52,6 @@ public class ObjectSelector : MonoBehaviour
             }
         }
     }
-
-    private bool HasTarget => _target != null && _target.IsActive;
 
     private void OnTriggerExit2D(Collider2D collision)
     {
