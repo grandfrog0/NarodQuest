@@ -9,7 +9,7 @@ public class ObjectSelector : MonoBehaviour
 
     private void Start()
     {
-        InputSystemManager.OnTouchAtPosition += OnScreenTouched;
+        InputSystemManager.OnTouchAtPosition.AddListener(OnScreenTouched);
     }
 
     private void OnScreenTouched(Vector2 screenPos)

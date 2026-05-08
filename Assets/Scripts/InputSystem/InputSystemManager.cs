@@ -4,13 +4,14 @@ using UnityEngine.InputSystem;
 
 public class InputSystemManager : MonoBehaviour
 {
-    public static event UnityAction<Vector2> OnTouchAtPosition;
-    public static event UnityAction OnTouch;
+    public static UnityEvent<Vector2> OnTouchAtPosition = new();
+    public static UnityEvent OnTouch = new();
 
     InputSystem_Actions _inputSystem;
     Vector2 _prevPosition;
 
     public static Vector2 PositionDelta { get; private set; }
+    public static Vector2 CurrentTouchPosition { get; private set; }
 
     void Awake()
     {
@@ -25,7 +26,7 @@ public class InputSystemManager : MonoBehaviour
     void OnEnable()
     {
         _inputSystem.Player.Enable();
-        _inputSystem.Player.Attack.performed += OnAttack;
+        _inputSystem.Player.Attack.canceled += OnAttack;
     }
 
     void OnDisable()
@@ -41,9 +42,9 @@ public class InputSystemManager : MonoBehaviour
 
     void CalculateDelta()
     {
-        Vector2 currentPosition = GetCurrentTouchPosition();
-        PositionDelta = currentPosition - _prevPosition;
-        _prevPosition = currentPosition;
+        CurrentTouchPosition = GetCurrentTouchPosition();
+        PositionDelta = CurrentTouchPosition - _prevPosition;
+        _prevPosition = CurrentTouchPosition;
     }
 
     void OnAttack(InputAction.CallbackContext context)
