@@ -1,20 +1,29 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using static UnityEngine.GraphicsBuffer;
 
 public class ObjectSelector : MonoBehaviour
 {
-    [SerializeField] private GameObject _selectionOutline;
+    [SerializeField] private GameObject _selectionOutlinePrefab;
     [SerializeField] private LayerMask _selectMask;
-    private InteractableObject _target;
+    private Dictionary<InteractableObject, (GameObject, UnityAction<bool>)> _targets = new();
+    private CircleCollider2D _collider;
 
     private void Start()
     {
         InputSystemManager.OnTouchAtPosition += OnScreenTouched;
+        _collider = GetComponent<CircleCollider2D>();
     }
 
     private void OnScreenTouched(Vector2 screenPos)
     {
-        if (_target == null || EventSystem.current.IsPointerOverGameObject())
+        if (_targets.Count == 0 || EventSystem.current.IsPointerOverGameObject())
         {
             return;
         }
@@ -23,42 +32,66 @@ public class ObjectSelector : MonoBehaviour
 
         if (hit.collider != null)
         {
-            if (hit.collider.gameObject == _target.gameObject)
+            InteractableObject target = _targets.FirstOrDefault(x => x.Key.gameObject == hit.collider.gameObject).Key;
+            if (target)
             {
-                _target.Interact();
+                target.Interact();
             }
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (_target == null || collision.gameObject != _target.gameObject)
+        if (collision.CompareTag("Interactable"))
         {
-            if (collision.CompareTag("Interactable"))
+            if (!_targets.Any(x => x.Key.gameObject == collision.gameObject))
             {
-                if (_target != null && _target == collision.gameObject && !_target.IsActive)
-                {
-                    _target = null;
-                    return;
-                }
-
-                if (_target == null || !_target.IsActive || Vector3.Distance(transform.position, _target.transform.position) > Vector3.Distance(transform.position, collision.transform.position))
-                {
-                    _target = collision.GetComponent<InteractableObject>();
-
-                    _selectionOutline.SetActive(true);
-                    _selectionOutline.transform.position = _target.transform.position;
-                }
+                InteractableObject target = collision.GetComponent<InteractableObject>();
+                AddTarget(target);
             }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (_target != null && collision.gameObject == _target.gameObject)
+        if (collision.CompareTag("Interactable") && Vector3.Distance(transform.position, collision.transform.position) > _collider.radius)
         {
-            _target = null;
-            _selectionOutline.SetActive(false);
+            if (_targets.Any(x => x.Key.gameObject == collision.gameObject))
+            {
+                InteractableObject target = collision.GetComponent<InteractableObject>();
+                RemoveTarget(target);
+            }
         }
+    }
+
+    private void OnActiveChanged(InteractableObject target, bool value)
+    {
+        if (!value)
+        {
+            RemoveTarget(target);
+        }
+        else
+        {
+            if (Vector3.Distance(transform.position, target.transform.position) <= _collider.radius)
+            {
+                AddTarget(target);
+            }
+        }
+    }
+
+    private void AddTarget(InteractableObject target)
+    {
+        UnityAction<bool> action = x => OnActiveChanged(target, x);
+        target.OnActiveChanged.AddListener(action);
+        GameObject outline = Instantiate(_selectionOutlinePrefab, target.transform.position, Quaternion.identity);
+        outline.transform.localScale = target.transform.localScale + Vector3.one;
+        _targets.Add(target, (outline, action));
+    }
+
+    private void RemoveTarget(InteractableObject target)
+    {
+        _targets.Remove(target, out (GameObject target, UnityAction<bool> action) value);
+        target.OnActiveChanged.RemoveListener(value.action);
+        Destroy(value.target);
     }
 }
