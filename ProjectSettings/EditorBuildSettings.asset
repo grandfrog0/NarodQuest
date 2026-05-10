@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WhackAMole.unity
     guid: 469e6c4490c85b94ca072c123a6c475f
+  - enabled: 1
+    path: Assets/Scenes/MilkCow.unity
+    guid: aac92f7881acd8c4bad92522dae0482b
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 30a1a70e17adfad48a7303392b0f29c9, type: 3}
   m_UseUCBPForAssetBundles: 0

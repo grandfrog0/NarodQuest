@@ -17,8 +17,9 @@ public class ObjectSelector : MonoBehaviour
 
     private void Start()
     {
-        InputSystemManager.OnTouchAtPosition += OnScreenTouched;
         _collider = GetComponent<CircleCollider2D>();
+        InputSystemManager.OnTouchAtPosition.AddListener(OnScreenTouched);
+
     }
 
     private void OnScreenTouched(Vector2 screenPos)
