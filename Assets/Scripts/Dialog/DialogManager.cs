@@ -15,12 +15,12 @@ public class DialogManager : MonoBehaviour
 
     void OnEnable()
     {
-        InputSystemManager.OnTouch += ShowDialog;
+        InputSystemManager.OnTouch.AddListener(ShowDialog);
     }
 
     void OnDisable()
     {
-        InputSystemManager.OnTouch -= ShowDialog;
+        InputSystemManager.OnTouch.AddListener(ShowDialog);
 
     }
 
