@@ -21,6 +21,7 @@ public class MoleHole : InteractableObject
     {
         _renderer = GetComponent<SpriteRenderer>();
         HoleState = MoleHoleState.Grassed;
+        IsActive = false;
     }
 
     private void ShowHoleType(MoleHoleState holeType)
@@ -29,7 +30,7 @@ public class MoleHole : InteractableObject
         {
             MoleHoleState.Grassed => Color.green,
             MoleHoleState.Hole => Color.black,
-            MoleHoleState.MoleHole => Color.red,
+            MoleHoleState.MoleHole => Color.brown,
             MoleHoleState.Rock => Color.gray,
             _ => Color.white
         };
@@ -38,10 +39,12 @@ public class MoleHole : InteractableObject
     public void Subscribe(Action onInteract)
     {
         _onInteract = onInteract;
+        IsActive = false;
     }
     public void Describe()
     {
         _onInteract = null;
+        IsActive = true;
     }
     public override void Interact()
     {

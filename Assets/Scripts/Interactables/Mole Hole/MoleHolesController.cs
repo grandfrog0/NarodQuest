@@ -5,10 +5,18 @@ using System.Linq;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 public class MoleHolesController : MonoBehaviour
 {
+    [SerializeField] private UnityEvent _onGameStart;
+    [SerializeField] private UnityEvent _onGameEnd;
+    [SerializeField] private UnityEvent _onWin;
+    [SerializeField] private UnityEvent _onLose;
+    [SerializeField] private UnityEvent<int> _onMolesCountChanged;
+    [SerializeField] private UnityEvent<float> _onDigDurabilityChanged;
+
     [SerializeField] private List<MoleHole> _holes;
     [SerializeField] private Vector2 _actionCooldownRange;
     [SerializeField] private Vector2 _moleOutsideTimeRange;
@@ -18,21 +26,24 @@ public class MoleHolesController : MonoBehaviour
     private int _molesLeft;
     private int _digDurabilityLeft;
 
-    private void Start()
-    {
-        StartMinigame();
-    }
+    private bool IsGameActive => _gameRoutine != null;
 
     public void StartMinigame()
     {
         _molesLeft = Random.Range(_maxMolesCountRange.x, _maxMolesCountRange.y + 1);
+        _onMolesCountChanged.Invoke(_molesLeft);
+
         _digDurabilityLeft = _maxDigDurability;
+        _onDigDurabilityChanged.Invoke(Mathf.RoundToInt((float)_digDurabilityLeft / _maxDigDurability * 100));
+
         _gameRoutine = StartCoroutine(MinigameRoutine());
 
         foreach (MoleHole hole in _holes)
         {
             hole.Subscribe(() => OnInteract(hole));
         }
+
+        _onGameStart.Invoke();
     }
 
     public void StopMinigame()
@@ -51,11 +62,15 @@ public class MoleHolesController : MonoBehaviour
         if (_molesLeft <= 0)
         {
             Debug.Log("WIN");
+            _onWin.Invoke();
         }
         else
         {
             Debug.Log("LOSE");
+            _onLose.Invoke();
         }
+
+        _onGameEnd.Invoke();
     }
 
     private IEnumerator MinigameRoutine()
@@ -125,10 +140,16 @@ public class MoleHolesController : MonoBehaviour
 
     private void OnInteract(MoleHole hole)
     {
+        if (!IsGameActive)
+        {
+            return;
+        }
+
         switch (hole.HoleState)
         {
             case MoleHoleState.MoleHole:
                 _molesLeft--;
+                _onMolesCountChanged.Invoke(_molesLeft);
                 hole.HoleState = MoleHoleState.Hole;
                 if (_molesLeft <= 0)
                 {
@@ -138,6 +159,7 @@ public class MoleHolesController : MonoBehaviour
 
             case MoleHoleState.Rock:
                 _digDurabilityLeft--;
+                _onDigDurabilityChanged.Invoke(Mathf.RoundToInt((float)_digDurabilityLeft / _maxDigDurability * 100));
                 if (_digDurabilityLeft <= 0)
                 {
                     StopMinigame();

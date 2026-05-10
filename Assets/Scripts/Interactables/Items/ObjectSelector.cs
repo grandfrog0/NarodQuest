@@ -81,6 +81,11 @@ public class ObjectSelector : MonoBehaviour
 
     private void AddTarget(InteractableObject target)
     {
+        if (_targets.ContainsKey(target))
+        {
+            return;
+        }
+
         UnityAction<bool> action = x => OnActiveChanged(target, x);
         target.OnActiveChanged.AddListener(action);
         GameObject outline = Instantiate(_selectionOutlinePrefab, target.transform.position, Quaternion.identity);
