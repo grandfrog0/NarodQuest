@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class Teat : MonoBehaviour, /*IDragHandler,*/ IEndDragHandler
+public class Teat : MonoBehaviour
 {
     [SerializeField] int index;
     [SerializeField] UdderManager udder;
@@ -26,18 +26,30 @@ public class Teat : MonoBehaviour, /*IDragHandler,*/ IEndDragHandler
 
     void Update()
     {
-        Debug.Log(udder.IsShowing || !IsPointerOverImage(InputSystemManager.CurrentTouchPosition));
-        if (udder.IsShowing || !IsPointerOverImage(InputSystemManager.CurrentTouchPosition))
+        if (_time >= config.teatMinTimeMilking)
+            EndMilking();
+
+        if (udder.IsShowing || !InputSystemManager.IsTouching || !IsPointerOverImage(InputSystemManager.CurrentTouchPosition))
         {
+            _time = 0f;
             milkParticles.Stop();
             return;
         }
 
+
         _time += Time.deltaTime;
         if (InputSystemManager.PositionDelta.y >= 0)
+        {
+            //Debug.Log($"Stop (position) -- {index} {InputSystemManager.PositionDelta.y}");
+            _time = 0f;
+
             milkParticles.Stop();
-        else if (InputSystemManager.PositionDelta.y < -0.5f)
+        }
+        else if (InputSystemManager.PositionDelta.y < -0.1f)
+        {
+            //Debug.Log($"Play -- {index}");
             milkParticles.Play();
+        }
     }
 
     //public void OnDrag(PointerEventData eventData)
@@ -51,10 +63,10 @@ public class Teat : MonoBehaviour, /*IDragHandler,*/ IEndDragHandler
     //    //Debug.Log(eventData.delta);
     //}
 
-    public void OnEndDrag(PointerEventData eventData)
+    public void EndMilking()
     {
-        if (_time >= config.teatMinTimeMilking)
-            udder.TeatMilked(index);
+        //Debug.Log(_time);
+        udder.TeatMilked(index);
 
         milkParticles.Stop();
         _time = 0f;

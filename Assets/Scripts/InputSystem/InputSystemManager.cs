@@ -12,6 +12,7 @@ public class InputSystemManager : MonoBehaviour
 
     public static Vector2 PositionDelta { get; private set; }
     public static Vector2 CurrentTouchPosition { get; private set; }
+    public static bool IsTouching { get; private set; }
 
     void Awake()
     {
@@ -25,32 +26,44 @@ public class InputSystemManager : MonoBehaviour
 
     void OnEnable()
     {
-        _inputSystem.Player.Enable();
-        _inputSystem.Player.Attack.canceled += OnAttack;
+        _inputSystem.Enable();
+        _inputSystem.Player.Look.performed += SetDelta;
+        _inputSystem.UI.Touch.started += OnTouchStarted;
+        _inputSystem.UI.Touch.canceled += OnTouchCanceled;
+        _inputSystem.Player.Attack.canceled += OnAttackCanceled;
     }
 
     void OnDisable()
     {
-        _inputSystem.Player.Disable();
-        _inputSystem.Player.Attack.performed -= OnAttack;
+        _inputSystem.Disable();
+        _inputSystem.Player.Look.performed -= SetDelta;
+        _inputSystem.Player.Attack.started -= OnTouchStarted;
+        _inputSystem.UI.Touch.canceled -= OnTouchCanceled;
+        _inputSystem.Player.Attack.canceled -= OnAttackCanceled;
     }
 
-    void Update()
+    void SetDelta(InputAction.CallbackContext context)
     {
-        CalculateDelta();
-    }
-
-    void CalculateDelta()
-    {
+        PositionDelta = context.ReadValue<Vector2>();
         CurrentTouchPosition = GetCurrentTouchPosition();
-        PositionDelta = CurrentTouchPosition - _prevPosition;
-        _prevPosition = CurrentTouchPosition;
     }
 
-    void OnAttack(InputAction.CallbackContext context)
+    void OnTouchStarted(InputAction.CallbackContext context)
+    {
+        IsTouching = true;
+    }
+
+    void OnTouchCanceled(InputAction.CallbackContext context)
+    {
+        IsTouching = false;
+    }
+
+    void OnAttackCanceled(InputAction.CallbackContext context)
     {
         OnTouch?.Invoke();
         OnTouchAtPosition?.Invoke(GetCurrentTouchPosition());
+
+        IsTouching = false;
     }
 
     public static Vector2 GetCurrentTouchPosition()
