@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class InventoryVisualizer : MonoBehaviour
 {
@@ -10,7 +9,7 @@ public class InventoryVisualizer : MonoBehaviour
     [SerializeField] private RectTransform _selectionMark;
     private List<ItemView> _itemViews = new();
 
-    [SerializeField] private SpriteRenderer _selectedRenderer;
+    [SerializeField] private PlayerItemViewer _playerItemViewer;
 
     public void Refresh()
     {
@@ -25,12 +24,26 @@ public class InventoryVisualizer : MonoBehaviour
 
     private void OnSelectionChanged(ItemView itemView, ItemCountPair pair)
     {
-        _selectionMark.gameObject.SetActive(true);
-        _selectionMark.transform.position = itemView.transform.position;
-        _inventoryManager.SelectItem(pair.Item);
+        Debug.Log(_selectionMark);
+        if (pair != null && _inventoryManager.SelectedItem != pair.Item)
+        {
+            _selectionMark.gameObject.SetActive(true);
+            _selectionMark.transform.position = itemView.transform.position;
+            _inventoryManager.SelectedItem = pair.Item;
 
-        _selectedRenderer.gameObject.SetActive(pair?.Item != null);
-        _selectedRenderer.sprite = pair?.Item.Icon;
+            if (pair?.Item != null)
+            {
+                _playerItemViewer.Show(pair.Item.Icon);
+            }
+        }
+        else
+        {
+            _selectionMark.gameObject.SetActive(false);
+            _inventoryManager.SelectedItem = null;
+
+            _playerItemViewer.Hide();
+        }
+        Debug.Log(_selectionMark);
     }
 
     public void Clear()
@@ -41,9 +54,24 @@ public class InventoryVisualizer : MonoBehaviour
         }
         _itemViews.Clear();
     }
+    private void OnAnyTakeableTaken(bool value)
+    {
+        if (value)
+        {
+            OnSelectionChanged(null, null);
+        }
+    }
 
     private void Start()
     {
         Refresh();
+    }
+    private void OnEnable()
+    {
+        TakeableObjects.OnAnyTaken += OnAnyTakeableTaken;
+    }
+    private void OnDisable()
+    {
+        TakeableObjects.OnAnyTaken -= OnAnyTakeableTaken;
     }
 }

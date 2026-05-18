@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Events;
@@ -85,13 +86,18 @@ public class ObjectSelector : MonoBehaviour
         target.OnActiveChanged.AddListener(action);
         GameObject outline = Instantiate(_selectionOutlinePrefab, target.transform.position, Quaternion.identity);
         outline.transform.localScale = target.transform.localScale + Vector3.one;
+        outline.transform.SetParent(target.transform);
         _targets.Add(target, (outline, action));
     }
 
     private void RemoveTarget(InteractableObject target)
     {
-        _targets.Remove(target, out (GameObject target, UnityAction<bool> action) value);
+        _targets.Remove(target, out (GameObject outline, UnityAction<bool> action) value);
         target.OnActiveChanged.RemoveListener(value.action);
-        Destroy(value.target);
+
+        if (!value.outline?.IsUnityNull() ?? false)
+        {
+            Destroy(value.outline);
+        }
     }
 }
