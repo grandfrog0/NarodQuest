@@ -15,6 +15,13 @@ public class QuestVisualizer : MonoBehaviour
 
     public void ShowQuest(QuestState quest)
     {
-        _currentQuestText.SetValue(_questsNamings.Quests.FirstOrDefault(x => x.Quest == quest)?.Naming ?? "");
+        if (quest == QuestState.None)
+        {
+            _currentQuestText.Clear();
+        }
+        else
+        {
+            _currentQuestText.SetValue(_questsNamings.Quests.FirstOrDefault(x => x.Quest == quest)?.Naming ?? "");
+        }
     }
 }

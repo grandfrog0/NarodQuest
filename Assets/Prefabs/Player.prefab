@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7726424164847592634}
   - component: {fileID: 5880524069476086069}
+  - component: {fileID: 1063771542983224757}
   m_Layer: 0
   m_Name: Item Viewer
   m_TagString: Untagged
@@ -91,6 +92,18 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &1063771542983224757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2064781737747666821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 078408984e65dff4d8538f4c4de34151, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerBringable
 --- !u!1 &8127068896405604266
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,6 +119,7 @@ GameObject:
   - component: {fileID: 2952184483914371898}
   - component: {fileID: 3469575206095137743}
   - component: {fileID: 1908981569809329129}
+  - component: {fileID: 147497628349723731}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -176,7 +190,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
   m_Color: {r: 0.9622642, g: 0.7093, b: 0, a: 1}
@@ -318,3 +332,16 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 3
+--- !u!114 &147497628349723731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8127068896405604266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caf36b2935e6c244ca50af02da0db82c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BringableObjectController
+  _offset: {x: 0, y: -0.25}

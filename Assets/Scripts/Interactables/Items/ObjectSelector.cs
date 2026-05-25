@@ -91,6 +91,7 @@ public class ObjectSelector : MonoBehaviour
         target.OnActiveChanged.AddListener(action);
         GameObject outline = Instantiate(_selectionOutlinePrefab, target.transform.position, Quaternion.identity);
         outline.transform.localScale = target.transform.localScale + Vector3.one;
+        outline.transform.parent = target.transform;
         _targets.Add(target, (outline, action));
     }
 

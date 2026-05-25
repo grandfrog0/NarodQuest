@@ -1,33 +1,51 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerMovementController : MonoBehaviour
 {
-    [SerializeField] PlayerConfig config;
-    [SerializeField] JoystickController joystick;
+    public UnityEvent<Vector2> OnMoveAxisChanged { get; } = new();
 
-    Rigidbody2D _rg;
+    [SerializeField] private PlayerConfig config;
+    [SerializeField] private JoystickController joystick;
+    private Rigidbody2D _rigidbody;
 
-    void Start()
+    public Vector2 Axis
+    {
+        get => _axis;
+        set
+        {
+            _axis = value;
+            OnMoveAxisChanged.Invoke(_axis);
+        }
+    }
+    private Vector2 _axis;
+
+    private void Start()
     {
         Initialize();
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         Move();
     }
 
-    void Initialize()
+    private void Initialize()
     {
-        _rg = GetComponent<Rigidbody2D>();
+        _rigidbody = GetComponent<Rigidbody2D>();
+        Axis = Vector2.down;
     }
 
-    void Move()
+    private void Move()
     {
-        // итоговое движение
         Vector2 totalMovement = joystick.Movement * config.speed * Time.fixedDeltaTime;
-        Vector2 totalPosition = totalMovement + _rg.position;
-        _rg.MovePosition(totalPosition);
-    }
+        Vector2 totalPosition = totalMovement + _rigidbody.position;
+        _rigidbody.MovePosition(totalPosition);
 
+        Vector2 axis = totalMovement != Vector2.zero ? Mathf.Abs(totalMovement.x) > Mathf.Abs(totalMovement.y) ? Vector2.right * Mathf.Sign(totalMovement.x) : Vector2.up * Mathf.Sign(totalMovement.y) : Vector2.zero;
+        if (Axis != axis && axis != Vector2.zero)
+        {
+            Axis = axis;
+        }
+    }
 }
