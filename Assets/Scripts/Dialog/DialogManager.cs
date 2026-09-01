@@ -68,7 +68,6 @@ public class DialogManager : MonoBehaviour
             cloudWindowPosition = _dialogManagerConfig.cloudWindowOffsset;
         }
 
-
         _dialogWindowManager.SetLog(log, cloudWindowPosition);
         _currentIndex++;
     }

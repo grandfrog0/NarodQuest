@@ -4,7 +4,11 @@ public class TutorialQuest : AbstractQuest
 {
     public override GameQuestStep GameStep => GameQuestStep.Tutorial;
 
+    [Header("Start")]
     [SerializeField] private DialogConfig _greetingsDialog;
+    [Header("Movement")]
+    [SerializeField] private DialogConfig _movementDialog;
+    [SerializeField] private CollisionTrigger _movementTrigger;
 
     public TutorialQuestStep CurrentStep
     {
@@ -18,13 +22,12 @@ public class TutorialQuest : AbstractQuest
     }
     private TutorialQuestStep _currentStep;
 
-    private DialogManager _dialogManager;
-
     protected override void StartQuest()
     {
         base.StartQuest();
         CurrentStep = TutorialQuestStep.Start;
-        _dialogManager = DialogManager.Instance;
+
+        _movementTrigger.Disable();
     }
 
     private void ManageStep(TutorialQuestStep step)
@@ -59,6 +62,7 @@ public class TutorialQuest : AbstractQuest
         // после пропуска приветствия перейти в Movement
 
         DialogManager.Instance.StartDialog(_greetingsDialog, null);
+        DialogManager.Instance.OnDialogEnd.AddListener(() => Debug.Log("End!"));
         DialogManager.Instance.OnDialogEnd.AddListener(GoToMovementInstructions);
 
         void GoToMovementInstructions()
@@ -72,6 +76,8 @@ public class TutorialQuest : AbstractQuest
         // показать инструкцию
         // после того, как игрок оттянет джойстик и дойдет до нужной точки перейти в BringItem
 
+        _movementTrigger.Enable();
+        DialogManager.Instance.StartDialog(_movementDialog, null);
 
     }
     private void ShowBringItemInstruction()
@@ -88,5 +94,11 @@ public class TutorialQuest : AbstractQuest
     {
          // похвалить
          // завершить квест и перейти к следующему (дойти до избушки)
+    }
+
+    public void OnMovementTargetReceived()
+    {
+        CurrentStep = TutorialQuestStep.BringItem;
+        _movementTrigger.Disable();
     }
 }
