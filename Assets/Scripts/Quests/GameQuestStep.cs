@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum QuestState
+public enum GameQuestStep
 {
     None,
     /// НавеститьБабку
@@ -48,5 +48,7 @@ public enum QuestState
     // ДобавитьТопорВКашу,
     AddTheAxeToThePorridge,
     // Финал
-    End
+    End,
+
+    Tutorial
 }

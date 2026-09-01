@@ -13,9 +13,9 @@ public class QuestVisualizer : MonoBehaviour
         QuestManager.Instance.OnQuestChanged.AddListener(ShowQuest);
     }
 
-    public void ShowQuest(QuestState quest)
+    public void ShowQuest(GameQuestStep quest)
     {
-        if (quest == QuestState.None)
+        if (quest == GameQuestStep.None)
         {
             _currentQuestText.Clear();
         }

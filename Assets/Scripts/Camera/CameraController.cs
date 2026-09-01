@@ -2,16 +2,18 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] Transform target;
-    [SerializeField] CameraConfig config;
+    [SerializeField] private Transform _target;
+    [SerializeField] private CameraConfig _config;
 
-    void LateUpdate()
+    private Vector3 TargetPosition => _target.position + _config.Offset;
+
+    private void LateUpdate()
     {
-        Follow();
+        transform.position = Vector3.Lerp(transform.position, TargetPosition, _config.Speed * Time.deltaTime);
     }
 
-    void Follow()
+    private void Start()
     {
-        transform.position = target.position + config.offsetFollow;
+        transform.position = TargetPosition;
     }
 }

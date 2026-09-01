@@ -3,6 +3,6 @@ using System;
 [Serializable]
 public class LogSerializable
 {
-    public Person person;
+    public PersonConfig person;
     public string message;
 }

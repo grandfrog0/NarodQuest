@@ -1,17 +1,23 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DialogManager : MonoBehaviour
 {
-    [SerializeField] DialogWindowManager dialogWindowManager;
-    [SerializeField] DialogConfig dialogConfig;
-    [SerializeField] DialogManagerConfig dialogManagerConfig;
+    public static DialogManager Instance { get; private set; }
 
-    Dictionary<Person, Transform> currentCompanions;
-    DialogConfig _currentDialog;
-    int _currentIndex;
+    public UnityEvent OnDialogEnd { get; } = new();
 
-    Camera _mainCamera;
+    [SerializeField] private DialogWindowManager _dialogWindowManager;
+    [SerializeField] private DialogConfig _dialogConfig;
+    [SerializeField] private DialogManagerConfig _dialogManagerConfig;
+
+    private List<CompanionSerializable> _currentCompanions;
+    private DialogConfig _currentDialog;
+    private int _currentIndex;
+
+    private Camera _mainCamera;
 
     void OnEnable()
     {
@@ -20,38 +26,52 @@ public class DialogManager : MonoBehaviour
 
     void OnDisable()
     {
-        InputSystemManager.OnTouch.AddListener(ShowDialog);
-
+        InputSystemManager.OnTouch.RemoveListener(ShowDialog);
     }
 
     void Start()
     {
+        Instance = this;
         _mainCamera = Camera.main;
     }
 
-    public void StartDialog(DialogConfig dialog, Dictionary<Person, Transform> companions)
+    public void StartDialog(DialogConfig dialog, List<CompanionSerializable> companions)
     {
         _currentDialog = dialog;
-        dialogWindowManager.ShowWindow();
-        currentCompanions = companions;
+        _dialogWindowManager.ShowWindow();
+        _currentCompanions = companions;
 
         ShowDialog();
     }
 
-    void ShowDialog()
+    private void ShowDialog()
     {
         if (_currentDialog == null || _currentDialog.dialog.Count <= _currentIndex)
         {
-            dialogWindowManager.HideWindow();
+            _dialogWindowManager.HideWindow();
+            OnDialogEnd.Invoke();
             return;
         }
 
         LogSerializable log = _currentDialog.dialog[_currentIndex];
 
-        Vector2 screenPersonPosition = _mainCamera.WorldToScreenPoint(currentCompanions[log.person].position);
-        Vector2 cloudWindowPosition = screenPersonPosition + dialogManagerConfig.cloudWindowOffsset;
+        Vector2 cloudWindowPosition;
 
-        dialogWindowManager.SetLog(log, cloudWindowPosition);
+        Transform personTransform = GetTransform(log.person);
+        if (personTransform != null)
+        {
+            Vector2 screenPersonPosition = _mainCamera.WorldToScreenPoint(personTransform.position);
+            cloudWindowPosition = screenPersonPosition + _dialogManagerConfig.cloudWindowOffsset;
+        }
+        else
+        {
+            cloudWindowPosition = _dialogManagerConfig.cloudWindowOffsset;
+        }
+
+
+        _dialogWindowManager.SetLog(log, cloudWindowPosition);
         _currentIndex++;
     }
+
+    private Transform GetTransform(PersonConfig person) => _currentCompanions?.FirstOrDefault(x => x.person == person)?.companion;
 }

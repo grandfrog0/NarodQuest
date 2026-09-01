@@ -4,6 +4,6 @@ using UnityEngine;
 [Serializable]
 public class QuestNaming
 {
-    public QuestState Quest;
+    public GameQuestStep Quest;
     public string Naming;
 }

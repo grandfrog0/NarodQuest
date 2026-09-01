@@ -12,7 +12,7 @@ public class QuestsNamingsConfig : ScriptableObject
     {
         if (Quests.Count == 0)
         {
-            foreach (QuestState quest in Enum.GetValues(typeof(QuestState)))
+            foreach (GameQuestStep quest in Enum.GetValues(typeof(GameQuestStep)))
             {
                 Quests.Add(new QuestNaming() { Quest = quest });
             }

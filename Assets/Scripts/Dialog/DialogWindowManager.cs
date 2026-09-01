@@ -22,9 +22,8 @@ public class DialogWindowManager : MonoBehaviour
 
     public void SetLog(LogSerializable log, Vector2 position)
     {
-        person.text = config.GetPersonName(log.person);
+        person.text = log.person.Name;
         message.text = log.message;
         cloudWindow.anchoredPosition = position;
-
     }
 }

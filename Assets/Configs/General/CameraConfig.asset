@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e07d9aeb03c9194b9c8db933670f409, type: 3}
   m_Name: CameraConfig
   m_EditorClassIdentifier: Assembly-CSharp::CameraConfig
-  offsetFollow: {x: 0, y: 0, z: -10}
+  Offset: {x: 0, y: 0, z: -10}
+  Speed: 3

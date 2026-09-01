@@ -1,30 +1,15 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class NPC : InteractableObject
 {
-    [SerializeField] List<CompanionSerializable> companionsSerializable;
-    [SerializeField] DialogConfig dialog;
-    [SerializeField] DialogManager dialogManager;
-
-    Dictionary<Person, Transform> companions = new();
-
-    void Start()
-    {
-        Initialize();
-    }
-
-    void Initialize()
-    {
-        foreach (CompanionSerializable companionSerializable in companionsSerializable)
-        {
-            companions[companionSerializable.person] = companionSerializable.companion;
-        }
-    }
+    [SerializeField] private List<CompanionSerializable> _companions;
+    [SerializeField] private DialogConfig _dialog;
 
     public override void Interact()
     {
         IsActive = false;
-        dialogManager.StartDialog(dialog, companions);
+        DialogManager.Instance.StartDialog(_dialog, _companions);
     }
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class QuestTrigger : Trigger
 {
-    [SerializeField] private QuestState _quest;
+    [SerializeField] private GameQuestStep _quest;
 
     protected override void Start()
     {

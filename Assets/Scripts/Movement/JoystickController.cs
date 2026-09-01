@@ -27,7 +27,7 @@ public class JoystickController : MonoBehaviour, IDragHandler, IEndDragHandler
     {
         Vector2 targetPosition = eventData.position;
 
-        // инверсия в зависимости от якорей джостика
+        // инверсия в зависимости от якорей джойстика
         targetPosition.x -= xInverse ? Screen.width : 0f;
 
         Vector2 direction = targetPosition - _startPosition;
@@ -35,11 +35,11 @@ public class JoystickController : MonoBehaviour, IDragHandler, IEndDragHandler
         // уменьшение магнитуды для реализации разгона
         direction = Vector2.ClampMagnitude(direction, 1 / maxDistance);
 
-        //Debug.Log(direction);
+        //Debug.Log(direction); 
 
         float distance = Vector3.Distance(_startPosition, targetPosition);
         float clampedDistance = Mathf.Clamp(distance, 0f, maxDistance);
-        
+
         Movement = direction * clampedDistance;
         _joystick.anchoredPosition = _startPosition + Movement * clampedDistance;
     }
