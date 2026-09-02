@@ -37,6 +37,7 @@ public class DialogManager : MonoBehaviour
 
     public void StartDialog(DialogConfig dialog, List<CompanionSerializable> companions)
     {
+        _currentIndex = 0;
         _currentDialog = dialog;
         _dialogWindowManager.ShowWindow();
         _currentCompanions = companions;
@@ -46,7 +47,7 @@ public class DialogManager : MonoBehaviour
 
     private void ShowDialog()
     {
-        if (_currentDialog == null || _currentDialog.dialog.Count <= _currentIndex)
+        if (_currentDialog == null || _currentIndex >= _currentDialog.dialog.Count)
         {
             _dialogWindowManager.HideWindow();
             OnDialogEnd.Invoke();

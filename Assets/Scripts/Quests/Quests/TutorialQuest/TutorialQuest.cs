@@ -9,6 +9,9 @@ public class TutorialQuest : AbstractQuest
     [Header("Movement")]
     [SerializeField] private DialogConfig _movementDialog;
     [SerializeField] private CollisionTrigger _movementTrigger;
+    [Header("Item")]
+    [SerializeField] private DialogConfig _bringItemDialog;
+    [SerializeField] private DroppedItem _targetItem;
 
     public TutorialQuestStep CurrentStep
     {
@@ -28,6 +31,7 @@ public class TutorialQuest : AbstractQuest
         CurrentStep = TutorialQuestStep.Start;
 
         _movementTrigger.Disable();
+        _targetItem.gameObject.SetActive(false);
     }
 
     private void ManageStep(TutorialQuestStep step)
@@ -62,7 +66,6 @@ public class TutorialQuest : AbstractQuest
         // после пропуска приветствия перейти в Movement
 
         DialogManager.Instance.StartDialog(_greetingsDialog, null);
-        DialogManager.Instance.OnDialogEnd.AddListener(() => Debug.Log("End!"));
         DialogManager.Instance.OnDialogEnd.AddListener(GoToMovementInstructions);
 
         void GoToMovementInstructions()
@@ -78,27 +81,37 @@ public class TutorialQuest : AbstractQuest
 
         _movementTrigger.Enable();
         DialogManager.Instance.StartDialog(_movementDialog, null);
-
     }
     private void ShowBringItemInstruction()
     {
         // показать инструкцию
         // после того, как игрок подберет предмет в инвентарь перейти в DragItem
+
+        _targetItem.gameObject.SetActive(true);
+        _targetItem.OnPicked += OnTargetItemBrought;
+        DialogManager.Instance.StartDialog(_bringItemDialog, null);
     }
     private void ShowDragItemInstruction()
     {
-         // показать инструкцию
-         // после того, как игрок перенесет камень в нужную точку перейти в End
+        // показать инструкцию
+        // после того, как игрок перенесет камень в нужную точку перейти в End
     }
     private void ShowEnd()
     {
-         // похвалить
-         // завершить квест и перейти к следующему (дойти до избушки)
+        // похвалить
+        // завершить квест и перейти к следующему (дойти до избушки)
     }
 
     public void OnMovementTargetReceived()
     {
         CurrentStep = TutorialQuestStep.BringItem;
         _movementTrigger.Disable();
+    }
+
+    public void OnTargetItemBrought(ItemCountPair drop)
+    {
+        CurrentStep = TutorialQuestStep.DragItem;
+
+        // TODO
     }
 }

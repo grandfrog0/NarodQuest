@@ -14,9 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogConfig
   dialog:
   - person: {fileID: 11400000, guid: 031d6aed1ca1e6f4e85700b88e5a54d8, type: 2}
-    message: "\u0414\u0430\u0432\u0430\u0439 \u0440\u0430\u0437\u0431\u0435\u0440\u0435\u043C\u0441\u044F
-      \u0441 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435\u043C."
-  - person: {fileID: 11400000, guid: 031d6aed1ca1e6f4e85700b88e5a54d8, type: 2}
     message: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0439 \u0434\u0436\u043E\u0439\u0441\u0442\u0438\u043A,
       \u0447\u0442\u043E\u0431\u044B \u0434\u043E\u0439\u0442\u0438 \u0434\u043E
       \u0443\u043A\u0430\u0437\u0430\u043D\u043D\u043E\u0439 \u0442\u043E\u0447\u043A\u0438."
