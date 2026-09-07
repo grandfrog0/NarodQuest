@@ -4,9 +4,10 @@ using UnityEngine.EventSystems;
 
 public class DroppedItem : InteractableObject
 {
+    public event Action<ItemCountPair> OnPicked;
+
     [SerializeField] private SpriteRenderer _renderer;
     [SerializeField] private ItemCountPair _drop;
-    public Action<ItemCountPair> OnPicked { get; set; }
 
     public void Initialize(ItemCountPair item)
     {

@@ -14,6 +14,8 @@ public class TutorialQuest : AbstractQuest
     [SerializeField] private DroppedItem _targetItem;
     [Header("DragItem")]
     [SerializeField] private DialogConfig _dragItemDialog;
+    [SerializeField] private TakeableObject _dragItem;
+    [SerializeField] private DropTakeableTrigger _dropTrigger;
     [Header("End")]
     [SerializeField] private DialogConfig _endDialog;
 
@@ -36,6 +38,8 @@ public class TutorialQuest : AbstractQuest
 
         _movementTrigger.Disable();
         _targetItem.gameObject.SetActive(false);
+        _dragItem.gameObject.SetActive(false);
+        _dropTrigger.gameObject.SetActive(false);
     }
 
     private void ManageStep(TutorialQuestStep step)
@@ -99,12 +103,22 @@ public class TutorialQuest : AbstractQuest
     {
         // показать инструкцию
         // после того, как игрок перенесет камень в нужную точку перейти в End
+
+        _dragItem.gameObject.SetActive(true);
+        _dropTrigger.gameObject.SetActive(true);
+        _dropTrigger.OnTrigger.AddListener(OnTargetDragDropped);
+
         DialogManager.Instance.StartDialog(_dragItemDialog, null);
     }
     private void ShowEnd()
     {
         // похвалить
         // завершить квест и перейти к следующему (дойти до избушки)
+        
+        _dropTrigger.OnTrigger.RemoveListener(OnTargetDragDropped);
+        _dropTrigger.gameObject.SetActive(false);
+        _dragItem.IsActive = false;
+
         DialogManager.Instance.StartDialog(_endDialog, null);
     }
 
@@ -117,5 +131,10 @@ public class TutorialQuest : AbstractQuest
     public void OnTargetItemBrought(ItemCountPair drop)
     {
         CurrentStep = TutorialQuestStep.DragItem;
+    }
+
+    public void OnTargetDragDropped()
+    {
+        CurrentStep = TutorialQuestStep.End;
     }
 }

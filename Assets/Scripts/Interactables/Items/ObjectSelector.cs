@@ -48,7 +48,10 @@ public class ObjectSelector : MonoBehaviour
             if (!_targets.Any(x => x.Key.gameObject == collision.gameObject))
             {
                 InteractableObject target = collision.GetComponent<InteractableObject>();
-                AddTarget(target);
+                if (target.IsActive)
+                {
+                    AddTarget(target);
+                }
             }
         }
     }
@@ -89,6 +92,7 @@ public class ObjectSelector : MonoBehaviour
 
         UnityAction<bool> action = x => OnActiveChanged(target, x);
         target.OnActiveChanged.AddListener(action);
+
         GameObject outline = Instantiate(_selectionOutlinePrefab, target.transform.position, Quaternion.identity);
         outline.transform.localScale = target.transform.localScale + Vector3.one;
         outline.transform.parent = target.transform;

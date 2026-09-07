@@ -17,7 +17,7 @@ public class Trigger : MonoBehaviour
             return;
         }
 
-        if (collision.CompareTag("Player"))
+        if (!collision.isTrigger && collision.CompareTag("Player"))
         {
             _onEnter.Invoke();
 

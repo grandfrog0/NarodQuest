@@ -23,13 +23,14 @@ public class BringableObjectController : MonoBehaviour
             return false;
         }
     }
+
     public void Bring(PlayerBringable bringable)
     {
         Detach();
 
         Current = bringable;
 
-        Current.transform.parent = transform;
+        Current.Drag(transform);
         OnMoveAxisChanged(_movementController.Axis);
         _movementController.OnMoveAxisChanged.AddListener(OnMoveAxisChanged);
     }
