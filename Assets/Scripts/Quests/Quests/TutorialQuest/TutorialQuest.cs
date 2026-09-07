@@ -9,9 +9,13 @@ public class TutorialQuest : AbstractQuest
     [Header("Movement")]
     [SerializeField] private DialogConfig _movementDialog;
     [SerializeField] private CollisionTrigger _movementTrigger;
-    [Header("Item")]
+    [Header("BringItem")]
     [SerializeField] private DialogConfig _bringItemDialog;
     [SerializeField] private DroppedItem _targetItem;
+    [Header("DragItem")]
+    [SerializeField] private DialogConfig _dragItemDialog;
+    [Header("End")]
+    [SerializeField] private DialogConfig _endDialog;
 
     public TutorialQuestStep CurrentStep
     {
@@ -95,11 +99,13 @@ public class TutorialQuest : AbstractQuest
     {
         // показать инструкцию
         // после того, как игрок перенесет камень в нужную точку перейти в End
+        DialogManager.Instance.StartDialog(_dragItemDialog, null);
     }
     private void ShowEnd()
     {
         // похвалить
         // завершить квест и перейти к следующему (дойти до избушки)
+        DialogManager.Instance.StartDialog(_endDialog, null);
     }
 
     public void OnMovementTargetReceived()
@@ -111,7 +117,5 @@ public class TutorialQuest : AbstractQuest
     public void OnTargetItemBrought(ItemCountPair drop)
     {
         CurrentStep = TutorialQuestStep.DragItem;
-
-        // TODO
     }
 }
