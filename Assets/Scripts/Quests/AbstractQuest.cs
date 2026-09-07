@@ -40,19 +40,6 @@ public abstract class AbstractQuest : MonoBehaviour
         }
     }
 
-    //public virtual void TryEndQuest()
-    //{
-    //    switch (CurrentState)
-    //    {
-    //        case StateOfQuest.Started or StateOfQuest.Paused:
-    //            EndQuest();
-    //            break;
-
-    //        case StateOfQuest.Unstarted or StateOfQuest.Finished:
-    //            return;
-    //    }
-    //}
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))

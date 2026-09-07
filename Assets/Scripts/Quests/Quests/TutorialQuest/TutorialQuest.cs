@@ -88,6 +88,7 @@ public class TutorialQuest : AbstractQuest
         // после того, как игрок оттянет джойстик и дойдет до нужной точки перейти в BringItem
 
         _movementTrigger.Enable();
+        LocatorManager.SetTarget(_movementTrigger.transform);
         DialogManager.Instance.StartDialog(_movementDialog, null);
     }
     private void ShowBringItemInstruction()
@@ -119,13 +120,21 @@ public class TutorialQuest : AbstractQuest
         _dropTrigger.gameObject.SetActive(false);
         _dragItem.IsActive = false;
 
+        DialogManager.Instance.OnDialogEnd.AddListener(End);
         DialogManager.Instance.StartDialog(_endDialog, null);
+
+        void End()
+        {
+            DialogManager.Instance.OnDialogEnd.RemoveListener(End);
+            EndQuest();
+        }
     }
 
     public void OnMovementTargetReceived()
     {
         CurrentStep = TutorialQuestStep.BringItem;
         _movementTrigger.Disable();
+        LocatorManager.Clear();
     }
 
     public void OnTargetItemBrought(ItemCountPair drop)
