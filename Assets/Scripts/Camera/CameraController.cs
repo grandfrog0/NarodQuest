@@ -5,7 +5,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Transform _target;
     [SerializeField] private CameraConfig _config;
 
-    private Vector3 TargetPosition => _target.position + _config.Offset;
+    public Vector3 TargetPosition => _target.position + _config.Offset;
 
     private void LateUpdate()
     {
