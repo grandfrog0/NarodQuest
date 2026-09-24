@@ -1,0 +1,33 @@
+using UnityEngine;
+
+public class StepSkipper : MonoBehaviour
+{
+    [Header("Main")]
+    [SerializeField] private GameQuestStep _firstStep;
+    [SerializeField] private Transform _playerTransform;
+
+    [Header("Visit Granny")]
+    [SerializeField] private Vector3 _hutPosition;
+
+#if UNITY_EDITOR
+
+    private void Awake()
+    {
+        if (_firstStep is not GameQuestStep.None)
+        {
+            Jump(_firstStep);
+        }
+    }
+
+    public void Jump(GameQuestStep step)
+    {
+        switch (step)
+        {
+            case GameQuestStep.VisitGranny:
+                _playerTransform.position = _hutPosition;
+                break;
+        }
+    }
+
+#endif
+}
