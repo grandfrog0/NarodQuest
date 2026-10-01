@@ -9,6 +9,8 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField] private JoystickController joystick;
     private Rigidbody2D _rigidbody;
 
+    [SerializeField] private Animator _animator;
+
     public Vector2 Axis
     {
         get => _axis;
@@ -38,11 +40,23 @@ public class PlayerMovementController : MonoBehaviour
 
     private void Move()
     {
-        Vector2 totalMovement = joystick.Movement * config.speed * Time.fixedDeltaTime;
+        Vector2 totalMovement = joystick.Movement.normalized * config.speed * Time.fixedDeltaTime;
         Vector2 totalPosition = totalMovement + _rigidbody.position;
         _rigidbody.MovePosition(totalPosition);
 
-        Vector2 axis = totalMovement != Vector2.zero ? Mathf.Abs(totalMovement.x) > Mathf.Abs(totalMovement.y) ? Vector2.right * Mathf.Sign(totalMovement.x) : Vector2.up * Mathf.Sign(totalMovement.y) : Vector2.zero;
+        Vector2 axis;
+
+        if (totalMovement != Vector2.zero)
+        {
+            axis = Mathf.Abs(totalMovement.x) > Mathf.Abs(totalMovement.y) ? Vector2.right * Mathf.Sign(totalMovement.x) : Vector2.up * Mathf.Sign(totalMovement.y);
+            _animator.SetBool("IsRunning", true);
+        }
+        else
+        {
+            axis = Vector2.zero;
+            _animator.SetBool("IsRunning", false);
+        }
+
         if (Axis != axis && axis != Vector2.zero)
         {
             Axis = axis;

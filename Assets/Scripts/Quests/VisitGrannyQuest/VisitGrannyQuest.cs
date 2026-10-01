@@ -7,28 +7,19 @@ public class VisitGrannyQuest : AbstractQuest
     [Header("Preparing")]
     [SerializeField] private Transform _hutTransform;
     [Header("Main")]
-    [SerializeField] private DialogConfig _visitGrannyDialog;
+    [SerializeField] private NPC _grannyNpc;
 
     public void ShowHintToStart()
     {
+        StartQuest();
+
         LocatorManager.SetTarget(_hutTransform);
-    }
-
-    protected override void StartQuest()
-    {
-        base.StartQuest();
-
-        LocatorManager.Clear();
-
-        /*
-        DialogManager.Instance.StartDialog(_visitGrannyDialog, null);
-        DialogManager.Instance.OnDialogEnd.AddListener(OnDialogEnd);
+        _grannyNpc.OnDialogComplete += OnDialogEnd;
 
         void OnDialogEnd()
         {
-            DialogManager.Instance.OnDialogEnd.RemoveListener(OnDialogEnd);
+            _grannyNpc.OnDialogComplete -= OnDialogEnd;
             EndQuest();
         }
-        */
     }
 }
