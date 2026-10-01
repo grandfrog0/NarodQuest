@@ -39,12 +39,12 @@ public class MoleHole : InteractableObject
     public void Subscribe(Action onInteract)
     {
         _onInteract = onInteract;
-        IsActive = false;
+        IsActive = true;
     }
     public void Describe()
     {
         _onInteract = null;
-        IsActive = true;
+        IsActive = false;
     }
     public override void Interact()
     {

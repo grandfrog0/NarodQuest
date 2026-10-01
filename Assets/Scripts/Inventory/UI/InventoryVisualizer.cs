@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class InventoryVisualizer : MonoBehaviour
 {
@@ -12,6 +11,17 @@ public class InventoryVisualizer : MonoBehaviour
 
     [SerializeField] private SpriteRenderer _selectedRenderer;
 
+    public bool IsHidden
+    {
+        get => _isHidden;
+        set
+        {
+            _isHidden = value;
+            RefreshVisibility();
+        }
+    }
+    [SerializeField] private bool _isHidden;
+
     public void Refresh()
     {
         Clear();
@@ -21,6 +31,13 @@ public class InventoryVisualizer : MonoBehaviour
             itemView.Initialize(pair.Item.Icon, pair.Count, () => OnSelectionChanged(itemView, pair));
             _itemViews.Add(itemView);
         }
+
+        RefreshVisibility();
+    }
+
+    private void RefreshVisibility()
+    {
+        gameObject.SetActive(!_isHidden && !_inventoryManager.IsEmpty);
     }
 
     private void OnSelectionChanged(ItemView itemView, ItemCountPair pair)

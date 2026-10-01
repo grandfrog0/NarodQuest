@@ -9,6 +9,8 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private UnityEvent<Item> _onSelectionChanged;
     [SerializeField] private InventoryConfig _config;
 
+    public bool IsEmpty => _config.Items.Count == 0;
+
     public void SelectItem(Item item)
     {
         _config.SelectedItem = item;

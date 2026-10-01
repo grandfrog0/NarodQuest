@@ -9,6 +9,9 @@ public class StepSkipper : MonoBehaviour
     [Header("Visit Granny")]
     [SerializeField] private Vector3 _hutPosition;
 
+    [Header("Come to the Milkmaid")]
+    [SerializeField] private Vector3 _milkmaidPosition;
+
 #if UNITY_EDITOR
 
     private void Awake()
@@ -25,6 +28,10 @@ public class StepSkipper : MonoBehaviour
         {
             case GameQuestStep.VisitGranny:
                 _playerTransform.position = _hutPosition;
+                break;
+
+            case GameQuestStep.ComeToTheMilkmaid:
+                _playerTransform.position = _milkmaidPosition;
                 break;
         }
     }
