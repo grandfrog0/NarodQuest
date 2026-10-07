@@ -1,7 +1,10 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerTranslator : MonoBehaviour
 {
+    public UnityEvent OnTransitionComplete;
+
     [SerializeField] private PlayerTranslator _other;
     [SerializeField] private Vector3 _offset;
     public Vector3 TargetPosition => transform.position + _offset;
@@ -20,6 +23,8 @@ public class PlayerTranslator : MonoBehaviour
 
         void CompleteTeleport()
         {
+            OnTransitionComplete.Invoke();
+
             player.position = _other.TargetPosition;
             Camera.main.transform.position = Camera.main.GetComponent<CameraController>().TargetPosition;
         }

@@ -36,6 +36,12 @@ public class PlayerMovementController : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         Axis = Vector2.down;
+
+        OnMoveAxisChanged.AddListener(axis =>
+        {
+            _animator.SetFloat("MoveX", axis.x);
+            _animator.SetFloat("MoveY", axis.y);
+        });
     }
 
     private void Move()

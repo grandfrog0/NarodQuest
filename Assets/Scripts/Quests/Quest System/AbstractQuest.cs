@@ -44,14 +44,14 @@ public abstract class AbstractQuest : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (_isTrigger && collision.CompareTag("Player"))
+        if (_isTrigger && collision.CompareTag("Player") && !collision.isTrigger)
         {
             TryStartQuest();
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (_isTrigger && collision.CompareTag("Player"))
+        if (_isTrigger && collision.CompareTag("Player") && !collision.isTrigger)
         {
             TryPauseQuest();
         }

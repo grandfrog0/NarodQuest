@@ -7,7 +7,7 @@ public class BringableObjectController : MonoBehaviour
 
     public PlayerBringable Current { get; private set; }
     [SerializeField] private Vector2 _offset = Vector2.down;
-    private float _radius = 0.5f;
+    [SerializeField] private float _radius = 0.5f;
     private PlayerMovementController _movementController;
 
     public bool SwitchBring(PlayerBringable bringable)

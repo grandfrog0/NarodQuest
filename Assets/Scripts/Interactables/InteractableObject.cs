@@ -14,5 +14,6 @@ public abstract class InteractableObject : MonoBehaviour
         }
     }
     private bool _isActive = true;
+    public virtual float SizeMultiplier => 1f;
     public abstract void Interact();
 }

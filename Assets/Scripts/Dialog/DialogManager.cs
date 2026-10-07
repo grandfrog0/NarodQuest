@@ -13,6 +13,8 @@ public class DialogManager : MonoBehaviour
     [SerializeField] private DialogConfig _dialogConfig;
     [SerializeField] private DialogManagerConfig _dialogManagerConfig;
 
+    [SerializeField] private List<CompanionSerializable> _baseCompanions;
+
     private List<CompanionSerializable> _currentCompanions;
     private DialogConfig _currentDialog;
     private int _currentIndex;
@@ -35,12 +37,12 @@ public class DialogManager : MonoBehaviour
         _mainCamera = Camera.main;
     }
 
-    public void StartDialog(DialogConfig dialog, List<CompanionSerializable> companions)
+    public void StartDialog(DialogConfig dialog, List<CompanionSerializable> companions = null)
     {
         _currentIndex = 0;
         _currentDialog = dialog;
         _dialogWindowManager.ShowWindow();
-        _currentCompanions = companions;
+        _currentCompanions = companions ?? _baseCompanions;
 
         ShowDialog();
     }

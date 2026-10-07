@@ -33,6 +33,7 @@ public class TransitionManager : MonoBehaviour
         for (float t = 0; t <= 1; t += Time.deltaTime * 2)
         {
             _fade.color = Color.Lerp(Color.clear, Color.black, t);
+            yield return null;
         }
 
         _fade.color = Color.black;
@@ -44,6 +45,7 @@ public class TransitionManager : MonoBehaviour
         for (float t = 0; t <= 1; t += Time.deltaTime * 2)
         {
             _fade.color = Color.Lerp(Color.black, Color.clear, t);
+            yield return null;
         }
 
         _fade.gameObject.SetActive(false);

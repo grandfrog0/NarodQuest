@@ -19,7 +19,7 @@ public class CollisionTrigger : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag(_tag))
+        if (collision.CompareTag(_tag) && !collision.isTrigger)
         {
             _onTrigger.Invoke();
         }

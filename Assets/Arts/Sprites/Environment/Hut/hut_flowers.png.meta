@@ -1,0 +1,767 @@
+fileFormatVersion: 2
+guid: db43f2fd5eed9de44ac36352297d2416
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6958339017208287736
+    second: cvetochki_0
+  - first:
+      213: 2969430400259270565
+    second: cvetochki_1
+  - first:
+      213: -1302471033015896812
+    second: cvetochki_2
+  - first:
+      213: 6735872593075685190
+    second: cvetochki_3
+  - first:
+      213: 4084968073918595185
+    second: cvetochki_4
+  - first:
+      213: 8295336361794678429
+    second: cvetochki_5
+  - first:
+      213: -6167841867201864349
+    second: cvetochki_6
+  - first:
+      213: 471734291936011416
+    second: cvetochki_7
+  - first:
+      213: -373827427870562969
+    second: cvetochki_8
+  - first:
+      213: 6258870816838992154
+    second: cvetochki_9
+  - first:
+      213: 5688905519976784847
+    second: cvetochki_10
+  - first:
+      213: 2874576888652779607
+    second: cvetochki_11
+  - first:
+      213: -6857215792109912074
+    second: cvetochki_12
+  - first:
+      213: -4390739075230234256
+    second: cvetochki_13
+  - first:
+      213: 7709002283685384779
+    second: cvetochki_14
+  - first:
+      213: -3894073820247266078
+    second: cvetochki_15
+  - first:
+      213: -6000387719979454542
+    second: cvetochki_16
+  - first:
+      213: 2845238788238382925
+    second: cvetochki_17
+  - first:
+      213: 5246472608353507459
+    second: cvetochki_18
+  - first:
+      213: 1049623214726025047
+    second: cvetochki_19
+  - first:
+      213: -3102074149644988701
+    second: cvetochki_20
+  - first:
+      213: 2577338326469070667
+    second: cvetochki_21
+  - first:
+      213: 7952101528322104385
+    second: cvetochki_22
+  - first:
+      213: 5792252365725569740
+    second: cvetochki_23
+  - first:
+      213: 2466679248867471552
+    second: cvetochki_24
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: cvetochki_0
+      rect:
+        serializedVersion: 2
+        x: 1647
+        y: 636
+        width: 35
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80e2f8cd7830f6f90800000000000000
+      internalID: -6958339017208287736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cvetochki_1
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 590
+        width: 27
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a723b06739853920800000000000000
+      internalID: 2969430400259270565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cvetochki_2
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 582
+        width: 34
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 415f9da0f71bcede0800000000000000
+      internalID: -1302471033015896812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cvetochki_3
+      rect:
+        serializedVersion: 2
+        x: 1747
+        y: 600
+        width: 35
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 647c09a6f60aa7d50800000000000000
+      internalID: 6735872593075685190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cvetochki_4
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 553
+        width: 27
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 170cab4f1d8b0b830800000000000000
+      internalID: 4084968073918595185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cvetochki_5
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 551
+        width: 34
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9e27217874fe1370800000000000000
+      internalID: 8295336361794678429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cvetochki_6
+      rect:
+        serializedVersion: 2
+        x: 1623
+        y: 551
+        width: 35
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36d96aa108c676aa0800000000000000
+      internalID: -6167841867201864349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cvetochki_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 529
+        width: 26
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8946733d6dfeb8600800000000000000
+      internalID: 471734291936011416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cvetochki_8
+      rect:
+        serializedVersion: 2
+        x: 295
+        y: 533
+        width: 25
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7652a7a5fe5efcaf0800000000000000
+      internalID: -373827427870562969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cvetochki_9
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 506
+        width: 27
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a114fb4d8d9fbd650800000000000000
+      internalID: 6258870816838992154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cvetochki_10
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 514
+        width: 27
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc3a9f6ed6d03fe40800000000000000
+      internalID: 5688905519976784847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cvetochki_11
+      rect:
+        serializedVersion: 2
+        x: 1812
+        y: 503
+        width: 34
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75052b7337c84e720800000000000000
+      internalID: 2874576888652779607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cvetochki_12
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 497
+        width: 23
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6fff613719646d0a0800000000000000
+      internalID: -6857215792109912074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cvetochki_13
+      rect:
+        serializedVersion: 2
+        x: 1316
+        y: 488
+        width: 25
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 079897ff216f013c0800000000000000
+      internalID: -4390739075230234256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cvetochki_14
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 456
+        width: 24
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b421eb3abb0ebfa60800000000000000
+      internalID: 7709002283685384779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cvetochki_15
+      rect:
+        serializedVersion: 2
+        x: 1300
+        y: 461
+        width: 27
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ec630ffd7875f9c0800000000000000
+      internalID: -3894073820247266078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cvetochki_16
+      rect:
+        serializedVersion: 2
+        x: 1340
+        y: 464
+        width: 34
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2bf220cf8275abca0800000000000000
+      internalID: -6000387719979454542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cvetochki_17
+      rect:
+        serializedVersion: 2
+        x: 1073
+        y: 314
+        width: 24
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d479c1a6a915c7720800000000000000
+      internalID: 2845238788238382925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cvetochki_18
+      rect:
+        serializedVersion: 2
+        x: 1109
+        y: 298
+        width: 24
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3885ab05a073fc840800000000000000
+      internalID: 5246472608353507459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cvetochki_19
+      rect:
+        serializedVersion: 2
+        x: 618
+        y: 47
+        width: 35
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75f8fbda0c2019e00800000000000000
+      internalID: 1049623214726025047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cvetochki_20
+      rect:
+        serializedVersion: 2
+        x: 706
+        y: 45
+        width: 34
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ee0d731ff733f4d0800000000000000
+      internalID: -3102074149644988701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cvetochki_21
+      rect:
+        serializedVersion: 2
+        x: 1559
+        y: 27
+        width: 35
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4f40377d8b84c320800000000000000
+      internalID: 2577338326469070667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cvetochki_22
+      rect:
+        serializedVersion: 2
+        x: 578
+        y: 2
+        width: 35
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14cda7d353a8b5e60800000000000000
+      internalID: 7952101528322104385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cvetochki_23
+      rect:
+        serializedVersion: 2
+        x: 667
+        y: 14
+        width: 34
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc21d7486d6326050800000000000000
+      internalID: 5792252365725569740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cvetochki_24
+      rect:
+        serializedVersion: 2
+        x: 1515
+        y: 3
+        width: 35
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c0b29335b76b3220800000000000000
+      internalID: 2466679248867471552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      cvetochki_0: -6958339017208287736
+      cvetochki_1: 2969430400259270565
+      cvetochki_10: 5688905519976784847
+      cvetochki_11: 2874576888652779607
+      cvetochki_12: -6857215792109912074
+      cvetochki_13: -4390739075230234256
+      cvetochki_14: 7709002283685384779
+      cvetochki_15: -3894073820247266078
+      cvetochki_16: -6000387719979454542
+      cvetochki_17: 2845238788238382925
+      cvetochki_18: 5246472608353507459
+      cvetochki_19: 1049623214726025047
+      cvetochki_2: -1302471033015896812
+      cvetochki_20: -3102074149644988701
+      cvetochki_21: 2577338326469070667
+      cvetochki_22: 7952101528322104385
+      cvetochki_23: 5792252365725569740
+      cvetochki_24: 2466679248867471552
+      cvetochki_3: 6735872593075685190
+      cvetochki_4: 4084968073918595185
+      cvetochki_5: 8295336361794678429
+      cvetochki_6: -6167841867201864349
+      cvetochki_7: 471734291936011416
+      cvetochki_8: -373827427870562969
+      cvetochki_9: 6258870816838992154
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
