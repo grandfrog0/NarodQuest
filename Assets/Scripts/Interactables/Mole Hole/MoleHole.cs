@@ -22,6 +22,15 @@ public class MoleHole : InteractableObject
         _renderer = GetComponent<SpriteRenderer>();
         HoleState = MoleHoleState.Grassed;
         IsActive = false;
+
+        DropTakeableTrigger _dropTrigger = GetComponent<DropTakeableTrigger>();
+        _dropTrigger.OnTrigger.AddListener(OnTakeableDropped);
+
+        void OnTakeableDropped()
+        {
+            HoleState = MoleHoleState.Rock;
+            _dropTrigger.OnTrigger.RemoveListener(OnTakeableDropped);
+        }
     }
 
     private void ShowHoleType(MoleHoleState holeType)

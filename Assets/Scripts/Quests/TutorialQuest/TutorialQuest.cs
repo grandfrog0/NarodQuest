@@ -130,11 +130,6 @@ public class TutorialQuest : AbstractQuest
 
             LocatorManager.SetTarget(_dropTrigger.transform);
         }
-
-        void OnDrop()
-        {
-
-        }
     }
     private void ShowEnd()
     {

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6926010095418293321}
   - component: {fileID: 6341731519086009947}
   - component: {fileID: 5440104405407594243}
+  - component: {fileID: 7852931329359821124}
   m_Layer: 6
   m_Name: Mole Hole
   m_TagString: Interactable
@@ -142,6 +143,22 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!114 &7852931329359821124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320078364957952668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa3bbc0b46a8e441a63bdf650374e65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DropTakeableTrigger
+  _onTrigger:
+    m_PersistentCalls:
+      m_Calls: []
+  _targetTag: Interactable
 --- !u!1 &8012384356581561415
 GameObject:
   m_ObjectHideFlags: 0

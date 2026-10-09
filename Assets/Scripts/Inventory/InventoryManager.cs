@@ -7,9 +7,19 @@ public class InventoryManager : MonoBehaviour
 {
     [SerializeField] private UnityEvent _onChanged;
     [SerializeField] private UnityEvent<Item> _onSelectionChanged;
-    [SerializeField] private InventoryConfig _config;
+    private InventoryConfig _config;
 
     public bool IsEmpty => _config.Items.Count == 0;
+
+    public void Initialize(InventoryConfig inventory)
+    {
+        _config = inventory;
+    }
+
+    public InventoryConfig Clone()
+    {
+        return _config;
+    }
 
     public void SelectItem(Item item)
     {

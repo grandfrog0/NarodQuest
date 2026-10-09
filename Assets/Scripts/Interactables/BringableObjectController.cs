@@ -5,6 +5,7 @@ public class BringableObjectController : MonoBehaviour
 {
     public static BringableObjectController Instance { get; private set; }
 
+    public bool HasObject => Current != null;
     public PlayerBringable Current { get; private set; }
     [SerializeField] private Vector2 _offset = Vector2.down;
     [SerializeField] private float _radius = 0.5f;
@@ -54,7 +55,7 @@ public class BringableObjectController : MonoBehaviour
             return;
         }
 
-        Current.transform.localPosition = _offset + axis * _radius;
+        Current.transform.localPosition = _offset + Current.GetOffset(axis) + axis * _radius;
     }
 
     private void Start()

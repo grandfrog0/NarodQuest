@@ -13,6 +13,11 @@ public class PlayerBringable : MonoBehaviour
 
     public bool IsActive { get; set; } = true;
 
+    [SerializeField] private Vector2 _offsetHorizontal;
+    [SerializeField] private Vector2 _offsetVertical;
+    [SerializeField] private Vector2 _offset;
+    public Vector2 GetOffset(Vector2 axis) => _offsetHorizontal * axis.x + _offsetVertical * axis.y + _offset;
+
     private void Start()
     {
         _defaultParent = transform.parent;

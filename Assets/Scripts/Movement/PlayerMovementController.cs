@@ -10,6 +10,9 @@ public class PlayerMovementController : MonoBehaviour
     private Rigidbody2D _rigidbody;
 
     [SerializeField] private Animator _animator;
+    [SerializeField] private BringableObjectController _bringableController;
+
+    public float Speed => config.Speed * (_bringableController.HasObject ? config.WeightKoefficient : 1f);
 
     public Vector2 Axis
     {
@@ -46,7 +49,7 @@ public class PlayerMovementController : MonoBehaviour
 
     private void Move()
     {
-        Vector2 totalMovement = joystick.Movement.normalized * config.speed * Time.fixedDeltaTime;
+        Vector2 totalMovement = joystick.Movement.normalized * Speed * Time.fixedDeltaTime;
         Vector2 totalPosition = totalMovement + _rigidbody.position;
         _rigidbody.MovePosition(totalPosition);
 

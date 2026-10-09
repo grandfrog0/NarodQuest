@@ -29,8 +29,6 @@ public class CameraController : MonoBehaviour
             float height = _cam.orthographicSize;
             float width = height * _cam.aspect;
 
-            Debug.Log(_constraints.Bounds.min.x);
-
             return new Vector3(
                 Mathf.Clamp(_target.position.x + _config.Offset.x, _constraints.Bounds.min.x + width, _constraints.Bounds.max.x - width),
                 Mathf.Clamp(_target.position.y + _config.Offset.y, _constraints.Bounds.min.y + height, _constraints.Bounds.max.y - height),

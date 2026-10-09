@@ -7,7 +7,7 @@ public class DropTakeableTrigger : MonoBehaviour
     public UnityEvent OnTrigger => _onTrigger;
     [SerializeField] private UnityEvent _onTrigger = new();
 
-    [SerializeField] string _targetTag;
+    [SerializeField] string _targetTag = "Interactable";
     private PlayerBringable _target;
 
     private void OnTriggerEnter2D(Collider2D collision)
