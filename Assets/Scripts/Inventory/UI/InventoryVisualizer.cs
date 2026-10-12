@@ -59,7 +59,7 @@ public class InventoryVisualizer : MonoBehaviour
         _itemViews.Clear();
     }
 
-    private void Start()
+    public void Initialize()
     {
         Refresh();
     }

@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
   m_Name: GrassTile
   m_EditorClassIdentifier: Unity.2D.Tilemap.Extras::UnityEngine.RuleTile
-  m_DefaultSprite: {fileID: -7601240878374447580, guid: 9ee40e0491ed5e34ab330f6431b860e4, type: 3}
+  m_DefaultSprite: {fileID: -5406753781919037653, guid: dece7771e743cf243b7ed06005dedfda, type: 3}
   m_DefaultGameObject: {fileID: 0}
   m_DefaultColliderType: 1
   m_TilingRules:
   - m_Id: 0
     m_Sprites:
-    - {fileID: -7601240878374447580, guid: 9ee40e0491ed5e34ab330f6431b860e4, type: 3}
+    - {fileID: -5406753781919037653, guid: dece7771e743cf243b7ed06005dedfda, type: 3}
     - {fileID: 2240941154993307106, guid: 31821c7e2b5659946a9fde2eb0663a07, type: 3}
     - {fileID: 6471263428881360600, guid: 64a80cf2e150cf64aa1219cbb162074c, type: 3}
     - {fileID: 5839260021443967095, guid: ea69d9e0a4f24844e874f1b0645e2b8e, type: 3}

@@ -15,8 +15,23 @@ public class SaveManager : MonoBehaviour
     {
         try
         {
-
-            Debug.Log($"Успешно сохранены данные в {FilePath}");
+            SavePlayer();
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError("Ошибка сохранения данных игрока: " + ex);
+        }
+        try
+        {
+            SaveEnvironment();
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError("Ошибка сохранения данных: " + ex);
+        }
+        try
+        {
+            SaveQuests();
         }
         catch (Exception ex)
         {
@@ -25,18 +40,20 @@ public class SaveManager : MonoBehaviour
 
         void SavePlayer()
         {
-            ;
+            PlayerSave playerSave = _stateSaver.CreatePlayerSave();
+            string json = JsonUtility.ToJson(playerSave);
+            File.WriteAllText(PlayerPath, json);
 
-            string json = JsonUtility.ToJson(obj);
-            File.WriteAllText(FilePath, json);
+            Debug.Log($"player save: {json}");
+            Debug.Log($"inventory: {JsonUtility.ToJson(playerSave.Inventory)}");
         }
         void SaveEnvironment()
         {
-
+            // TODO
         }
         void SaveQuests()
         {
-
+            // TODO
         }
     }
 
@@ -44,31 +61,42 @@ public class SaveManager : MonoBehaviour
     {
         try
         {
-            string json = File.ReadAllText(FilePath);
-            object obj = JsonUtility.FromJson<object>(json);
-
-            // TODO
-
-            Debug.Log($"Успешно загружено сохранение ({json})");
+            LoadPlayer();
         }
         catch (Exception ex)
         {
-            Debug.LogError("Ошибка чтения данных: " + ex);
+            Debug.LogError("Ошибка загрузки данных игрока: " + ex);
+        }
+
+        void LoadPlayer()
+        {
+            string json = File.ReadAllText(PlayerPath);
+            PlayerSave playerSave = JsonUtility.FromJson<PlayerSave>(json);
+            _stateSaver.ApplyPlayerSave(playerSave);
+        }
+        void LoadEnvironment()
+        {
+            // TODO
+        }
+        void LoadQuests()
+        {
+            // TODO
         }
     }
 
     public void Clear()
     {
-        try
-        {
-            File.WriteAllText(FilePath, "");
+        throw new NotImplementedException();
+        //try
+        //{
+        //    File.WriteAllText(FilePath, "");
 
-            Debug.Log($"Успешно очищено сохранение в {FilePath}");
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError("Ошибка сохранения данных: " + ex);
-        }
+        //    Debug.Log($"Успешно очищено сохранение в {FilePath}");
+        //}
+        //catch (Exception ex)
+        //{
+        //    Debug.LogError("Ошибка сохранения данных: " + ex);
+        //}
     }
 }
 

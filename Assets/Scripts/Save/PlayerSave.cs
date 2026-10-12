@@ -11,7 +11,7 @@ public class PlayerSave
 
     public PlayerBringable GetCurrentBringable()
     {
-        return ObjectRegistrator.Get(CurrentBringableId).GetComponent<PlayerBringable>();
+        return ObjectRegistrator.Get(CurrentBringableId)?.GetComponent<PlayerBringable>();
     }
 }
 

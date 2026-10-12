@@ -29,9 +29,9 @@ public class ObjectRegistrator : MonoBehaviour
     {
         if (id >= 0 && id < _registrated.Count)
         {
-            return null;
+            return _registrated[id];
         }
 
-        return _registrated[id];
+        return null;
     }
 }

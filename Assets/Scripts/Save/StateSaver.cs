@@ -4,21 +4,21 @@ using UnityEngine;
 public class StateSaver : MonoBehaviour
 {
     /*
-    0. Файлы сохранения:
-    1. Игрок (координаты, инвентарь, предмет в руке)
-    2. Окружение (поднятые предметы, интерактив, нпс)
-    2. Квесты (мини-игры, квесты)
+        0. Файлы сохранения:
+        1. Игрок (координаты, инвентарь, предмет в руке)
+        2. Окружение (поднятые предметы, интерактив, нпс)
+        2. Квесты (мини-игры, квесты)
 
-    1. Координаты игрока, поворот
-    2. Предмет в руках у игрока
-    3. Инвентарь
-    4. Координаты каждого лежащего предмета и его подобранность
-    5. Координаты каждого переносимого предмета
-    6. Состояние интерактива:
-    - Калитки
-    7. Состояние мини-игр
-    8. Состояние квестов
-    8. Состояние НПС
+        1. Координаты игрока, поворот
+        2. Предмет в руках у игрока
+        3. Инвентарь
+        4. Координаты каждого лежащего предмета и его подобранность
+        5. Координаты каждого переносимого предмета
+        6. Состояние интерактива:
+        - Калитки
+        7. Состояние мини-игр
+        8. Состояние квестов
+        8. Состояние НПС
     */
 
     [SerializeField] private PlayerMovementController _player;
@@ -32,7 +32,7 @@ public class StateSaver : MonoBehaviour
             Position = _player.transform.position,
             Axis = _player.Axis,
             Inventory = _inventory.Clone(),
-            CurrentBringableId = _bringableController.Current.GetId()
+            CurrentBringableId = _bringableController.Current?.GetId() ?? -1
         };
     }
     public EnvironmentSave CreateEnvironmentSave()
@@ -49,7 +49,12 @@ public class StateSaver : MonoBehaviour
         _player.transform.position = playerSave.Position;
         _player.Axis = playerSave.Axis;
         _inventory.Initialize(playerSave.Inventory);
-        _bringableController.Bring(playerSave.GetCurrentBringable());
+
+        PlayerBringable bringable = playerSave.GetCurrentBringable();
+        if (bringable != null)
+        {
+            _bringableController.Bring(bringable);
+        }
     }
     public void ApplyEnvironmentSave(EnvironmentSave environmentSave)
     {
