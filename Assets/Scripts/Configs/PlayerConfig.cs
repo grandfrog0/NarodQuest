@@ -3,5 +3,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerConfig", menuName = "Scriptable Objects/PlayerConfig")]
 public class PlayerConfig : ScriptableObject
 {
-    public float speed;
+    public float Speed;
+    public float WeightKoefficient;
 }

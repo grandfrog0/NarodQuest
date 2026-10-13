@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6401b618abc1334b8e3084d166da23f, type: 3}
+  m_Name: Home Constraints
+  m_EditorClassIdentifier: Assembly-CSharp::CameraConstraints
+  Bounds:
+    m_Center: {x: 52.63695, y: 49.05084, z: 0}
+    m_Extent: {x: 16.889206, y: 17.358795, z: 0}

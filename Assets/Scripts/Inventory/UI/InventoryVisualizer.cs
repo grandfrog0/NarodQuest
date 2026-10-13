@@ -9,6 +9,19 @@ public class InventoryVisualizer : MonoBehaviour
     [SerializeField] private RectTransform _selectionMark;
     private List<ItemView> _itemViews = new();
 
+    [SerializeField] private SpriteRenderer _selectedRenderer;
+
+    public bool IsHidden
+    {
+        get => _isHidden;
+        set
+        {
+            _isHidden = value;
+            RefreshVisibility();
+        }
+    }
+    [SerializeField] private bool _isHidden;
+
     public void Refresh()
     {
         Clear();
@@ -18,6 +31,13 @@ public class InventoryVisualizer : MonoBehaviour
             itemView.Initialize(pair.Item.Icon, pair.Count, () => OnSelectionChanged(itemView, pair));
             _itemViews.Add(itemView);
         }
+
+        RefreshVisibility();
+    }
+
+    private void RefreshVisibility()
+    {
+        gameObject.SetActive(!_isHidden && !_inventoryManager.IsEmpty);
     }
 
     private void OnSelectionChanged(ItemView itemView, ItemCountPair pair)
@@ -25,8 +45,11 @@ public class InventoryVisualizer : MonoBehaviour
         _selectionMark.gameObject.SetActive(true);
         _selectionMark.transform.position = itemView.transform.position;
         _inventoryManager.SelectItem(pair.Item);
+
+        _selectedRenderer.gameObject.SetActive(pair?.Item != null);
+        _selectedRenderer.sprite = pair?.Item.Icon;
     }
-    
+
     public void Clear()
     {
         foreach (ItemView itemView in _itemViews)
@@ -36,7 +59,7 @@ public class InventoryVisualizer : MonoBehaviour
         _itemViews.Clear();
     }
 
-    private void Start()
+    public void Initialize()
     {
         Refresh();
     }
