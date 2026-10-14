@@ -11,7 +11,7 @@ public class TakeableObject : InteractableObject
     public PlayerBringable Bringable => _bringable;
     private PlayerBringable _bringable;
 
-    public override void Interact()
+    public override void Interact(InteractionData data)
     {
         bool isTaken = BringableObjectController.Instance.SwitchBring(_bringable);
         _collider.isTrigger = isTaken;

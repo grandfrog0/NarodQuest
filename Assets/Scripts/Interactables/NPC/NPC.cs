@@ -10,7 +10,7 @@ public class NPC : InteractableObject
     [SerializeField] private List<CompanionSerializable> _companions;
     [SerializeField] private DialogConfig _dialog;
 
-    public override void Interact()
+    public override void Interact(InteractionData data)
     {
         IsActive = false;
         DialogManager.Instance.StartDialog(_dialog, _companions);

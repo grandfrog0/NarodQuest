@@ -124,7 +124,7 @@ public class TutorialQuest : AbstractQuest
 
         DialogManager.Instance.StartDialog(_dragItemDialog, null);
 
-        void OnDrag()
+        void OnDrag(PlayerBringable _)
         {
             _dragItem.Bringable.OnDrag -= OnDrag;
 

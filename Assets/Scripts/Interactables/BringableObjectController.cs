@@ -11,6 +11,12 @@ public class BringableObjectController : MonoBehaviour
     [SerializeField] private float _radius = 0.5f;
     private PlayerMovementController _movementController;
 
+    public void Initialize()
+    {
+        _movementController = GetComponent<PlayerMovementController>();
+        Instance = this;
+    }
+
     public bool SwitchBring(PlayerBringable bringable)
     {
         if (Current != bringable)
@@ -45,6 +51,7 @@ public class BringableObjectController : MonoBehaviour
 
         Current.Drop();
         _movementController.OnMoveAxisChanged.RemoveListener(OnMoveAxisChanged);
+
         Current = null;
     }
 
@@ -56,12 +63,7 @@ public class BringableObjectController : MonoBehaviour
         }
 
         Current.transform.localPosition = _offset + Current.GetOffset(axis) + axis * _radius;
-    }
-
-    private void Start()
-    {
-        _movementController = GetComponent<PlayerMovementController>();
-        Instance = this;
+        Current.Renderer.SortingOrder = axis == Vector2.down ? 1 : 0;
     }
 
     private void OnDestroy()

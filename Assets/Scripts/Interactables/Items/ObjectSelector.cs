@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.UIElements;
 
 public class ObjectSelector : MonoBehaviour
 {
@@ -11,11 +12,16 @@ public class ObjectSelector : MonoBehaviour
     private Dictionary<InteractableObject, (GameObject, UnityAction<bool>)> _targets = new();
     private CircleCollider2D _collider;
 
-    private void Start()
+    private InventoryConfig _inventory;
+    private BringableObjectController _bringableObjectController;
+
+    public void Initialize(InventoryConfig inventory, BringableObjectController bringableController)
     {
         _collider = GetComponent<CircleCollider2D>();
         InputSystemManager.OnTouchAtPosition.AddListener(OnScreenTouched);
 
+        _inventory = inventory;
+        _bringableObjectController = bringableController;
     }
 
     private void OnScreenTouched(Vector2 screenPos)
@@ -32,7 +38,12 @@ public class ObjectSelector : MonoBehaviour
             InteractableObject target = _targets.FirstOrDefault(x => x.Key.gameObject == hit.collider.gameObject).Key;
             if (target)
             {
-                target.Interact();
+                target.Interact(new InteractionData
+                {
+                    Point = hit.point,
+                    Inventory = _inventory,
+                    BringableController = _bringableObjectController
+                });
             }
         }
     }

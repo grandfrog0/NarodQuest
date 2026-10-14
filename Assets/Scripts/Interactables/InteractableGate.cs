@@ -12,7 +12,7 @@ public class InteractableGate : InteractableObject
     [SerializeField] private Animator _animator;
     public override float SizeMultiplier => 3f;
 
-    public override void Interact()
+    public override void Interact(InteractionData data)
     {
         IsOpened ^= true;
         _animator.SetBool("IsOpened", IsOpened);

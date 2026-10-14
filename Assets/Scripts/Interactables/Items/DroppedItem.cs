@@ -27,7 +27,7 @@ public class DroppedItem : InteractableObject
         Initialize(_drop);
     }
 
-    public override void Interact()
+    public override void Interact(InteractionData data)
     {
         PickUp();
     }

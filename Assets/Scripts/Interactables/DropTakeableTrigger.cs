@@ -27,7 +27,7 @@ public class DropTakeableTrigger : MonoBehaviour
         }
     }
 
-    private void OnTargetDrop()
+    private void OnTargetDrop(PlayerBringable _)
     {
         OnTrigger.Invoke();
     }

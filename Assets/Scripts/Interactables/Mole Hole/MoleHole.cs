@@ -55,7 +55,7 @@ public class MoleHole : InteractableObject
         _onInteract = null;
         IsActive = false;
     }
-    public override void Interact()
+    public override void Interact(InteractionData data)
     {
         _onInteract?.Invoke();
     }

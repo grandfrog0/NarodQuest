@@ -4,14 +4,27 @@ using UnityEngine;
 /// <summary>
 /// Объект, который можно тащить и ставить
 /// </summary>
+[RequireComponent(typeof(ItemRenderer))]
 public class PlayerBringable : MonoBehaviour
 {
-    public event Action OnDrag;
-    public event Action OnDrop;
+    public event Action<PlayerBringable> OnDrag;
+    public event Action<PlayerBringable> OnDrop;
 
     private Transform _defaultParent;
 
     public bool IsActive { get; set; } = true;
+    public ItemRenderer Renderer
+    {
+        get
+        {
+            if (_renderer == null)
+            {
+                _renderer = GetComponent<ItemRenderer>();
+            }
+            return _renderer;
+        }
+    }
+    private ItemRenderer _renderer;
 
     [SerializeField] private Vector2 _offsetHorizontal;
     [SerializeField] private Vector2 _offsetVertical;
@@ -26,12 +39,18 @@ public class PlayerBringable : MonoBehaviour
     public void Drag(Transform currentParent)
     {
         transform.SetParent(currentParent);
-        OnDrag?.Invoke();
+        OnDrag?.Invoke(this);
     }
 
     public void Drop()
     {
         transform.SetParent(_defaultParent);
-        OnDrop?.Invoke();
+
+        if (Renderer != null)
+        {
+            Renderer.SortingOrder = 0;
+        }
+
+        OnDrop?.Invoke(this);
     }
 }

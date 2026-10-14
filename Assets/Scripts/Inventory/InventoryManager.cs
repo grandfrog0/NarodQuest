@@ -11,9 +11,10 @@ public class InventoryManager : MonoBehaviour
 
     public bool IsEmpty => _config.Items.Count == 0;
 
-    public void Initialize(InventoryConfig inventory)
+    public InventoryConfig Initialize(InventoryConfig inventory)
     {
         _config = inventory;
+        return inventory;
     }
 
     public InventoryConfig Clone()
