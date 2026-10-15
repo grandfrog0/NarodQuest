@@ -41,6 +41,7 @@ public class ObjectSelector : MonoBehaviour
                 target.Interact(new InteractionData
                 {
                     Point = hit.point,
+                    Player = gameObject,
                     Inventory = _inventory,
                     BringableController = _bringableObjectController
                 });
