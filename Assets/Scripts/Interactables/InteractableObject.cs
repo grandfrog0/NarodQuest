@@ -14,6 +14,10 @@ public abstract class InteractableObject : MonoBehaviour
         }
     }
     private bool _isActive = true;
+    public OutlineConfig Outline => _outline;
+    [SerializeField] private OutlineConfig _outline;
+    public int SelectionOrder => _selectionOrder;
+    [SerializeField] private int _selectionOrder;
     public virtual float SizeMultiplier => 1f;
     public abstract void Interact(InteractionData data);
 }

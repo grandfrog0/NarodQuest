@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3044267291272343067}
   - component: {fileID: 7555047774009299162}
   - component: {fileID: 485785694439590101}
+  - component: {fileID: 8698052322451207513}
   m_Layer: 6
   m_Name: Takeable Object
   m_TagString: Interactable
@@ -152,6 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4517fde9c0ac6fe46a8c3c071ae431cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TakeableObject
+  _outline: {fileID: 11400000, guid: 5e3c4bd84adb57f4faea0298139c360b, type: 2}
 --- !u!114 &485785694439590101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,3 +166,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 078408984e65dff4d8538f4c4de34151, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerBringable
+  _offsetHorizontal: {x: 0, y: 0}
+  _offsetVertical: {x: 0, y: 0}
+  _offset: {x: 0, y: 0}
+--- !u!114 &8698052322451207513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052711336008620603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9825371eaf6dc17419e3e0351a1567c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemRenderer
+  _sortingOrder: 0
+  _renderers: []
+  _sortingOrders: 

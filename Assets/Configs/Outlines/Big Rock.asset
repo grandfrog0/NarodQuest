@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bae8f17c46aa3ee4492efdd460e97197, type: 3}
+  m_Name: Big Rock
+  m_EditorClassIdentifier: Assembly-CSharp::OutlineConfig
+  Sprite: {fileID: 4287576010021037850, guid: 04abe5f6a61156342867917531be1656, type: 3}
+  Color: {r: 1, g: 1, b: 1, a: 0.35686275}
+  Offset: {x: 0, y: 4, z: 0}
+  Size: {x: 4, y: 4, z: 4}
+  SortingOrder: 1

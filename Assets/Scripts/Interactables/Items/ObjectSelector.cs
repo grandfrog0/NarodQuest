@@ -7,9 +7,10 @@ using UnityEngine.UIElements;
 
 public class ObjectSelector : MonoBehaviour
 {
-    [SerializeField] private GameObject _selectionOutlinePrefab;
+    [SerializeField] private OutlineView _selectionOutlinePrefab;
     [SerializeField] private LayerMask _selectMask;
-    private Dictionary<InteractableObject, (GameObject, UnityAction<bool>)> _targets = new();
+    [SerializeField] private OutlineConfig _defaultOutlineConfig;
+    private Dictionary<InteractableObject, (OutlineView, UnityAction<bool>)> _targets = new();
     private CircleCollider2D _collider;
 
     private InventoryConfig _inventory;
@@ -31,16 +32,16 @@ public class ObjectSelector : MonoBehaviour
             return;
         }
 
-        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(screenPos), Vector3.zero, 1, _selectMask);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(Camera.main.ScreenToWorldPoint(screenPos), Vector3.zero, 1, _selectMask);
 
-        if (hit.collider != null)
+        if (hits.Length > 0)
         {
-            InteractableObject target = _targets.FirstOrDefault(x => x.Key.gameObject == hit.collider.gameObject).Key;
+            InteractableObject target = _targets.OrderByDescending(x => x.Key.SelectionOrder).FirstOrDefault(x => hits.Select(x => x.collider.gameObject).Contains(x.Key.gameObject)).Key;
             if (target)
             {
                 target.Interact(new InteractionData
                 {
-                    Point = hit.point,
+                    Point = hits.FirstOrDefault(x => x.collider.gameObject == target.gameObject).point,
                     Player = gameObject,
                     Inventory = _inventory,
                     BringableController = _bringableObjectController
@@ -101,16 +102,15 @@ public class ObjectSelector : MonoBehaviour
         UnityAction<bool> action = x => OnActiveChanged(target, x);
         target.OnActiveChanged.AddListener(action);
 
-        GameObject outline = Instantiate(_selectionOutlinePrefab, target.transform.position, Quaternion.identity);
-        outline.transform.localScale = target.transform.localScale + Vector3.one * 1.5f;
-        outline.transform.parent = target.transform;
+        OutlineView outline = Instantiate(_selectionOutlinePrefab, target.transform);
+        outline.Initalize(target.Outline ?? _defaultOutlineConfig);
         _targets.Add(target, (outline, action));
     }
 
     private void RemoveTarget(InteractableObject target)
     {
-        _targets.Remove(target, out (GameObject target, UnityAction<bool> action) value);
+        _targets.Remove(target, out (OutlineView target, UnityAction<bool> action) value);
         target.OnActiveChanged.RemoveListener(value.action);
-        Destroy(value.target);
+        Destroy(value.target.gameObject);
     }
 }

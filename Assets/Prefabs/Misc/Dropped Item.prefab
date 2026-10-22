@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f11db959c739b9f4da0e38528ca36e19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DroppedItem
+  _outline: {fileID: 11400000, guid: 5e3c4bd84adb57f4faea0298139c360b, type: 2}
   _renderer: {fileID: 3466041954128753782}
   _drop:
     Item: {fileID: 11400000, guid: 91e712e14f1b90949b7709575d471ec4, type: 2}

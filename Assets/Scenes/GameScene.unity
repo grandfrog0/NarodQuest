@@ -1278,7 +1278,7 @@ Transform:
   m_GameObject: {fileID: 80536227}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.37, z: 0}
+  m_LocalPosition: {x: 0, y: -0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3678,6 +3678,18 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 0.75
       objectReference: {fileID: 0}
+    - target: {fileID: 3081060191842522607, guid: 916fc759f1cff3a4f95243d40bcd72f2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -6770838332135060171, guid: 0b59cd654dcead94898d4896a15ac62c, type: 3}
+    - target: {fileID: 3469575206095137743, guid: 916fc759f1cff3a4f95243d40bcd72f2, type: 3}
+      propertyPath: _defaultOutlineConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 8355245e20776104b87809a4a18d9631, type: 2}
+    - target: {fileID: 3469575206095137743, guid: 916fc759f1cff3a4f95243d40bcd72f2, type: 3}
+      propertyPath: _selectionOutlinePrefab
+      value: 
+      objectReference: {fileID: 2970958449724380204, guid: 483354da2adaa6044b68f6889a62d40f, type: 3}
     - target: {fileID: 8127068896405604266, guid: 916fc759f1cff3a4f95243d40bcd72f2, type: 3}
       propertyPath: m_Name
       value: Player
@@ -3977,7 +3989,7 @@ Transform:
   m_GameObject: {fileID: 267015372}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.299988, y: -1.4900055, z: 0}
+  m_LocalPosition: {x: -10.71, y: 0.19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3996,6 +4008,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f11db959c739b9f4da0e38528ca36e19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DroppedItem
+  _outline: {fileID: 0}
+  _selectionOrder: 0
   _renderer: {fileID: 80536228}
   _drop:
     Item: {fileID: 11400000, guid: 1d9d13156f57f08428f2f34e2b220a99, type: 2}
@@ -4338,6 +4352,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4517fde9c0ac6fe46a8c3c071ae431cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TakeableObject
+  _outline: {fileID: 11400000, guid: d5d80f9e95021824b9f267b2c6aece94, type: 2}
+  _selectionOrder: 0
 --- !u!114 &285945075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4377,6 +4393,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1624492904}
     m_Modifications:
+    - target: {fileID: 702927769625465529, guid: e4218363bff9f2642a62604a25b6849f, type: 3}
+      propertyPath: _outline
+      value: 
+      objectReference: {fileID: 11400000, guid: 8392059dfeae69540a47a9f5daab64eb, type: 2}
     - target: {fileID: 702927769625465529, guid: e4218363bff9f2642a62604a25b6849f, type: 3}
       propertyPath: _companions.Array.data[0].person
       value: 
@@ -5725,6 +5745,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81934da26322f60479535130a069d31f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableGate
+  _outline: {fileID: 0}
+  _selectionOrder: 0
   _isOpened: 0
   _animator: {fileID: 402675391}
 --- !u!58 &402675393
@@ -118549,6 +118571,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd8d52e9270e7c6468e93016d079d04c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Table
+  _outline: {fileID: 11400000, guid: 87169dd1151a49f44b6062f93a3625c4, type: 2}
+  _selectionOrder: -10
   _bringables:
   - {fileID: 1314600133}
   _items:
@@ -757197,7 +757221,7 @@ Transform:
   m_GameObject: {fileID: 1314600129}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.072052, y: 0.0304169, z: 0}
+  m_LocalPosition: {x: -10.13, y: -3.37, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -757216,6 +757240,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4517fde9c0ac6fe46a8c3c071ae431cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TakeableObject
+  _outline: {fileID: 0}
+  _selectionOrder: 0
 --- !u!114 &1314600133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -760006,6 +760032,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f11db959c739b9f4da0e38528ca36e19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DroppedItem
+  _outline: {fileID: 0}
+  _selectionOrder: 0
   _renderer: {fileID: 15412992}
   _drop:
     Item: {fileID: 11400000, guid: 11e228b2c53b77440a14b94ffe0fe95f, type: 2}
@@ -761535,6 +761563,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7555047774009299162, guid: 7023211779ccf254cbe73c9fd83d2e4f, type: 3}
+      propertyPath: _outline
+      value: 
+      objectReference: {fileID: 11400000, guid: 189f8433c2764a24789f240cb77438bb, type: 2}
     - target: {fileID: 8698052322451207513, guid: 7023211779ccf254cbe73c9fd83d2e4f, type: 3}
       propertyPath: _renderers.Array.size
       value: 1
@@ -763097,6 +763129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4517fde9c0ac6fe46a8c3c071ae431cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TakeableObject
+  _outline: {fileID: 0}
+  _selectionOrder: 0
 --- !u!114 &1891538168
 MonoBehaviour:
   m_ObjectHideFlags: 0
