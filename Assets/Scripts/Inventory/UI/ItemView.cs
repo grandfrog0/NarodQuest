@@ -9,10 +9,14 @@ public class ItemView : MonoBehaviour
     [SerializeField] private Button _button;
     private UnityAction _onClick;
 
-    public void Initialize(Sprite icon, int count, UnityAction onClick = null)
+    public ItemCountPair ItemCountPair { get; private set; }
+
+    public void Initialize(ItemCountPair itemCountPair, UnityAction onClick = null)
     {
-        _iconImage.sprite = icon;
-        _countText.text = FormatCount(count);
+        ItemCountPair = itemCountPair;
+
+        _iconImage.sprite = itemCountPair.Item.Icon;
+        _countText.text = FormatCount(itemCountPair.Count);
 
         _onClick = onClick;
         if (_onClick != null)

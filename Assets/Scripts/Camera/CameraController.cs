@@ -8,6 +8,11 @@ public class CameraController : MonoBehaviour
 
     private Camera _cam;
 
+    public CameraConstraints GetConstraints()
+    {
+        return _constraints;
+    }
+
     public void SetConstraints(CameraConstraints constraints)
     {
         _constraints = constraints;

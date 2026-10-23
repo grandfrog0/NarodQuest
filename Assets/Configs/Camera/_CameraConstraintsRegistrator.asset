@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8149e07f629bd14388a66479781c70d, type: 3}
+  m_Name: _CameraConstraintsRegistrator
+  m_EditorClassIdentifier: Assembly-CSharp::CameraConstraintsRegistrator
+  _constraints:
+  - {fileID: 11400000, guid: 51f148e05d08f4f40b9e728a59c6ac7b, type: 2}
+  - {fileID: 11400000, guid: 4cd7ed6fd298a8d46be72853905024df, type: 2}
+  - {fileID: 11400000, guid: 446b2bb335c152b49b87668f507e5c36, type: 2}

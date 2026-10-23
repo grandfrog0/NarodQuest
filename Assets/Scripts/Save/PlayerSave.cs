@@ -6,8 +6,9 @@ public class PlayerSave
 
     public Vector3 Position;
     public Vector2 Axis;
-    public InventoryConfig Inventory;
+    public InventorySerializable Inventory;
     public int CurrentBringableId;
+    public string CameraConstraints;
 
     public PlayerBringable GetCurrentBringable()
     {

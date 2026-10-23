@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -5,36 +6,55 @@ using UnityEngine.Events;
 
 public class InventoryManager : MonoBehaviour
 {
-    [SerializeField] private UnityEvent _onChanged;
-    [SerializeField] private UnityEvent<Item> _onSelectionChanged;
-    private InventoryConfig _config;
+    public UnityEvent OnChanged { get; } = new();
+    public UnityEvent<int> OnSelectionChanged { get; } = new();
+    private ItemRegistrator _itemRegistrator;
+    private InventoryConfig _inventory;
 
-    public bool IsEmpty => _config.Items.Count == 0;
+    public bool IsEmpty => _inventory.Items.Count == 0;
 
-    public InventoryConfig Initialize(InventoryConfig inventory)
+    public InventoryConfig Initialize(ItemRegistrator itemRegistrator, InventorySerializable serializable)
     {
-        _config = inventory;
-        return inventory;
+        _itemRegistrator = itemRegistrator;
+
+        _inventory = new();
+        ApplySerializable(serializable);
+
+        return _inventory;
     }
 
-    public InventoryConfig Clone()
+    public InventorySerializable CreateSerializable()
     {
-        return _config;
+        return _inventory.CreateSerializable();
     }
 
-    public void SelectItem(Item item)
+    public void ApplySerializable(InventorySerializable serializable)
     {
-        _config.SelectedItem = item;
-        _onSelectionChanged.Invoke(_config.SelectedItem);
+        _inventory.ApplySerializable(_itemRegistrator.GetByName, serializable);
+        OnChanged.Invoke();
+
+        StartCoroutine(SelectionChanged());
+
+        IEnumerator SelectionChanged()
+        {
+            yield return null;
+            OnSelectionChanged.Invoke(_inventory.SelectedIndex);
+        }
+    }
+
+    public void SelectItem(int index)
+    {
+        _inventory.SelectedIndex = index;
+        OnSelectionChanged.Invoke(_inventory.SelectedIndex);
     }
 
     public int GetCount(Item item)
     {
-        return _config.Items.FirstOrDefault(x => x.Item == item)?.Count ?? 0;
+        return _inventory.Items.FirstOrDefault(x => x.Item == item)?.Count ?? 0;
     }
     private bool TryGetPair(Item item, out ItemCountPair pair)
     {
-        return (pair = _config.FirstOrDefault(x => x.Item == item)) != null;
+        return (pair = _inventory.FirstOrDefault(x => x.Item == item)) != null;
     }
 
     public void Add(Item item, int count)
@@ -50,9 +70,9 @@ public class InventoryManager : MonoBehaviour
         }
         else
         {
-            _config.Items.Add(new ItemCountPair(item, count));
+            _inventory.Items.Add(new ItemCountPair(item, count));
         }
-        _onChanged.Invoke();
+        OnChanged.Invoke();
     }
     public void Remove(Item item, int count)
     {
@@ -69,7 +89,7 @@ public class InventoryManager : MonoBehaviour
             {
                 RemovePair(pair);
             }
-            _onChanged.Invoke();
+            OnChanged.Invoke();
         }
     }
     public void Remove(Item item)
@@ -77,22 +97,22 @@ public class InventoryManager : MonoBehaviour
         if (TryGetPair(item, out ItemCountPair pair))
         {
             RemovePair(pair);
-            _onChanged.Invoke();
+            OnChanged.Invoke();
         }
     }
     private void RemovePair(ItemCountPair pair)
     {
-        _config.Items.Remove(pair);
+        _inventory.Items.Remove(pair);
     }
     public void Clear()
     {
-        _config.Items.Clear();
-        _onChanged.Invoke();
-        SelectItem(null);
+        _inventory.Items.Clear();
+        OnChanged.Invoke();
+        SelectItem(-1);
     }
 
     public IEnumerable<ItemCountPair> GetEnumerator()
     {
-        return _config;
+        return _inventory;
     }
 }

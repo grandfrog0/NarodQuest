@@ -1,23 +1,33 @@
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class Bootstrap : MonoBehaviour
 {
     [SerializeField] private LocatorManager _locatorManager;
     [SerializeField] private TransitionManager _transitionManager;
-    [SerializeField] private ObjectRegistrator _objectRegistrator;
     [SerializeField] private InventoryManager _inventoryManager;
     [SerializeField] private InventoryVisualizer _inventoryVisualizer;
     [SerializeField] private ObjectSelector _objectSelector;
     [SerializeField] private BringableObjectController _bringableController;
 
+    [Header("Registrators")]
+    [SerializeField] private ObjectRegistrator _objectRegistrator;
+    [SerializeField] private ItemRegistrator _itemRegistrator;
+    [SerializeField] private CameraConstraintsRegistrator _cameraConstraintsRegistrator;
+
+
     private void Start()
     {
-        // Сохранение
+        // Регистраторы
         _objectRegistrator.Initialize();
+        _itemRegistrator.Initialize();
+        _cameraConstraintsRegistrator.Initialize();
 
-        // Инвентарь
-        InventoryConfig inventory = _inventoryManager.Initialize(new InventoryConfig());
+        // Сохранение
+
+        // Инвентарь (TODO: Load from data)
         _inventoryVisualizer.Initialize();
+        InventoryConfig inventory = _inventoryManager.Initialize(_itemRegistrator, new InventorySerializable());
 
         // Графика
         _locatorManager.Initialize();
