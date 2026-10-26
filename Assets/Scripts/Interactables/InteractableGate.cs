@@ -28,7 +28,6 @@ public class InteractableGate : InteractableObject, IDescriptable
 
     public void ApplyTags(List<string> tags)
     {
-        Debug.Log(tags);
         IsOpened = tags[0] == "1";
         _animator.SetBool("IsOpened", IsOpened);
     }

@@ -9,20 +9,18 @@ public class StateSaver : MonoBehaviour
     /*
         0. Файлы сохранения:
             1. Игрок (координаты, инвентарь, предмет в руке, ограничения камеры)
-        2. Окружение (поднятые предметы, интерактив, нпс)
-        2. Квесты (мини-игры, квесты)
+            2. Окружение (поднятые предметы, интерактив, нпс)
+        3. Квесты (мини-игры, квесты)
 
             1. Координаты игрока, поворот
             2. Предмет в руках у игрока
             3. Инвентарь
-        4. Подобранность каждого инвентарного предмета
-        5. Координаты каждого переносимого предмета
-        6. Состояние интерактива:
-        - Калитки
-        - Стола
+            4. Подобранность каждого инвентарного предмета
+            5. Координаты каждого переносимого предмета
+            6. Состояние интерактива
         7. Состояние мини-игр
         8. Состояние квестов
-        9. Состояние НПС
+            9. Состояние НПС
             10. Ограничения камеры
     */
 
@@ -79,14 +77,13 @@ public class StateSaver : MonoBehaviour
         foreach (int itemId in environmentSave.RaisedObjectsIds)
         {
             DroppedItem item = _droppedItemsRegistrator.DroppedItems.First(x => x.GetId() == itemId);
-            item.PickUp();
+            item.MarkPickedUp(true);
         }
+        Debug.Log(_inventory.CreateSerializable().Items[0].Count);
 
-        Debug.Log(environmentSave.InteractiveDatas);
         foreach (InteractiveObjectData data in environmentSave.InteractiveDatas)
         {
             IDescriptable d = _descriptablesRegistrator.Descriptables.First(x => x.Id == data.Id);
-            Debug.Log(d);
             d.ApplyTags(data.Tags);
         }
     }

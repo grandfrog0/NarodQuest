@@ -41,18 +41,21 @@ public class SaveManager : MonoBehaviour
         void SavePlayer()
         {
             PlayerSave playerSave = _stateSaver.CreatePlayerSave();
-            string json = JsonUtility.ToJson(playerSave);
+            string json = JsonUtility.ToJson(playerSave, true);
             File.WriteAllText(PlayerPath, json);
         }
         void SaveEnvironment()
         {
             EnvironmentSave environmentSave = _stateSaver.CreateEnvironmentSave();
-            string json = JsonUtility.ToJson(environmentSave);
+            string json = JsonUtility.ToJson(environmentSave, true);
             File.WriteAllText(EnvironmentPath, json);
         }
         void SaveQuests()
         {
             // TODO
+            //EnvironmentSave environmentSave = _stateSaver.CreateQuestSave();
+            //string json = JsonUtility.ToJson(environmentSave, true);
+            //File.WriteAllText(EnvironmentPath, json);
         }
     }
 
@@ -64,7 +67,7 @@ public class SaveManager : MonoBehaviour
         }
         catch (Exception ex)
         {
-            Debug.LogError("Ошибка загрузки данных игрока: " + ex);
+            Debug.Log("Ошибка загрузки данных игрока: " + ex);
         }
         try
         {
@@ -72,7 +75,15 @@ public class SaveManager : MonoBehaviour
         }
         catch (Exception ex)
         {
-            Debug.LogError("Ошибка загрузки данных окружения: " + ex);
+            Debug.Log("Ошибка загрузки данных окружения: " + ex);
+        }
+        try
+        {
+            LoadQuests();
+        }
+        catch (Exception ex)
+        {
+            Debug.Log("Ошибка загрузки данных квестов: " + ex);
         }
 
         void LoadPlayer()
@@ -90,22 +101,38 @@ public class SaveManager : MonoBehaviour
         void LoadQuests()
         {
             // TODO
+            string json = File.ReadAllText(QuestsPath);
+            //EnvironmentSave environmentSave = JsonUtility.FromJson<EnvironmentSave>(json);
+            //_stateSaver.ApplyEnvironmentSave(environmentSave);
         }
     }
 
     public void Clear()
     {
-        throw new NotImplementedException();
-        //try
-        //{
-        //    File.WriteAllText(FilePath, "");
-
-        //    Debug.Log($"Успешно очищено сохранение в {FilePath}");
-        //}
-        //catch (Exception ex)
-        //{
-        //    Debug.LogError("Ошибка сохранения данных: " + ex);
-        //}
+        try
+        {
+            File.Delete(PlayerPath);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError("Ошибка удаления данных игрока: " + ex);
+        }
+        try
+        {
+            File.Delete(EnvironmentPath);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError("Ошибка удаления данных окружения: " + ex);
+        }
+        try
+        {
+            File.Delete(QuestsPath);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError("Ошибка удаления данных квестов: " + ex);
+        }
     }
 }
 

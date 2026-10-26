@@ -69,7 +69,6 @@ public class InventoryVisualizer : MonoBehaviour
 
         _selectionMark.gameObject.SetActive(true);
         _selectionMark.transform.position = itemView.transform.position;
-        Debug.Log((_selectionMark.transform.position, itemView.transform.position, selectedIndex));
 
         _selectedRenderer.gameObject.SetActive(itemView.ItemCountPair.Item != null);
         _selectedRenderer.sprite = itemView.ItemCountPair.Item.Icon;

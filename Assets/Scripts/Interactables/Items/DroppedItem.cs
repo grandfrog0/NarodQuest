@@ -1,4 +1,5 @@
 using System;
+using UnityEditor.Build;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -19,7 +20,25 @@ public class DroppedItem : InteractableObject
         IsPicked = false;
     }
 
-    public ItemCountPair PickUp()
+    public bool TryPickUp(out ItemCountPair drop)
+    {
+        if (IsPicked)
+        {
+            drop = null;
+            return false;
+        }
+
+        drop = PickUp();
+        return true;
+    }
+
+    public void MarkPickedUp(bool value)
+    {
+        IsPicked = value;
+        gameObject.SetActive(!IsPicked);
+    }
+
+    private ItemCountPair PickUp()
     {
         IsPicked = true;
         OnPicked?.Invoke(_drop);

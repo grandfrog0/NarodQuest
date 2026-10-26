@@ -105,8 +105,15 @@ public class TutorialQuest : AbstractQuest
         // показать инструкцию
         // после того, как игрок подберет предмет в инвентарь перейти в DragItem
 
+        if (_targetItem.IsPicked)
+        {
+            OnTargetItemBrought(null);
+            return;
+        }
+
         _targetItem.gameObject.SetActive(true);
         _targetItem.OnPicked += OnTargetItemBrought;
+
         DialogManager.Instance.StartDialog(_bringItemDialog, null);
     }
     private void ShowDragItemInstruction()

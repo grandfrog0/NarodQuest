@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class NPC : InteractableObject
+public class NPC : InteractableObject, IDescriptable
 {
     public event Action OnDialogComplete;
 
     [SerializeField] private List<CompanionSerializable> _companions;
     [SerializeField] private DialogConfig _dialog;
+
+    public int Id => this.GetId();
 
     public override void Interact(InteractionData data)
     {
@@ -22,5 +24,15 @@ public class NPC : InteractableObject
             DialogManager.Instance.OnDialogEnd.RemoveListener(OnDialogEnd);
             OnDialogComplete?.Invoke();
         }
+    }
+
+    public virtual List<string> GetTags()
+    {
+        return new List<string>();
+    }
+
+    public virtual void ApplyTags(List<string> tags)
+    {
+        
     }
 }
