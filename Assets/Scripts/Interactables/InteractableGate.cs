@@ -1,7 +1,8 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractableGate : InteractableObject
+public class InteractableGate : InteractableObject, IDescriptable
 {
     public bool IsOpened
     { 
@@ -15,6 +16,20 @@ public class InteractableGate : InteractableObject
     public override void Interact(InteractionData data)
     {
         IsOpened ^= true;
+        _animator.SetBool("IsOpened", IsOpened);
+    }
+
+    public int Id => this.GetId();
+
+    public List<string> GetTags()
+    {
+        return new List<string> { IsOpened ? "1" : "0" };
+    }
+
+    public void ApplyTags(List<string> tags)
+    {
+        Debug.Log(tags);
+        IsOpened = tags[0] == "1";
         _animator.SetBool("IsOpened", IsOpened);
     }
 }

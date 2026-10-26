@@ -1,9 +1,12 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ObjectRegistrator : MonoBehaviour
 {
     static private ObjectRegistrator _instance;
+    public static IEnumerable<GameObject> Enumerate() => _instance._registrated.AsEnumerable();
     static public int GetId(GameObject gameObject)
     {
         return _instance.GetIdByGameObject(gameObject);

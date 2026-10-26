@@ -3,13 +3,9 @@ using UnityEngine;
 
 public class EnvironmentSave
 {
-    // 2. Окружение (поднятые предметы, интерактив, нпс)
+    // 2. Окружение (поднятые предметы)
+    public List<int> RaisedObjectsIds;
 
-    public List<DroppedItem> RaisedObjects;
-
-    // Интерактив
-    public bool IsGateOpened;
-
-    // Статусы NPC
-    public List<NpcStatus> NpcStatuses;
+    // Интерактив (состояние интерактива и нпс)
+    public List<InteractiveObjectData> InteractiveDatas;
 }

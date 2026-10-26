@@ -1,5 +1,8 @@
 using System;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class StateSaver : MonoBehaviour
 {
@@ -28,6 +31,8 @@ public class StateSaver : MonoBehaviour
     [SerializeField] private InventoryManager _inventory;
     [SerializeField] private CameraController _cameraController;
     [SerializeField] private CameraConstraintsRegistrator _cameraConstraintsRegistrator;
+    [SerializeField] private DroppedItemsRegistrator _droppedItemsRegistrator;
+    [SerializeField] private DescriptablesRegistrator _descriptablesRegistrator;
 
     public PlayerSave CreatePlayerSave()
     {
@@ -42,7 +47,11 @@ public class StateSaver : MonoBehaviour
     }
     public EnvironmentSave CreateEnvironmentSave()
     {
-        throw new NotImplementedException();
+        return new EnvironmentSave
+        {
+            RaisedObjectsIds = _droppedItemsRegistrator.DroppedItems.Where(x => x.IsPicked).Select(x => x.GetId()).ToList(),
+            InteractiveDatas = _descriptablesRegistrator.Descriptables.Select(x => new InteractiveObjectData { Id = x.Id, Tags = x.GetTags() }).ToList()
+        };
     }
     public QuestSave CreateQuestSave()
     {
@@ -67,7 +76,19 @@ public class StateSaver : MonoBehaviour
     }
     public void ApplyEnvironmentSave(EnvironmentSave environmentSave)
     {
-        throw new NotImplementedException();
+        foreach (int itemId in environmentSave.RaisedObjectsIds)
+        {
+            DroppedItem item = _droppedItemsRegistrator.DroppedItems.First(x => x.GetId() == itemId);
+            item.PickUp();
+        }
+
+        Debug.Log(environmentSave.InteractiveDatas);
+        foreach (InteractiveObjectData data in environmentSave.InteractiveDatas)
+        {
+            IDescriptable d = _descriptablesRegistrator.Descriptables.First(x => x.Id == data.Id);
+            Debug.Log(d);
+            d.ApplyTags(data.Tags);
+        }
     }
     public void ApplyQuestSave(QuestSave questSave)
     {

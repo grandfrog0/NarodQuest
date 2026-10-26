@@ -12277,6 +12277,8 @@ GameObject:
   m_Component:
   - component: {fileID: 173057900}
   - component: {fileID: 173057901}
+  - component: {fileID: 173057903}
+  - component: {fileID: 173057902}
   m_Layer: 0
   m_Name: Object Registrator
   m_TagString: Untagged
@@ -12331,6 +12333,30 @@ MonoBehaviour:
   - {fileID: 285945070}
   - {fileID: 1109730519}
   - {fileID: 709448643}
+--- !u!114 &173057902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173057899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7fcc0f355709df4bbab020fbe77a487, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DescriptablesRegistrator
+--- !u!114 &173057903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173057899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93e0226497493d843a02cfc32ec28b5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DroppedItemsRegistrator
 --- !u!1001 &173109079
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41834,6 +41860,8 @@ MonoBehaviour:
   _objectSelector: {fileID: 1567047848}
   _bringableController: {fileID: 726402081}
   _objectRegistrator: {fileID: 173057901}
+  _droppedItemsRegistrator: {fileID: 173057903}
+  _descriptablesRegistrator: {fileID: 173057902}
   _itemRegistrator: {fileID: 11400000, guid: 0e325caf101bf5e4e8fe8e70f8abcba5, type: 2}
   _cameraConstraintsRegistrator: {fileID: 11400000, guid: dbf88ff9a4c973142b4e721f1c5322a9, type: 2}
 --- !u!4 &611850870
@@ -44433,6 +44461,8 @@ MonoBehaviour:
   _inventory: {fileID: 1900830170}
   _cameraController: {fileID: 713610317}
   _cameraConstraintsRegistrator: {fileID: 11400000, guid: dbf88ff9a4c973142b4e721f1c5322a9, type: 2}
+  _droppedItemsRegistrator: {fileID: 173057903}
+  _descriptablesRegistrator: {fileID: 173057902}
 --- !u!1001 &646638042
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -821909,7 +821939,7 @@ Tilemap:
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 0.16078432}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_Origin: {x: -406, y: -481, z: 0}
   m_Size: {x: 785, y: 700, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}

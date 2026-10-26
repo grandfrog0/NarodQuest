@@ -27,7 +27,7 @@ public class SaveManager : MonoBehaviour
         }
         catch (Exception ex)
         {
-            Debug.LogError("Ошибка сохранения данных: " + ex);
+            Debug.LogError("Ошибка сохранения данных окружения: " + ex);
         }
         try
         {
@@ -43,13 +43,12 @@ public class SaveManager : MonoBehaviour
             PlayerSave playerSave = _stateSaver.CreatePlayerSave();
             string json = JsonUtility.ToJson(playerSave);
             File.WriteAllText(PlayerPath, json);
-
-            Debug.Log($"player save: {json}");
-            Debug.Log($"inventory: {JsonUtility.ToJson(playerSave.Inventory)}");
         }
         void SaveEnvironment()
         {
-            // TODO
+            EnvironmentSave environmentSave = _stateSaver.CreateEnvironmentSave();
+            string json = JsonUtility.ToJson(environmentSave);
+            File.WriteAllText(EnvironmentPath, json);
         }
         void SaveQuests()
         {
@@ -67,6 +66,14 @@ public class SaveManager : MonoBehaviour
         {
             Debug.LogError("Ошибка загрузки данных игрока: " + ex);
         }
+        try
+        {
+            LoadEnvironment();
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError("Ошибка загрузки данных окружения: " + ex);
+        }
 
         void LoadPlayer()
         {
@@ -76,7 +83,9 @@ public class SaveManager : MonoBehaviour
         }
         void LoadEnvironment()
         {
-            // TODO
+            string json = File.ReadAllText(EnvironmentPath);
+            EnvironmentSave environmentSave = JsonUtility.FromJson<EnvironmentSave>(json);
+            _stateSaver.ApplyEnvironmentSave(environmentSave);
         }
         void LoadQuests()
         {

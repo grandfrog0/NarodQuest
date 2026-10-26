@@ -12,6 +12,8 @@ public class Bootstrap : MonoBehaviour
 
     [Header("Registrators")]
     [SerializeField] private ObjectRegistrator _objectRegistrator;
+    [SerializeField] private DroppedItemsRegistrator _droppedItemsRegistrator;
+    [SerializeField] private DescriptablesRegistrator _descriptablesRegistrator;
     [SerializeField] private ItemRegistrator _itemRegistrator;
     [SerializeField] private CameraConstraintsRegistrator _cameraConstraintsRegistrator;
 
@@ -20,6 +22,8 @@ public class Bootstrap : MonoBehaviour
     {
         // Регистраторы
         _objectRegistrator.Initialize();
+        _droppedItemsRegistrator.Initialize();
+        _descriptablesRegistrator.Initialize();
         _itemRegistrator.Initialize();
         _cameraConstraintsRegistrator.Initialize();
 
