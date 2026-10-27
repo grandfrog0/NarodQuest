@@ -46,7 +46,7 @@ public class CameraController : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, TargetPosition, _config.Speed * Time.deltaTime);
     }
 
-    private void Start()
+    public void Initialize()
     {
         transform.position = TargetPosition;
         _cam = Camera.main;

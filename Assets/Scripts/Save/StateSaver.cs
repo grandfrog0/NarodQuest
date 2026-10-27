@@ -71,6 +71,7 @@ public class StateSaver : MonoBehaviour
 
         CameraConstraints constraints = _cameraConstraintsRegistrator.GetByName(playerSave.CameraConstraints);
         _cameraController.SetConstraints(constraints);
+        _cameraController.transform.position = _cameraController.TargetPosition;
     }
     public void ApplyEnvironmentSave(EnvironmentSave environmentSave)
     {
@@ -79,7 +80,6 @@ public class StateSaver : MonoBehaviour
             DroppedItem item = _droppedItemsRegistrator.DroppedItems.First(x => x.GetId() == itemId);
             item.MarkPickedUp(true);
         }
-        Debug.Log(_inventory.CreateSerializable().Items[0].Count);
 
         foreach (InteractiveObjectData data in environmentSave.InteractiveDatas)
         {

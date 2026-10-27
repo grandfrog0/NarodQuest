@@ -50,7 +50,7 @@ public class MoleHole : InteractableObject
         _onInteract = onInteract;
         IsActive = true;
     }
-    public void Describe()
+    public void Unsubscribe()
     {
         _onInteract = null;
         IsActive = false;

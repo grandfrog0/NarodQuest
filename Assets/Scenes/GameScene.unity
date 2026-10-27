@@ -12333,6 +12333,7 @@ MonoBehaviour:
   - {fileID: 285945070}
   - {fileID: 1109730519}
   - {fileID: 709448643}
+  - {fileID: 156638874}
 --- !u!114 &173057902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41853,6 +41854,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c20488f60ce2432478c883a5674a579a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bootstrap
+  _saveManager: {fileID: 646411931}
+  _cameraController: {fileID: 713610317}
   _locatorManager: {fileID: 1691938657}
   _transitionManager: {fileID: 1311302705}
   _inventoryManager: {fileID: 1900830170}

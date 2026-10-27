@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
-public class MoleHolesController : MonoBehaviour
+public class MoleHolesController : Minigame
 {
     [SerializeField] private UnityEvent _onGameStart;
     [SerializeField] private UnityEvent _onGameEnd;
@@ -26,10 +26,40 @@ public class MoleHolesController : MonoBehaviour
     private int _molesLeft;
     private int _digDurabilityLeft;
 
+    private bool _isWon;
+
     private bool IsGameActive => _gameRoutine != null;
+    private int CurrentMolesCount => _holes.Count(x => x.HoleState == MoleHoleState.MoleHole);
+
+    public override List<string> GetTags()
+    {
+        List<string> result = base.GetTags();
+
+        if (result[0] == "1")
+        {
+            result.Add(_isWon ? "Win" : "Lose");
+        }
+
+        return result;
+    }
+
+    public override void ApplyTags(List<string> tags)
+    {
+        base.ApplyTags(tags);
+
+        if (tags.Count > 1)
+        {
+            _isWon = tags[1] == "Win";
+        }
+    }
 
     public void StartMinigame()
     {
+        if (IsCompleted && _isWon)
+        {
+            return;
+        }
+
         _molesLeft = Random.Range(_maxMolesCountRange.x, _maxMolesCountRange.y + 1);
         _onMolesCountChanged.Invoke(_molesLeft);
 
@@ -56,20 +86,23 @@ public class MoleHolesController : MonoBehaviour
 
         foreach (MoleHole hole in _holes)
         {
-            hole.Describe();
+            hole.Unsubscribe();
         }
 
         if (_molesLeft <= 0)
         {
             Debug.Log("WIN");
+            _isWon = true;
             _onWin.Invoke();
         }
         else
         {
             Debug.Log("LOSE");
+            _isWon = false;
             _onLose.Invoke();
         }
 
+        IsCompleted = true;
         _onGameEnd.Invoke();
     }
 
@@ -87,8 +120,6 @@ public class MoleHolesController : MonoBehaviour
 
         StopMinigame();
     }
-
-    private int CurrentMolesCount => _holes.Count(x => x.HoleState == MoleHoleState.MoleHole);
 
     private MoleHole GetAvailableHole()
     {

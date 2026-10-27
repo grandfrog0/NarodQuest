@@ -3,6 +3,8 @@ using static UnityEditor.Progress;
 
 public class Bootstrap : MonoBehaviour
 {
+    [SerializeField] private SaveManager _saveManager;
+    [SerializeField] private CameraController _cameraController;
     [SerializeField] private LocatorManager _locatorManager;
     [SerializeField] private TransitionManager _transitionManager;
     [SerializeField] private InventoryManager _inventoryManager;
@@ -27,11 +29,14 @@ public class Bootstrap : MonoBehaviour
         _itemRegistrator.Initialize();
         _cameraConstraintsRegistrator.Initialize();
 
-        // Сохранение
-
-        // Инвентарь (TODO: Load from data)
+        // Инвентарь
         _inventoryVisualizer.Initialize();
-        InventoryConfig inventory = _inventoryManager.Initialize(_itemRegistrator, new InventorySerializable());
+        InventoryConfig inventory = _inventoryManager.Initialize(_itemRegistrator);
+
+        _cameraController.Initialize();
+
+        // Загрузка данных из сохранения
+        _saveManager.Load();
 
         // Графика
         _locatorManager.Initialize();
@@ -40,5 +45,10 @@ public class Bootstrap : MonoBehaviour
         // Игрок
         _bringableController.Initialize();
         _objectSelector.Initialize(inventory, _bringableController);
+    }
+
+    private void OnApplicationQuit()
+    {
+        _saveManager.Save();
     }
 }

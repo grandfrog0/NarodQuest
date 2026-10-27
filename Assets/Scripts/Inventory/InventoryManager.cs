@@ -13,13 +13,10 @@ public class InventoryManager : MonoBehaviour
 
     public bool IsEmpty => _inventory.Items.Count == 0;
 
-    public InventoryConfig Initialize(ItemRegistrator itemRegistrator, InventorySerializable serializable)
+    public InventoryConfig Initialize(ItemRegistrator itemRegistrator)
     {
         _itemRegistrator = itemRegistrator;
-
         _inventory = new();
-        ApplySerializable(serializable);
-
         return _inventory;
     }
 
