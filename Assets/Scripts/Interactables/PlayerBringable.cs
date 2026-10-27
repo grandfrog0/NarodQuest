@@ -31,7 +31,7 @@ public class PlayerBringable : MonoBehaviour
     [SerializeField] private Vector2 _offset;
     public Vector2 GetOffset(Vector2 axis) => _offsetHorizontal * axis.x + _offsetVertical * axis.y + _offset;
 
-    private void Start()
+    private void Awake()
     {
         _defaultParent = transform.parent;
     }

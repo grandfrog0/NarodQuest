@@ -1,8 +1,8 @@
 using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class QuestSave : MonoBehaviour
+public class QuestSave
 {
-    //public List<> CompletedMinigames;
-    //public List<QuestState> QuestStates;
+    public List<QuestData> Quests;
 }

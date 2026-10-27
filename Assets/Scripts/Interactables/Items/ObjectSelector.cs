@@ -23,6 +23,8 @@ public class ObjectSelector : MonoBehaviour
 
         _inventory = inventory;
         _bringableObjectController = bringableController;
+
+        //CheckTargets();
     }
 
     private void OnScreenTouched(Vector2 screenPos)
@@ -52,6 +54,22 @@ public class ObjectSelector : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        ValidateTarget(collision);
+    }
+
+    //private void CheckTargets()
+    //{
+    //    Collider2D[] colliders = new Collider2D[9];
+    //    int c = Physics2D.OverlapCircle((Vector2)transform.position + _collider.offset, _collider.radius, ContactFilter2D.noFilter, colliders);
+    //        Debug.Log(c);
+    //    for (int i = 0; i < c; i++)
+    //    {
+    //        Debug.Log((colliders[i], ValidateTarget(colliders[i])));
+    //    }
+    //}
+
+    private bool ValidateTarget(Collider2D collision)
+    {
         if (collision.CompareTag("Interactable"))
         {
             if (!_targets.Any(x => x.Key.gameObject == collision.gameObject))
@@ -60,9 +78,12 @@ public class ObjectSelector : MonoBehaviour
                 if (target.IsActive)
                 {
                     AddTarget(target);
+                    return true;
                 }
             }
         }
+
+        return false;
     }
 
     private void OnTriggerExit2D(Collider2D collision)

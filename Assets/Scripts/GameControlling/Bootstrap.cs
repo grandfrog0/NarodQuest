@@ -35,9 +35,6 @@ public class Bootstrap : MonoBehaviour
 
         _cameraController.Initialize();
 
-        // Загрузка данных из сохранения
-        _saveManager.Load();
-
         // Графика
         _locatorManager.Initialize();
         _transitionManager.Initialize();
@@ -45,6 +42,9 @@ public class Bootstrap : MonoBehaviour
         // Игрок
         _bringableController.Initialize();
         _objectSelector.Initialize(inventory, _bringableController);
+
+        // Загрузка данных из сохранения
+        _saveManager.Load();
     }
 
     private void OnApplicationQuit()

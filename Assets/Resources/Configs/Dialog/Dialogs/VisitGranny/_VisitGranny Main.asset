@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d28bc3518bb02fa4eb483a2771e5e787, type: 3}
-  m_Name: VisitGranny
+  m_Name: _VisitGranny Main
   m_EditorClassIdentifier: Assembly-CSharp::DialogConfig
   dialog:
   - person: {fileID: 11400000, guid: 3bcbfc24828f1bc40b34834c5dcff794, type: 2}
@@ -59,3 +59,4 @@ MonoBehaviour:
       \u0412\u0430\u043D\u044F."
   - person: {fileID: 11400000, guid: 3bcbfc24828f1bc40b34834c5dcff794, type: 2}
     message: "\u0421\u043A\u043E\u0440\u043E \u0432\u0435\u0440\u043D\u0443\u0441\u044C!"
+  _nextDialogDefault: {fileID: 11400000, guid: 6e4f69b6b7b941b4e95a9ec1a4b5ddd8, type: 2}

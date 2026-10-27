@@ -22,7 +22,7 @@ public class TakeableObject : InteractableObject, IDescriptable
         _collider.isTrigger = isTaken;
     }
 
-    private void Start()
+    private void Awake()
     {
         _collider = GetComponent<Collider2D>();
         _bringable = GetComponent<PlayerBringable>();

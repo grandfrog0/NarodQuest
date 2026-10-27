@@ -12922,6 +12922,7 @@ GameObject:
   - component: {fileID: 188549117}
   - component: {fileID: 188549116}
   - component: {fileID: 188549115}
+  - component: {fileID: 188549118}
   m_Layer: 0
   m_Name: Quest Manager
   m_TagString: Untagged
@@ -12970,6 +12971,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1352387708}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &188549118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 188549114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0b177d84cf7dce4ab880f94aacc321c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::QuestsRegistrator
+  _quests:
+  - {fileID: 80566829}
+  - {fileID: 1624492907}
+  - {fileID: 21555287}
+  - {fileID: 546774402}
+  - {fileID: 817054150}
+  - {fileID: 1541669712}
 --- !u!1001 &188940127
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37325,6 +37345,7 @@ GameObject:
   m_Component:
   - component: {fileID: 546774400}
   - component: {fileID: 546774401}
+  - component: {fileID: 546774402}
   m_Layer: 0
   m_Name: Villager
   m_TagString: Untagged
@@ -37393,6 +37414,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 81.99521, y: 86.47422}
   m_EdgeRadius: 0
+--- !u!114 &546774402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 546774399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1476db0ad63eaa54388040ff676bed07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GoToTheFarmerQuest
+  _isTrigger: 1
+  _dialog: {fileID: 11400000, guid: 0520fbd24e72e5f4a8398654a9f27dcc, type: 2}
 --- !u!1001 &549267002
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44466,6 +44501,7 @@ MonoBehaviour:
   _cameraConstraintsRegistrator: {fileID: 11400000, guid: dbf88ff9a4c973142b4e721f1c5322a9, type: 2}
   _droppedItemsRegistrator: {fileID: 173057903}
   _descriptablesRegistrator: {fileID: 173057902}
+  _questsRegistrator: {fileID: 188549118}
 --- !u!1001 &646638042
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48146,7 +48182,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &705678859
 RectTransform:
   m_ObjectHideFlags: 0
@@ -56183,6 +56219,7 @@ GameObject:
   m_Component:
   - component: {fileID: 817054148}
   - component: {fileID: 817054149}
+  - component: {fileID: 817054150}
   m_Layer: 0
   m_Name: Woodcutter
   m_TagString: Untagged
@@ -56251,6 +56288,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 143.76276, y: 103.04116}
   m_EdgeRadius: 0
+--- !u!114 &817054150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 817054147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7985235d0ff1f7428695602416753f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GoToTheWoodcutter
+  _isTrigger: 1
+  _dialog: {fileID: 11400000, guid: 42409e3637d201f4b981f5153c923c40, type: 2}
 --- !u!1001 &820098997
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -833947,11 +833998,11 @@ Transform:
   m_Children:
   - {fileID: 173057900}
   - {fileID: 646411930}
+  - {fileID: 188549117}
   - {fileID: 1311302706}
   - {fileID: 1691938656}
   - {fileID: 629927958}
   - {fileID: 201392185}
-  - {fileID: 188549117}
   - {fileID: 88865598}
   - {fileID: 1900830171}
   m_Father: {fileID: 0}
@@ -857851,7 +857902,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1691868050
 RectTransform:
   m_ObjectHideFlags: 0

@@ -52,10 +52,9 @@ public class SaveManager : MonoBehaviour
         }
         void SaveQuests()
         {
-            // TODO
-            //EnvironmentSave environmentSave = _stateSaver.CreateQuestSave();
-            //string json = JsonUtility.ToJson(environmentSave, true);
-            //File.WriteAllText(EnvironmentPath, json);
+            QuestSave questSave = _stateSaver.CreateQuestSave();
+            string json = JsonUtility.ToJson(questSave, true);
+            File.WriteAllText(QuestsPath, json);
         }
     }
 
@@ -67,7 +66,7 @@ public class SaveManager : MonoBehaviour
         }
         catch (Exception ex)
         {
-            Debug.Log("Ошибка загрузки данных игрока: " + ex);
+            Debug.LogWarning("Ошибка загрузки данных игрока: " + ex);
         }
         try
         {
@@ -75,7 +74,7 @@ public class SaveManager : MonoBehaviour
         }
         catch (Exception ex)
         {
-            Debug.Log("Ошибка загрузки данных окружения: " + ex);
+            Debug.LogWarning("Ошибка загрузки данных окружения: " + ex);
         }
         try
         {
@@ -83,7 +82,7 @@ public class SaveManager : MonoBehaviour
         }
         catch (Exception ex)
         {
-            Debug.Log("Ошибка загрузки данных квестов: " + ex);
+            Debug.LogWarning("Ошибка загрузки данных квестов: " + ex);
         }
 
         void LoadPlayer()
@@ -100,10 +99,9 @@ public class SaveManager : MonoBehaviour
         }
         void LoadQuests()
         {
-            // TODO
             string json = File.ReadAllText(QuestsPath);
-            //EnvironmentSave environmentSave = JsonUtility.FromJson<EnvironmentSave>(json);
-            //_stateSaver.ApplyEnvironmentSave(environmentSave);
+            QuestSave questSave = JsonUtility.FromJson<QuestSave>(json);
+            _stateSaver.ApplyQuestSave(questSave);
         }
     }
 

@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -28,17 +30,26 @@ public class TutorialQuest : AbstractQuest
         set
         {
             _currentStep = value;
-            Debug.Log($"Step: {_currentStep}");
             ManageStep(_currentStep);
         }
     }
     private TutorialQuestStep _currentStep;
+
+    private void Start()
+    {
+        Disactivate();
+    }
 
     protected override void StartQuest()
     {
         base.StartQuest();
         CurrentStep = TutorialQuestStep.Start;
 
+        Disactivate();
+    }
+
+    private void Disactivate()
+    {
         _movementTrigger.Disable();
         _targetItem.gameObject.SetActive(false);
         _dragItem.gameObject.SetActive(false);
@@ -142,7 +153,7 @@ public class TutorialQuest : AbstractQuest
     {
         // похвалить
         // завершить квест и перейти к следующему (дойти до избушки)
-        
+
         _dropTrigger.OnTrigger.RemoveListener(OnTargetDragDropped);
         _dropTrigger.gameObject.SetActive(false);
         _dragItem.IsActive = false;
@@ -174,5 +185,71 @@ public class TutorialQuest : AbstractQuest
         LocatorManager.Clear();
 
         CurrentStep = TutorialQuestStep.End;
+    }
+
+    private void SkipTo(TutorialQuestStep step)
+    {
+        if (CurrentState is StateOfQuest.Finished)
+        {
+            return;
+        }
+
+        switch (step)
+        {
+            case TutorialQuestStep.Start:
+                Greetings();
+                break;
+
+            case TutorialQuestStep.Movement:
+                ShowMovementInstructions();
+                break;
+
+            case TutorialQuestStep.BringItem:
+                SkipMovement();
+                ShowBringItemInstruction();
+                break;
+
+            case TutorialQuestStep.DragItem:
+                SkipBringItem();
+                ShowDragItemInstruction();
+                break;
+
+            case TutorialQuestStep.End:
+                SkipDragItem();
+                ShowEnd();
+                break;
+        }
+
+        void SkipMovement()
+        {
+            _movementTrigger.Disable();
+                Debug.Log(_movementTrigger.gameObject.activeSelf);
+        }
+        void SkipBringItem()
+        {
+            SkipMovement();
+        }
+        void SkipDragItem()
+        {
+            SkipBringItem();
+
+            _dragItem.gameObject.SetActive(false);
+            _dropTrigger.gameObject.SetActive(false);
+        }
+    }
+
+    public override List<string> GetTags()
+    {
+        List<string> result = base.GetTags();
+        result.Add(CurrentStep.ToString());
+        return result;
+    }
+
+    public override void ApplyTags(List<string> tags)
+    {
+        base.ApplyTags(tags);
+
+        TutorialQuestStep step = Enum.Parse<TutorialQuestStep>(tags[1]);
+        SkipTo(step);
     }
 }

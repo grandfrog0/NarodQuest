@@ -14,13 +14,15 @@ public class NPC : InteractableObject, IDescriptable
 
     public override void Interact(InteractionData data)
     {
-        IsActive = false;
         DialogManager.Instance.StartDialog(_dialog, _companions);
 
         DialogManager.Instance.OnDialogEnd.AddListener(OnDialogEnd);
 
         void OnDialogEnd()
         {
+            _dialog = _dialog?.NextDialog;
+            IsActive = _dialog != null;
+
             DialogManager.Instance.OnDialogEnd.RemoveListener(OnDialogEnd);
             OnDialogComplete?.Invoke();
         }
@@ -28,11 +30,27 @@ public class NPC : InteractableObject, IDescriptable
 
     public virtual List<string> GetTags()
     {
-        return new List<string>();
+        if (_dialog == null)
+        {
+            return new List<string>();
+        }
+
+        return new List<string>()
+        {
+            _dialog.name
+        };
     }
 
     public virtual void ApplyTags(List<string> tags)
     {
-        
+        if (tags.Count > 0)
+        {
+            while (_dialog != null && _dialog.name != tags[0])
+            {
+                _dialog = _dialog.NextDialog;
+            }
+        }
+
+        IsActive = _dialog != null;
     }
 }

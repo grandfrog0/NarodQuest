@@ -18,11 +18,15 @@ public class StateSaver : MonoBehaviour
             4. Подобранность каждого инвентарного предмета
             5. Координаты каждого переносимого предмета
             6. Состояние интерактива
-        7. Состояние мини-игр
+            7. Состояние мини-игр
         8. Состояние квестов
             9. Состояние НПС
             10. Ограничения камеры
     */
+
+    public PlayerSave PlayerSave { get; private set; }
+    public EnvironmentSave EnvironmentSave { get; private set; }
+    public QuestSave QuestSave { get; private set; }
 
     [SerializeField] private PlayerMovementController _player;
     [SerializeField] private BringableObjectController _bringableController;
@@ -31,6 +35,7 @@ public class StateSaver : MonoBehaviour
     [SerializeField] private CameraConstraintsRegistrator _cameraConstraintsRegistrator;
     [SerializeField] private DroppedItemsRegistrator _droppedItemsRegistrator;
     [SerializeField] private DescriptablesRegistrator _descriptablesRegistrator;
+    [SerializeField] private QuestsRegistrator _questsRegistrator;
 
     public PlayerSave CreatePlayerSave()
     {
@@ -53,11 +58,16 @@ public class StateSaver : MonoBehaviour
     }
     public QuestSave CreateQuestSave()
     {
-        throw new NotImplementedException();
+        return new QuestSave
+        {
+            Quests = _questsRegistrator.Quests.Select(x => new QuestData { Name = x.Name, Tags = x.GetTags() }).ToList()
+        };
     }
 
     public void ApplyPlayerSave(PlayerSave playerSave)
     {
+        PlayerSave = playerSave;
+
         _player.transform.position = playerSave.Position;
         _player.Axis = playerSave.Axis;
 
@@ -75,6 +85,8 @@ public class StateSaver : MonoBehaviour
     }
     public void ApplyEnvironmentSave(EnvironmentSave environmentSave)
     {
+        EnvironmentSave = environmentSave;
+
         foreach (int itemId in environmentSave.RaisedObjectsIds)
         {
             DroppedItem item = _droppedItemsRegistrator.DroppedItems.First(x => x.GetId() == itemId);
@@ -89,6 +101,12 @@ public class StateSaver : MonoBehaviour
     }
     public void ApplyQuestSave(QuestSave questSave)
     {
-        throw new NotImplementedException();
+        QuestSave = questSave;
+
+        foreach (QuestData data in questSave.Quests)
+        {
+            AbstractQuest quest = _questsRegistrator.Quests.First(x => x.Name == data.Name);
+            quest.ApplyTags(data.Tags);
+        }
     }
 }
