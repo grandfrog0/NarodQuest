@@ -9,10 +9,5 @@ public class PlayerSave
     public InventorySerializable Inventory;
     public int CurrentBringableId;
     public string CameraConstraints;
-
-    public PlayerBringable GetCurrentBringable()
-    {
-        return ObjectRegistrator.Get(CurrentBringableId)?.GetComponent<PlayerBringable>();
-    }
 }
 

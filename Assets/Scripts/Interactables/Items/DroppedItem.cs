@@ -40,11 +40,8 @@ public class DroppedItem : InteractableObject
 
     private ItemCountPair PickUp()
     {
-        Debug.Log(IsPicked);
         IsPicked = true;
         OnPicked?.Invoke(_drop);
-        Debug.Log(IsPicked);
-
         gameObject.SetActive(false);
 
         return _drop;

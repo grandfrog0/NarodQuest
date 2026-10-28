@@ -52,7 +52,7 @@ public class TutorialQuest : AbstractQuest
     {
         _movementTrigger.Disable();
         _targetItem.gameObject.SetActive(false);
-        _dragItem.gameObject.SetActive(false);
+        _dragItem.IsActive = false;
         _dropTrigger.gameObject.SetActive(false);
     }
 
@@ -125,6 +125,7 @@ public class TutorialQuest : AbstractQuest
         _targetItem.gameObject.SetActive(true);
         _targetItem.OnPicked += OnTargetItemBrought;
 
+        LocatorManager.SetTarget(_targetItem.transform);
         DialogManager.Instance.StartDialog(_bringItemDialog, null);
     }
     private void ShowDragItemInstruction()
@@ -132,7 +133,7 @@ public class TutorialQuest : AbstractQuest
         // показать инструкцию
         // после того, как игрок перенесет камень в нужную точку перейти в End
 
-        _dragItem.gameObject.SetActive(true);
+        _dragItem.IsActive = true;
         _dropTrigger.gameObject.SetActive(true);
 
         LocatorManager.SetTarget(_dragItem.transform);
@@ -155,7 +156,7 @@ public class TutorialQuest : AbstractQuest
         // завершить квест и перейти к следующему (дойти до избушки)
 
         _dropTrigger.OnTrigger.RemoveListener(OnTargetDragDropped);
-        _dropTrigger.gameObject.SetActive(false);
+        //_dropTrigger.gameObject.SetActive(false);
         _dragItem.IsActive = false;
 
         DialogManager.Instance.OnDialogEnd.AddListener(End);
@@ -170,21 +171,19 @@ public class TutorialQuest : AbstractQuest
 
     public void OnMovementTargetReceived()
     {
-        CurrentStep = TutorialQuestStep.BringItem;
-        //_movementTrigger.Disable();
         LocatorManager.Clear();
+        CurrentStep = TutorialQuestStep.BringItem;
     }
 
     public void OnTargetItemBrought(ItemCountPair drop)
     {
-        Debug.Log(drop);
+        LocatorManager.Clear();
         CurrentStep = TutorialQuestStep.DragItem;
     }
 
     public void OnTargetDragDropped()
     {
         LocatorManager.Clear();
-
         CurrentStep = TutorialQuestStep.End;
     }
 
@@ -224,7 +223,6 @@ public class TutorialQuest : AbstractQuest
         void SkipMovement()
         {
             _movementTrigger.Disable();
-                Debug.Log(_movementTrigger.gameObject.activeSelf);
         }
         void SkipBringItem()
         {

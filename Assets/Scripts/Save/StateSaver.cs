@@ -73,7 +73,7 @@ public class StateSaver : MonoBehaviour
 
         _inventory.ApplySerializable(playerSave.Inventory);
 
-        PlayerBringable bringable = playerSave.GetCurrentBringable();
+        PlayerBringable bringable = ObjectRegistrator.Get(playerSave.CurrentBringableId).GetComponent<PlayerBringable>();
         if (bringable != null)
         {
             _bringableController.Bring(bringable);

@@ -41,10 +41,12 @@ public class Bootstrap : MonoBehaviour
 
         // Игрок
         _bringableController.Initialize();
-        _objectSelector.Initialize(inventory, _bringableController);
 
         // Загрузка данных из сохранения
         _saveManager.Load();
+
+        // Игрок
+        _objectSelector.Initialize(inventory, _bringableController);
 
         // Другое
         _questsRegistrator.Initialize();

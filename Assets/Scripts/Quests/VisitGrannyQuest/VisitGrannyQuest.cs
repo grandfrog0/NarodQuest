@@ -14,6 +14,7 @@ public class VisitGrannyQuest : AbstractQuest
     {
         StartQuest();
 
+        // TODO: при входе в избу локатор переключается на бабушку, и наоборот;
         LocatorManager.SetTarget(_hutTransform);
         _grannyNpc.OnDialogComplete += OnDialogEnd;
 

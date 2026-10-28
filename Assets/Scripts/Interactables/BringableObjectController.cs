@@ -33,12 +33,9 @@ public class BringableObjectController : MonoBehaviour
 
     public void Bring(PlayerBringable bringable)
     {
-        Debug.Log(Current);
         Detach();
 
-        Debug.Log(Current);
         Current = bringable;
-        Debug.Log(Current);
 
         Current.Drag(transform);
         OnMoveAxisChanged(_movementController.Axis);

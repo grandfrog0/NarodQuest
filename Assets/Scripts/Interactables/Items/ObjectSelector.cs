@@ -24,6 +24,11 @@ public class ObjectSelector : MonoBehaviour
         _inventory = inventory;
         _bringableObjectController = bringableController;
 
+        if (_bringableObjectController.Current?.TryGetComponent(out TakeableObject takeableObject) == true)
+        {
+            AddTarget(takeableObject);
+        }
+
         //CheckTargets();
     }
 

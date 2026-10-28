@@ -28,7 +28,9 @@ public class LocatorMark : MonoBehaviour
 
         if (!isOnScreen)
         {
-            _rect.anchoredPosition = Clamp(targetPosition);
+            targetPosition = Clamp(targetPosition);
+            _rect.anchoredPosition = targetPosition;
+            _rect.up = Vector3.Lerp(_rect.up, -targetPosition, Time.fixedDeltaTime * 3);
         }
     }
 
