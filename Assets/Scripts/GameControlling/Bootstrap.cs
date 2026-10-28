@@ -1,5 +1,4 @@
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class Bootstrap : MonoBehaviour
 {
@@ -18,6 +17,7 @@ public class Bootstrap : MonoBehaviour
     [SerializeField] private DescriptablesRegistrator _descriptablesRegistrator;
     [SerializeField] private ItemRegistrator _itemRegistrator;
     [SerializeField] private CameraConstraintsRegistrator _cameraConstraintsRegistrator;
+    [SerializeField] private QuestsRegistrator _questsRegistrator;
 
 
     private void Start()
@@ -45,6 +45,9 @@ public class Bootstrap : MonoBehaviour
 
         // Загрузка данных из сохранения
         _saveManager.Load();
+
+        // Другое
+        _questsRegistrator.Initialize();
     }
 
     private void OnApplicationQuit()

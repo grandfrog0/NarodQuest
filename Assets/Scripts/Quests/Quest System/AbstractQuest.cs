@@ -26,6 +26,7 @@ public abstract class AbstractQuest : MonoBehaviour
         if (!_isInitialized)
         {
             _waitingState = StateOfQuest.Started;
+            Debug.Log(_waitingState);
             return;
         }
 
@@ -82,7 +83,10 @@ public abstract class AbstractQuest : MonoBehaviour
     public virtual void ApplyTags(List<string> tags)
     {
         CurrentState = Enum.Parse<StateOfQuest>(tags[0]);
+    }
 
+    public void Initialize()
+    {
         _isInitialized = true;
         if (_waitingState is StateOfQuest.Started)
         {

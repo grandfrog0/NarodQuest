@@ -15,7 +15,7 @@ public class DroppedItem : InteractableObject
     public void Initialize(ItemCountPair item)
     {
         _renderer.sprite = item.Item.Icon;
-        OnPicked = x => FindAnyObjectByType<InventoryManager>().Add(x.Item, x.Count);
+        OnPicked += x => FindAnyObjectByType<InventoryManager>().Add(x.Item, x.Count);
 
         IsPicked = false;
     }
@@ -40,8 +40,10 @@ public class DroppedItem : InteractableObject
 
     private ItemCountPair PickUp()
     {
+        Debug.Log(IsPicked);
         IsPicked = true;
         OnPicked?.Invoke(_drop);
+        Debug.Log(IsPicked);
 
         gameObject.SetActive(false);
 

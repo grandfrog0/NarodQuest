@@ -171,12 +171,13 @@ public class TutorialQuest : AbstractQuest
     public void OnMovementTargetReceived()
     {
         CurrentStep = TutorialQuestStep.BringItem;
-        _movementTrigger.Disable();
+        //_movementTrigger.Disable();
         LocatorManager.Clear();
     }
 
     public void OnTargetItemBrought(ItemCountPair drop)
     {
+        Debug.Log(drop);
         CurrentStep = TutorialQuestStep.DragItem;
     }
 
