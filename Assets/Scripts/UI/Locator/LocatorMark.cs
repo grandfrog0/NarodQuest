@@ -18,7 +18,7 @@ public class LocatorMark : MonoBehaviour
         }
     }
 
-    public void Handle(Vector3 screenPlayerPosition, float deltaTime)
+    public void Handle(float deltaTime)
     {
         if (_target == null)
         {
@@ -39,7 +39,7 @@ public class LocatorMark : MonoBehaviour
         {
             targetPosition = Clamp(targetPosition);
             _rect.anchoredPosition = targetPosition;
-            _rect.up = Vector3.Lerp(_rect.up, screenPlayerPosition - targetPosition, deltaTime * 3);
+            _rect.up = Vector2.Lerp(_rect.up, -targetPosition, deltaTime * 3);
         }
     }
 

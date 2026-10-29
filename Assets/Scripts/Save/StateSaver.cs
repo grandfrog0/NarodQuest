@@ -73,10 +73,10 @@ public class StateSaver : MonoBehaviour
 
         _inventory.ApplySerializable(playerSave.Inventory);
 
-        PlayerBringable bringable = ObjectRegistrator.Get(playerSave.CurrentBringableId).GetComponent<PlayerBringable>();
+        GameObject bringable = ObjectRegistrator.Get(playerSave.CurrentBringableId);
         if (bringable != null)
         {
-            _bringableController.Bring(bringable);
+            _bringableController.Bring(bringable.GetComponent<PlayerBringable>());
         }
 
         CameraConstraints constraints = _cameraConstraintsRegistrator.GetByName(playerSave.CameraConstraints);

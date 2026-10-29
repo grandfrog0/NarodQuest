@@ -858871,7 +858871,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e16035997cbb8e4ba125f9656abceb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocatorManager
-  _mark: {fileID: 0}
+  _playerTransform: {fileID: 241297959}
   _markPrefab: {fileID: 6757193245983708134, guid: d0ef14da7ff76b0448b15d45aba82688, type: 3}
   _markParent: {fileID: 198729585}
 --- !u!1001 &1692711925

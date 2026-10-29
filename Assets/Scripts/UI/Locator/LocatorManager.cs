@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
@@ -7,11 +8,13 @@ using static UnityEngine.GraphicsBuffer;
 public class LocatorManager : MonoBehaviour
 {
     private static LocatorManager _instance;
-    [SerializeField] LocatorMark _mark;
+
+    [SerializeField] Transform _playerTransform;
 
     [SerializeField] LocatorMark _markPrefab;
     [SerializeField] Transform _markParent;
     private List<LocatorMark> _marks = new();
+    private LocatorMark _mark;
 
     public static LocatorMark CreateMark()
     {
@@ -63,5 +66,17 @@ public class LocatorManager : MonoBehaviour
         _mark.Clear();
 
         _marks.Clear();
+    }
+
+    private void FixedUpdate()
+    {
+        Vector3 playerScreenPosition = Camera.main.WorldToScreenPoint(_playerTransform.position);
+        playerScreenPosition.z = 0;
+
+        foreach (LocatorMark mark in _marks)
+        {
+            mark.Handle(Time.deltaTime);
+        }
+        _mark.Handle(Time.deltaTime);
     }
 }
