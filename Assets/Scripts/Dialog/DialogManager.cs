@@ -7,7 +7,10 @@ public class DialogManager : MonoBehaviour
 {
     public static DialogManager Instance { get; private set; }
 
-    public UnityEvent OnDialogEnd { get; } = new();
+    [SerializeField] UnityEvent _onDialogStart;
+    [SerializeField] UnityEvent _onDialogEnd;
+    public UnityEvent OnDialogStart => _onDialogStart;
+    public UnityEvent OnDialogEnd => _onDialogEnd;
 
     [SerializeField] private DialogWindowManager _dialogWindowManager;
     [SerializeField] private DialogConfig _dialogConfig;
@@ -55,6 +58,9 @@ public class DialogManager : MonoBehaviour
             OnDialogEnd.Invoke();
             return;
         }
+
+        Debug.Log(_currentDialog);
+        OnDialogStart.Invoke();
 
         LogSerializable log = _currentDialog.dialog[_currentIndex];
 

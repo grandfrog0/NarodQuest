@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Rendering.UI;
 
 public class LocatorMark : MonoBehaviour
 {
@@ -9,7 +8,17 @@ public class LocatorMark : MonoBehaviour
     private Transform _target;
     private bool _isTargetOnScreen;
 
-    private void FixedUpdate()
+    public Transform Target
+    {
+        get => _target;
+        set
+        {
+            gameObject.SetActive(true);
+            _target = value;
+        }
+    }
+
+    public void Handle(Vector3 screenPlayerPosition, float deltaTime)
     {
         if (_target == null)
         {
@@ -30,7 +39,7 @@ public class LocatorMark : MonoBehaviour
         {
             targetPosition = Clamp(targetPosition);
             _rect.anchoredPosition = targetPosition;
-            _rect.up = Vector3.Lerp(_rect.up, -targetPosition, Time.fixedDeltaTime * 3);
+            _rect.up = Vector3.Lerp(_rect.up, screenPlayerPosition - targetPosition, deltaTime * 3);
         }
     }
 
@@ -42,12 +51,6 @@ public class LocatorMark : MonoBehaviour
     private Vector2 Clamp(Vector3 position)
     {
         return new Vector2(Mathf.Clamp(position.x - Screen.width / 2, Screen.width / -2 + _offset.x, Screen.width / 2 - _offset.x), Mathf.Clamp(position.y - Screen.height / 2, Screen.height / -2 + _offset.y, Screen.height / 2 - _offset.y));
-    }
-
-    public void SetTarget(Transform target)
-    {
-        gameObject.SetActive(true);
-        _target = target;
     }
 
     public void Clear()

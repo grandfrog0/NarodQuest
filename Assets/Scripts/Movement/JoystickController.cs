@@ -9,10 +9,10 @@ public class JoystickController : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public Vector2 Movement { get; private set; }
 
-    RectTransform _joystick;
-    Vector2 _startPosition;
+    private RectTransform _joystick;
+    private Vector2 _startPosition;
 
-    void Start()
+    void Awake()
     {
         Initialize();
     }
@@ -46,7 +46,25 @@ public class JoystickController : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        Clear();
+    }
+
+    private void Clear()
+    {
         _joystick.anchoredPosition = _startPosition;
         Movement = Vector2.zero;
+    }
+
+    public void SetActive(bool value)
+    {
+        if (value)
+        {
+            gameObject.SetActive(true);
+        }
+        else
+        {
+            Clear();
+            gameObject.SetActive(false);
+        }
     }
 }

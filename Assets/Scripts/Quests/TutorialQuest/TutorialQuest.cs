@@ -20,7 +20,9 @@ public class TutorialQuest : AbstractQuest
     [Header("DragItem")]
     [SerializeField] private DialogConfig _dragItemDialog;
     [SerializeField] private TakeableObject _dragItem;
+    [SerializeField] private Animator _dragItemAnimator;
     [SerializeField] private DropTakeableTrigger _dropTrigger;
+    [SerializeField] private Animator _dropTriggerAnimator;
     [Header("End")]
     [SerializeField] private DialogConfig _endDialog;
 
@@ -53,7 +55,9 @@ public class TutorialQuest : AbstractQuest
         _movementTrigger.Disable();
         _targetItem.gameObject.SetActive(false);
         _dragItem.IsActive = false;
+        _dragItemAnimator.gameObject.SetActive(false);
         _dropTrigger.gameObject.SetActive(false);
+        _dropTriggerAnimator.gameObject.SetActive(false);
     }
 
     protected override void EndQuest()
@@ -134,7 +138,9 @@ public class TutorialQuest : AbstractQuest
         // после того, как игрок перенесет камень в нужную точку перейти в End
 
         _dragItem.IsActive = true;
+        _dragItemAnimator.gameObject.SetActive(true);
         _dropTrigger.gameObject.SetActive(true);
+        _dropTriggerAnimator.gameObject.SetActive(false);
 
         LocatorManager.SetTarget(_dragItem.transform);
         _dragItem.Bringable.OnDrag += OnDrag;
@@ -146,6 +152,8 @@ public class TutorialQuest : AbstractQuest
         void OnDrag(PlayerBringable _)
         {
             _dragItem.Bringable.OnDrag -= OnDrag;
+            _dropTriggerAnimator.gameObject.SetActive(true);
+            _dragItemAnimator.Play("trigger");
 
             LocatorManager.SetTarget(_dropTrigger.transform);
         }
@@ -158,6 +166,7 @@ public class TutorialQuest : AbstractQuest
         _dropTrigger.OnTrigger.RemoveListener(OnTargetDragDropped);
         //_dropTrigger.gameObject.SetActive(false);
         _dragItem.IsActive = false;
+        _dragItemAnimator.gameObject.SetActive(false);
 
         DialogManager.Instance.OnDialogEnd.AddListener(End);
         DialogManager.Instance.StartDialog(_endDialog, null);
@@ -183,6 +192,7 @@ public class TutorialQuest : AbstractQuest
 
     public void OnTargetDragDropped()
     {
+        _dropTriggerAnimator.Play("trigger");
         LocatorManager.Clear();
         CurrentStep = TutorialQuestStep.End;
     }
@@ -233,7 +243,9 @@ public class TutorialQuest : AbstractQuest
             SkipBringItem();
 
             _dragItem.gameObject.SetActive(false);
+            _dragItemAnimator.gameObject.SetActive(false);
             _dropTrigger.gameObject.SetActive(false);
+            _dropTriggerAnimator.gameObject.SetActive(false);
         }
     }
 
