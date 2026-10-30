@@ -42,9 +42,10 @@ public class PlayerBringable : MonoBehaviour
         OnDrag?.Invoke(this);
     }
 
-    public void Drop()
+    public void Drop(Vector3 dropPosition)
     {
         transform.SetParent(_defaultParent);
+        transform.position = dropPosition;
 
         if (Renderer != null)
         {

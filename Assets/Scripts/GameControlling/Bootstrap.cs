@@ -8,7 +8,8 @@ public class Bootstrap : MonoBehaviour
     [SerializeField] private TransitionManager _transitionManager;
     [SerializeField] private InventoryManager _inventoryManager;
     [SerializeField] private InventoryVisualizer _inventoryVisualizer;
-    [SerializeField] private ObjectSelector _objectSelector;
+    [SerializeField] private InteractablesSelector _interactablesSelector;
+    [SerializeField] private Interactor _interactor;
     [SerializeField] private BringableObjectController _bringableController;
 
     [Header("Registrators")]
@@ -46,7 +47,8 @@ public class Bootstrap : MonoBehaviour
         _saveManager.Load();
 
         // Игрок
-        _objectSelector.Initialize(inventory, _bringableController);
+        _interactablesSelector.Initialize();
+        _interactor.Initialize(_interactablesSelector, inventory, _bringableController);
 
         // Другое
         _questsRegistrator.Initialize();

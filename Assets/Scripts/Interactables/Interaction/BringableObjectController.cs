@@ -17,7 +17,7 @@ public class BringableObjectController : MonoBehaviour
         Instance = this;
     }
 
-    public bool SwitchBring(PlayerBringable bringable)
+    public bool SwitchBring(PlayerBringable bringable, Vector3 point)
     {
         if (Current != bringable)
         {
@@ -26,7 +26,7 @@ public class BringableObjectController : MonoBehaviour
         }
         else
         {
-            Detach();
+            Detach(point);
             return false;
         }
     }
@@ -42,14 +42,14 @@ public class BringableObjectController : MonoBehaviour
         _movementController.OnMoveAxisChanged.AddListener(OnMoveAxisChanged);
     }
 
-    public void Detach()
+    public void Detach(Vector3 point = default)
     {
         if (Current == null)
         {
             return;
         }
 
-        Current.Drop();
+        Current.Drop(point);
         _movementController.OnMoveAxisChanged.RemoveListener(OnMoveAxisChanged);
 
         Current = null;

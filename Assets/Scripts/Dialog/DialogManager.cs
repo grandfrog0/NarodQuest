@@ -15,6 +15,7 @@ public class DialogManager : MonoBehaviour
     [SerializeField] private DialogWindowManager _dialogWindowManager;
     [SerializeField] private DialogConfig _dialogConfig;
     [SerializeField] private DialogManagerConfig _dialogManagerConfig;
+    [SerializeField] private float _skipDialogCooldown;
 
     [SerializeField] private List<CompanionSerializable> _baseCompanions;
 
@@ -22,16 +23,18 @@ public class DialogManager : MonoBehaviour
     private DialogConfig _currentDialog;
     private int _currentIndex;
 
+    private float _dialogShowTime;
+
     private Camera _mainCamera;
 
     void OnEnable()
     {
-        InputSystemManager.OnTouch.AddListener(ShowDialog);
+        InputSystemManager.OnTouch.AddListener(TryShowDialog);
     }
 
     void OnDisable()
     {
-        InputSystemManager.OnTouch.RemoveListener(ShowDialog);
+        InputSystemManager.OnTouch.RemoveListener(TryShowDialog);
     }
 
     void Start()
@@ -79,6 +82,15 @@ public class DialogManager : MonoBehaviour
 
         _dialogWindowManager.SetLog(log, cloudWindowPosition);
         _currentIndex++;
+    }
+
+    private void TryShowDialog()
+    {
+        if (Time.time >= _dialogShowTime + _skipDialogCooldown)
+        {
+            ShowDialog();
+            _dialogShowTime = Time.time;
+        }
     }
 
     private Transform GetTransform(PersonConfig person) => _currentCompanions?.FirstOrDefault(x => x.person == person)?.companion;

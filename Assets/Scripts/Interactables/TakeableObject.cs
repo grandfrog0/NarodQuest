@@ -18,7 +18,7 @@ public class TakeableObject : InteractableObject, IDescriptable
 
     public override void Interact(InteractionData data)
     {
-        bool isTaken = BringableObjectController.Instance.SwitchBring(_bringable);
+        bool isTaken = BringableObjectController.Instance.SwitchBring(_bringable, data.Point);
         _collider.isTrigger = isTaken;
     }
 
