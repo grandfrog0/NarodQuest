@@ -1,18 +1,42 @@
 using System;
 using System.Linq;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class Interactor : MonoBehaviour
 {
     [SerializeField] private InteractablesSelector _objectSelector;
-    [SerializeField] private OutlineController _outlineController; // TODO
+    [SerializeField] private OutlineController _outlineController;
     [SerializeField] private JoystickController _interactiveController;
-    [SerializeField] private GameObject _interactionPointViewer;
+    [SerializeField] private InteractionPointViewer _interactionPointViewer;
     [SerializeField] private float _selectionDistanceMultiplier = 3f;
     private InventoryConfig _inventory;
     private BringableObjectController _bringableObjectController;
 
-    public InteractableObject Target { get; private set; }
+    private InteractableObject _target;
+    public InteractableObject Target
+    {
+        get => _target;
+        private set
+        {
+            if (_target != value)
+            {
+                if (_target is not null)
+                {
+                    _outlineController.RemoveTarget(_target);
+                }
+
+                _target = value;
+
+                if (_target is not null)
+                {
+                    _outlineController.AddTarget(_target);
+                }
+            }
+
+            _interactionPointViewer.SetActive(_target is null);
+        }
+    }
     private Vector3 _interactionPoint;
 
     public void Initialize(InteractablesSelector objectSelector, InventoryConfig inventory, BringableObjectController bringableController)
@@ -20,12 +44,6 @@ public class Interactor : MonoBehaviour
         _objectSelector = objectSelector;
         _inventory = inventory;
         _bringableObjectController = bringableController;
-
-        // TODO
-        //if (_bringableObjectController.Current?.TryGetComponent(out TakeableObject takeableObject) == true)
-        //{
-        //    AddTarget(takeableObject);
-        //}
 
         _interactiveController.OnDragging += OnPointerMove;
         _interactiveController.OnDragStart += OnPointerDragStart;
@@ -48,7 +66,7 @@ public class Interactor : MonoBehaviour
     /// <param name="direction"></param>
     public void OnPointerMove(Vector2 direction)
     {
-        _interactionPoint = transform.position + (Vector3)direction * _selectionDistanceMultiplier;
+        _interactionPoint = _objectSelector.transform.position + (Vector3)direction * _selectionDistanceMultiplier;
 
         _interactionPointViewer.transform.position = _interactionPoint;
         HandleNearest();
@@ -68,7 +86,7 @@ public class Interactor : MonoBehaviour
     /// </summary>
     public void OnPointerClick()
     {
-        _interactionPoint = transform.position;
+        _interactionPoint = _objectSelector.transform.position;
         HandleNearest();
 
         TryInteract();
@@ -85,20 +103,23 @@ public class Interactor : MonoBehaviour
 
     private void HandleNearest()
     {
-        if (_bringableObjectController.Current != null)
+        Target = _objectSelector.Targets.OrderBy(x => Vector2.Distance(_interactionPoint, x.transform.position)).FirstOrDefault();
+
+        if (_bringableObjectController.Current != null && Target is not Table)
         {
             Target = null;
-            return;
+            _interactionPointViewer.SetPlaceCorrect(_bringableObjectController.IsCorrectPlace(_interactionPoint));
         }
-        Target = _objectSelector.Targets.OrderBy(x => Vector2.Distance(_interactionPoint, x.transform.position)).FirstOrDefault();
     }
 
     private bool TryInteract()
     {
-        if (_bringableObjectController.Current != null)
+            Debug.Log(("TRY INTERACT", _interactionPoint));
+        if (_bringableObjectController.Current != null && Target is not Table)
         {
-            _bringableObjectController.Current.Drop(_interactionPoint);
-            return true;
+            bool result = _bringableObjectController.TryDetach(_interactionPoint);
+            Target = null;
+            return result;
         }
 
         if (Target != null)

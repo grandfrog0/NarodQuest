@@ -9,12 +9,20 @@ public class BringableObjectController : MonoBehaviour
     public PlayerBringable Current { get; private set; }
     [SerializeField] private Vector2 _offset = Vector2.down;
     [SerializeField] private float _radius = 0.5f;
+    [SerializeField] private LayerMask _obstacleMask;
     private PlayerMovementController _movementController;
 
     public void Initialize()
     {
         _movementController = GetComponent<PlayerMovementController>();
         Instance = this;
+    }
+
+    public bool IsCorrectPlace(Vector3 position)
+    {
+        RaycastHit2D hit = Physics2D.Raycast(position, Vector2.zero, 1f, _obstacleMask);
+        Debug.Log(hit.collider);
+        return hit.collider == null;
     }
 
     public bool SwitchBring(PlayerBringable bringable, Vector3 point)
@@ -26,14 +34,14 @@ public class BringableObjectController : MonoBehaviour
         }
         else
         {
-            Detach(point);
+            TryDetach(point);
             return false;
         }
     }
 
     public void Bring(PlayerBringable bringable)
     {
-        Detach();
+        TryDetach();
 
         Current = bringable;
 
@@ -42,17 +50,20 @@ public class BringableObjectController : MonoBehaviour
         _movementController.OnMoveAxisChanged.AddListener(OnMoveAxisChanged);
     }
 
-    public void Detach(Vector3 point = default)
+    public bool TryDetach(Vector3 point = default)
     {
-        if (Current == null)
+        Debug.Log(IsCorrectPlace(point));
+        if (Current == null || !IsCorrectPlace(point))
         {
-            return;
+            return false;
         }
 
         Current.Drop(point);
         _movementController.OnMoveAxisChanged.RemoveListener(OnMoveAxisChanged);
 
         Current = null;
+
+        return true;
     }
 
     private void OnMoveAxisChanged(Vector2 axis)
@@ -68,6 +79,6 @@ public class BringableObjectController : MonoBehaviour
 
     private void OnDestroy()
     {
-        Detach();
+        TryDetach();
     }
 }

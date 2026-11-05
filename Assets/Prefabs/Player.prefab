@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7726424164847592634}
   - component: {fileID: 5880524069476086069}
   - component: {fileID: 1063771542983224757}
+  - component: {fileID: 2225908894951557060}
   m_Layer: 0
   m_Name: Item Viewer
   m_TagString: Untagged
@@ -107,6 +108,21 @@ MonoBehaviour:
   _offsetHorizontal: {x: 0, y: 0}
   _offsetVertical: {x: 0, y: 0}
   _offset: {x: 0, y: 0}
+--- !u!114 &2225908894951557060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2064781737747666821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9825371eaf6dc17419e3e0351a1567c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemRenderer
+  _sortingOrder: 0
+  _renderers: []
+  _sortingOrders: 
 --- !u!1 &2148791944849197871
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,7 +249,6 @@ GameObject:
   - component: {fileID: 253619806999837539}
   - component: {fileID: 4202754090517165681}
   - component: {fileID: 2952184483914371898}
-  - component: {fileID: 3469575206095137743}
   - component: {fileID: 1908981569809329129}
   - component: {fileID: 147497628349723731}
   m_Layer: 0
@@ -340,22 +355,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.5}
   m_Size: {x: 1, y: 1}
   m_Direction: 0
---- !u!114 &3469575206095137743
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8127068896405604266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cebd991f7d89b943be4bb2c9984a19a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ItemPicker
-  _selectionOutlinePrefab: {fileID: 8981622617838997482, guid: 483354da2adaa6044b68f6889a62d40f, type: 3}
-  _selectMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!58 &1908981569809329129
 CircleCollider2D:
   m_ObjectHideFlags: 0

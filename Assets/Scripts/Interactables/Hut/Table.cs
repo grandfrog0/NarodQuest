@@ -33,7 +33,7 @@ public class Table : InteractableObject, IDescriptable
         if (bringable != null && !_bringables.Contains(bringable))
         {
             // То отпускаем предмет
-            bringableController.Detach();
+            bringableController.TryDetach();
 
             // И ставим его на стол
             bringable.transform.position = data.Point;

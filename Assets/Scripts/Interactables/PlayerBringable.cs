@@ -10,6 +10,7 @@ public class PlayerBringable : MonoBehaviour
     public event Action<PlayerBringable> OnDrag;
     public event Action<PlayerBringable> OnDrop;
 
+    private Collider2D _collider;
     private Transform _defaultParent;
 
     public bool IsActive { get; set; } = true;
@@ -33,12 +34,14 @@ public class PlayerBringable : MonoBehaviour
 
     private void Awake()
     {
+        _collider = GetComponent<Collider2D>();
         _defaultParent = transform.parent;
     }
 
     public void Drag(Transform currentParent)
     {
         transform.SetParent(currentParent);
+        _collider.enabled = false;
         OnDrag?.Invoke(this);
     }
 
@@ -46,6 +49,8 @@ public class PlayerBringable : MonoBehaviour
     {
         transform.SetParent(_defaultParent);
         transform.position = dropPosition;
+
+        _collider.enabled = true;
 
         if (Renderer != null)
         {

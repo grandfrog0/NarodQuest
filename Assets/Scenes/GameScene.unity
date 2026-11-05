@@ -10875,7 +10875,7 @@ Transform:
   m_GameObject: {fileID: 153837521}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 19.649998, y: -11.450001, z: 0}
+  m_LocalPosition: {x: 19.649998, y: -11.92, z: 0}
   m_LocalScale: {x: 1.75, y: 1.75, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -16889,6 +16889,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 147497628349723731, guid: 916fc759f1cff3a4f95243d40bcd72f2, type: 3}
+      propertyPath: _obstacleMask.m_Bits
+      value: 65
+      objectReference: {fileID: 0}
     - target: {fileID: 253619806999837539, guid: 916fc759f1cff3a4f95243d40bcd72f2, type: 3}
       propertyPath: joystick
       value: 
@@ -16973,6 +16977,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8127068896405604266, guid: 916fc759f1cff3a4f95243d40bcd72f2, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3469575206095137743, guid: 916fc759f1cff3a4f95243d40bcd72f2, type: 3}
     m_RemovedGameObjects: []
@@ -16983,9 +16991,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8127068896405604266, guid: 916fc759f1cff3a4f95243d40bcd72f2, type: 3}
       insertIndex: 4
-      addedObject: {fileID: 1567047852}
-    - targetCorrespondingSourceObject: {fileID: 8127068896405604266, guid: 916fc759f1cff3a4f95243d40bcd72f2, type: 3}
-      insertIndex: 5
       addedObject: {fileID: 1567047853}
   m_SourcePrefab: {fileID: 100100000, guid: 916fc759f1cff3a4f95243d40bcd72f2, type: 3}
 --- !u!212 &241297958 stripped
@@ -42232,7 +42237,7 @@ MonoBehaviour:
   _inventoryManager: {fileID: 1900830170}
   _inventoryVisualizer: {fileID: 1682552142}
   _interactablesSelector: {fileID: 1567047853}
-  _interactor: {fileID: 1567047852}
+  _interactor: {fileID: 2107585403}
   _bringableController: {fileID: 726402081}
   _objectRegistrator: {fileID: 173057901}
   _droppedItemsRegistrator: {fileID: 173057903}
@@ -49532,6 +49537,7 @@ GameObject:
   m_Component:
   - component: {fileID: 715052300}
   - component: {fileID: 715052301}
+  - component: {fileID: 715052302}
   m_Layer: 0
   m_Name: Interaction Point Viewer
   m_TagString: Untagged
@@ -49613,6 +49619,21 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &715052302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715052299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a66dd8fbfed16d34d86ca62884523d29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractionPointViewer
+  _renderer: {fileID: 715052301}
+  _defaultColor: {r: 1, g: 1, b: 1, a: 0.5019608}
+  _wrongPlaceColor: {r: 1, g: 0.60188675, b: 0.60188675, a: 0.5019608}
 --- !u!1001 &715354194
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -834749,6 +834770,7 @@ Transform:
   - {fileID: 201392185}
   - {fileID: 88865598}
   - {fileID: 1900830171}
+  - {fileID: 2107585401}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1352929626
@@ -850017,22 +850039,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6772711913401337829, guid: 73a971e6485532a429cf07b360239503, type: 3}
   m_PrefabInstance: {fileID: 1566554995}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1567047852
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1560100008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a03b92f5c759b914892671af0e9695f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Interactor
-  _objectSelector: {fileID: 1567047853}
-  _interactiveController: {fileID: 308608212}
-  _interactionPointViewer: {fileID: 715052299}
-  _selectionDistanceMultiplier: 3
 --- !u!114 &1567047853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2478058,6 +2478064,70 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6772711913401337829, guid: e059d38c46c88af44a39a98b7f8f3b75, type: 3}
   m_PrefabInstance: {fileID: 2106066742}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2107585400
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2107585401}
+  - component: {fileID: 2107585403}
+  - component: {fileID: 2107585402}
+  m_Layer: 0
+  m_Name: Interaction
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2107585401
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2107585400}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1352387708}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2107585402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2107585400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17c8b3975389dd94fb6d8a462cd4d595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutlineController
+  _selectionOutlinePrefab: {fileID: 2970958449724380204, guid: 483354da2adaa6044b68f6889a62d40f, type: 3}
+  _defaultOutlineConfig: {fileID: 11400000, guid: 8355245e20776104b87809a4a18d9631, type: 2}
+--- !u!114 &2107585403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2107585400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a03b92f5c759b914892671af0e9695f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactor
+  _objectSelector: {fileID: 1567047853}
+  _outlineController: {fileID: 2107585402}
+  _interactiveController: {fileID: 308608212}
+  _interactionPointViewer: {fileID: 715052302}
+  _selectionDistanceMultiplier: 3
 --- !u!1001 &2109628842
 PrefabInstance:
   m_ObjectHideFlags: 0

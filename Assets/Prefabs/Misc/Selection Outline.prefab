@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 630917728106487469}
   - component: {fileID: 2970958449724380204}
   m_Layer: 0
-  m_Name: Selected Outline
+  m_Name: Selection Outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

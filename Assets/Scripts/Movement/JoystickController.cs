@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -105,7 +106,7 @@ public class JoystickController : MonoBehaviour, IDragHandler, IEndDragHandler, 
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (!_isCancelled)
+        if (!_isCancelled && Vector3.Distance(_startPosition, _joystick.anchoredPosition) < _cancelDistance)
         {
             OnClick?.Invoke();
         }

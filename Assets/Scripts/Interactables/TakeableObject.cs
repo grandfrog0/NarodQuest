@@ -8,8 +8,6 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerBringable))]
 public class TakeableObject : InteractableObject, IDescriptable
 {
-    private Collider2D _collider;
-
     public PlayerBringable Bringable => _bringable;
 
     public int Id => this.GetId();
@@ -18,13 +16,11 @@ public class TakeableObject : InteractableObject, IDescriptable
 
     public override void Interact(InteractionData data)
     {
-        bool isTaken = BringableObjectController.Instance.SwitchBring(_bringable, data.Point);
-        _collider.isTrigger = isTaken;
+        BringableObjectController.Instance.SwitchBring(_bringable, data.Point);
     }
 
     private void Awake()
     {
-        _collider = GetComponent<Collider2D>();
         _bringable = GetComponent<PlayerBringable>();
     }
 
