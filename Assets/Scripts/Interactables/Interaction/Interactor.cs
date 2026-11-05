@@ -21,6 +21,7 @@ public class Interactor : MonoBehaviour
         {
             if (_target != value)
             {
+                Debug.Log(_target);
                 if (_target is not null)
                 {
                     _outlineController.RemoveTarget(_target);
@@ -98,6 +99,8 @@ public class Interactor : MonoBehaviour
     /// </summary>
     private void OnPointerCancelled()
     {
+        Debug.Log("CANCELLED");
+        Target = null;
         _interactionPointViewer.gameObject.SetActive(false);
     }
 
@@ -114,10 +117,9 @@ public class Interactor : MonoBehaviour
 
     private bool TryInteract()
     {
-            Debug.Log(("TRY INTERACT", _interactionPoint));
         if (_bringableObjectController.Current != null && Target is not Table)
         {
-            bool result = _bringableObjectController.TryDetach(_interactionPoint);
+            bool result = _bringableObjectController.TryDetach(_interactionPoint, _interactionPoint == _objectSelector.transform.position);
             Target = null;
             return result;
         }
@@ -131,6 +133,8 @@ public class Interactor : MonoBehaviour
                 Inventory = _inventory,
                 BringableController = _bringableObjectController
             });
+
+            Target = null;
 
             return true;
         }

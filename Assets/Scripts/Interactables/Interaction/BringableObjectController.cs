@@ -11,6 +11,7 @@ public class BringableObjectController : MonoBehaviour
     [SerializeField] private float _radius = 0.5f;
     [SerializeField] private LayerMask _obstacleMask;
     private PlayerMovementController _movementController;
+    private Vector2 _lastAxis;
 
     public void Initialize()
     {
@@ -21,7 +22,6 @@ public class BringableObjectController : MonoBehaviour
     public bool IsCorrectPlace(Vector3 position)
     {
         RaycastHit2D hit = Physics2D.Raycast(position, Vector2.zero, 1f, _obstacleMask);
-        Debug.Log(hit.collider);
         return hit.collider == null;
     }
 
@@ -50,14 +50,17 @@ public class BringableObjectController : MonoBehaviour
         _movementController.OnMoveAxisChanged.AddListener(OnMoveAxisChanged);
     }
 
-    public bool TryDetach(Vector3 point = default)
+    public bool TryDetach(Vector3 point = default, bool savePosition = false)
     {
-        Debug.Log(IsCorrectPlace(point));
         if (Current == null || !IsCorrectPlace(point))
         {
             return false;
         }
 
+        if (savePosition)
+        {
+            point = (Vector2)transform.position + _offset/* + Current.GetOffset(_lastAxis)*/ + _lastAxis * _radius;
+        }
         Current.Drop(point);
         _movementController.OnMoveAxisChanged.RemoveListener(OnMoveAxisChanged);
 
@@ -75,6 +78,8 @@ public class BringableObjectController : MonoBehaviour
 
         Current.transform.localPosition = _offset + Current.GetOffset(axis) + axis * _radius;
         Current.Renderer.SortingOrder = axis == Vector2.down ? 1 : 0;
+
+        _lastAxis = axis;
     }
 
     private void OnDestroy()

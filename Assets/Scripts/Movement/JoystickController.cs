@@ -45,7 +45,7 @@ public class JoystickController : MonoBehaviour, IDragHandler, IEndDragHandler, 
 
         Vector2 direction = targetPosition - _startPosition;
         direction.Normalize();
-        // уменьшение магнитуды для реализации разгона
+
         direction = Vector2.ClampMagnitude(direction, 1 / maxDistance);
 
         float distance = Vector3.Distance(_startPosition, targetPosition);
@@ -73,7 +73,10 @@ public class JoystickController : MonoBehaviour, IDragHandler, IEndDragHandler, 
         Movement = direction * clampedDistance;
         _joystick.anchoredPosition = _startPosition + Movement * clampedDistance;
 
-        OnDragging?.Invoke(Movement);
+        if (!_isCancelled)
+        {
+            OnDragging?.Invoke(Movement);
+        }
     }
 
     public void OnEndDrag(PointerEventData eventData)

@@ -42,12 +42,15 @@ public class PlayerBringable : MonoBehaviour
     {
         transform.SetParent(currentParent);
         _collider.enabled = false;
+
+        IsActive = false;
         OnDrag?.Invoke(this);
     }
 
     public void Drop(Vector3 dropPosition)
     {
         transform.SetParent(_defaultParent);
+
         transform.position = dropPosition;
 
         _collider.enabled = true;
@@ -57,6 +60,7 @@ public class PlayerBringable : MonoBehaviour
             Renderer.SortingOrder = 0;
         }
 
+        IsActive = true;
         OnDrop?.Invoke(this);
     }
 }

@@ -9,14 +9,15 @@ using UnityEngine;
 public class TakeableObject : InteractableObject, IDescriptable
 {
     public PlayerBringable Bringable => _bringable;
-
+    public override bool IsActive { get => _bringable.IsActive; set => _bringable.IsActive = value; }
     public int Id => this.GetId();
 
     private PlayerBringable _bringable;
 
     public override void Interact(InteractionData data)
     {
-        BringableObjectController.Instance.SwitchBring(_bringable, data.Point);
+        bool isBrought = BringableObjectController.Instance.SwitchBring(_bringable, data.Point);
+        IsActive = !isBrought;
     }
 
     private void Awake()

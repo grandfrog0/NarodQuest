@@ -4,7 +4,7 @@ using UnityEngine.Events;
 public abstract class InteractableObject : MonoBehaviour
 {
     public UnityEvent<bool> OnActiveChanged { get; } = new();
-    public bool IsActive
+    public virtual bool IsActive
     {
         get => _isActive;
         set
