@@ -2,8 +2,13 @@ using UnityEngine;
 
 public class Bootstrap : MonoBehaviour
 {
+    [Header("Player")]
+    [SerializeField] private Transform _player;
+
+    [Header("Other")]
     [SerializeField] private SaveManager _saveManager;
     [SerializeField] private CameraController _cameraController;
+    [SerializeField] private CameraConstraintsController _cameraConstraintsController;
     [SerializeField] private LocatorManager _locatorManager;
     [SerializeField] private TransitionManager _transitionManager;
     [SerializeField] private InventoryManager _inventoryManager;
@@ -35,6 +40,7 @@ public class Bootstrap : MonoBehaviour
         InventoryConfig inventory = _inventoryManager.Initialize(_itemRegistrator);
 
         _cameraController.Initialize();
+        _cameraConstraintsController.Initialize(_cameraController, _player);
 
         // Графика
         _locatorManager.Initialize();

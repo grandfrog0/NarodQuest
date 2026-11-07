@@ -5,12 +5,18 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Transform _target;
     [SerializeField] private CameraConfig _config;
     [SerializeField] private CameraConstraints _constraints;
+    [SerializeField] private Bounds[] _constraintBounds;
 
     private Camera _cam;
 
     public CameraConstraints GetConstraints()
     {
         return _constraints;
+    }
+
+    public void SetConstraints(Bounds[] constraintBounds)
+    {
+        _constraintBounds = constraintBounds;
     }
 
     public void SetConstraints(CameraConstraints constraints)
@@ -26,7 +32,7 @@ public class CameraController : MonoBehaviour
     {
         get
         {
-            if (_constraints is null)
+            if (_constraintBounds == default)
             {
                 return _target.position + _config.Offset;
             }
@@ -35,8 +41,8 @@ public class CameraController : MonoBehaviour
             float width = height * _cam.aspect;
 
             return new Vector3(
-                Mathf.Clamp(_target.position.x + _config.Offset.x, _constraints.Bounds.min.x + width, _constraints.Bounds.max.x - width),
-                Mathf.Clamp(_target.position.y + _config.Offset.y, _constraints.Bounds.min.y + height, _constraints.Bounds.max.y - height),
+                Mathf.Clamp(_target.position.x + _config.Offset.x, _constraintBounds.min.x + width, _constraintBounds.max.x - width),
+                Mathf.Clamp(_target.position.y + _config.Offset.y, _constraintBounds.min.y + height, _constraintBounds.max.y - height),
                 _config.Offset.z);
         }
     }
