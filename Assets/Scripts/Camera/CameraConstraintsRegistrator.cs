@@ -1,24 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "CameraConstraintsRegistrator", menuName = "SO/Camera/Camera Constraints Registrator")]
-public class CameraConstraintsRegistrator : ScriptableObject
+public class CameraConstraintsRegistrator : MonoBehaviour
 {
     [SerializeField] private List<CameraConstraints> _constraints;
-    private Dictionary<string, CameraConstraints> _pairs;
-
-    public void Initialize()
-    {
-        _pairs = new();
-        foreach (CameraConstraints constraint in _constraints)
-        {
-            _pairs[constraint.name] = constraint;
-        }
-    }
 
     public CameraConstraints GetByName(string name)
     {
-        return !string.IsNullOrWhiteSpace(name) && _pairs.TryGetValue(name, out CameraConstraints value) ? value : null;
+        return _constraints.FirstOrDefault(x => x.Name == name);
     }
 }

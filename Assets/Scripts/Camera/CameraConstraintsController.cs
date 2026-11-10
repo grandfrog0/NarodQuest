@@ -8,17 +8,13 @@ public class CameraConstraintsController : MonoBehaviour
     private CameraController _cameraController;
     private Transform _player;
 
-    private Bounds[] _currentBounds;
-
     private Transform _current;
-    private Bounds _currentBoundsDEPRECATED;
+    private Bounds _currentBounds;
 
     public void Initialize(CameraController cameraController, Transform player)
     {
         _cameraController = cameraController;
         _player = player;
-
-        _currentBounds = new Bounds[4];
     }
 
     private void FixedUpdate()
@@ -28,7 +24,7 @@ public class CameraConstraintsController : MonoBehaviour
             return;
         }
 
-        if ((_player.position - _currentBoundsDEPRECATED.ClosestPoint(_player.position)).sqrMagnitude == 0)
+        if ((_player.position - _currentBounds.ClosestPoint(_player.position)).sqrMagnitude == 0)
         {
             return;
         }
@@ -40,7 +36,7 @@ public class CameraConstraintsController : MonoBehaviour
             if (constraint != _current && (_player.position - bounds.ClosestPoint(_player.position)).sqrMagnitude == 0)
             {
                 _current = constraint;
-                _currentBoundsDEPRECATED = bounds;
+                _currentBounds = bounds;
                 _cameraController.SetConstraints(_currentBounds);
                 return;
             }

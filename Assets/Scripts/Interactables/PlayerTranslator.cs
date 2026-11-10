@@ -26,7 +26,7 @@ public class PlayerTranslator : MonoBehaviour
             OnTransitionComplete.Invoke();
 
             player.position = _other.TargetPosition;
-            Camera.main.transform.position = Camera.main.GetComponent<CameraController>().TargetPosition;
+            //Camera.main.transform.position = Camera.main.GetComponent<CameraController>().TargetPosition;
         }
     }
 

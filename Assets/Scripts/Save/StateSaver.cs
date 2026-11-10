@@ -31,7 +31,7 @@ public class StateSaver : MonoBehaviour
     [SerializeField] private PlayerMovementController _player;
     [SerializeField] private BringableObjectController _bringableController;
     [SerializeField] private InventoryManager _inventory;
-    [SerializeField] private CameraController _cameraController;
+    [SerializeField] private CinemachineCameraController _cinemachineCameraController;
     [SerializeField] private CameraConstraintsRegistrator _cameraConstraintsRegistrator;
     [SerializeField] private DroppedItemsRegistrator _droppedItemsRegistrator;
     [SerializeField] private DescriptablesRegistrator _descriptablesRegistrator;
@@ -45,7 +45,7 @@ public class StateSaver : MonoBehaviour
             Axis = _player.Axis,
             Inventory = _inventory.CreateSerializable(),
             CurrentBringableId = _bringableController.Current?.GetId() ?? -1,
-            CameraConstraints = _cameraController.GetConstraints()?.name ?? ""
+            CameraConstraints = _cinemachineCameraController.GetConstraints()?.name ?? ""
         };
     }
     public EnvironmentSave CreateEnvironmentSave()
@@ -80,8 +80,7 @@ public class StateSaver : MonoBehaviour
         }
 
         CameraConstraints constraints = _cameraConstraintsRegistrator.GetByName(playerSave.CameraConstraints);
-        _cameraController.SetConstraints(constraints);
-        _cameraController.transform.position = _cameraController.TargetPosition;
+        _cinemachineCameraController.SetConstraints(constraints);
     }
     public void ApplyEnvironmentSave(EnvironmentSave environmentSave)
     {

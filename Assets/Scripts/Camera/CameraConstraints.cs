@@ -1,7 +1,9 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Constraints", menuName = "SO/Camera/Camera Constraints")]
-public class CameraConstraints : ScriptableObject
+public class CameraConstraints : MonoBehaviour
 {
-    public Bounds Bounds;
+    [SerializeField] private Collider2D _collider;
+    [SerializeField] private string _name;
+    public Collider2D Collider => _collider;
+    public string Name => _name;
 }
