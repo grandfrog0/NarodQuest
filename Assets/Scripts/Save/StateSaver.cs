@@ -45,7 +45,7 @@ public class StateSaver : MonoBehaviour
             Axis = _player.Axis,
             Inventory = _inventory.CreateSerializable(),
             CurrentBringableId = _bringableController.Current?.GetId() ?? -1,
-            CameraConstraints = _cinemachineCameraController.GetConstraints()?.name ?? ""
+            CameraConstraints = _cinemachineCameraController.GetConstraints()?.Name ?? "",
         };
     }
     public EnvironmentSave CreateEnvironmentSave()

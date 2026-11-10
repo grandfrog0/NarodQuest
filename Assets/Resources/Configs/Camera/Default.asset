@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6401b618abc1334b8e3084d166da23f, type: 3}
-  m_Name: Hut Inside Constraints
-  m_EditorClassIdentifier: Assembly-CSharp::CameraConstraints
-  Bounds:
-    m_Center: {x: 368.42, y: 208, z: 0}
-    m_Extent: {x: 17, y: 14, z: 0}
+  m_Script: {fileID: 11500000, guid: 1e07d9aeb03c9194b9c8db933670f409, type: 3}
+  m_Name: Default
+  m_EditorClassIdentifier: Assembly-CSharp::CameraConfig
+  Offset: {x: 0, y: 0, z: -10}
+  Speed: 1

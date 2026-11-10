@@ -134,6 +134,10 @@ public class Interactor : MonoBehaviour
                 BringableController = _bringableObjectController
             });
 
+            if (Target.IsActive == false)
+            {
+                _objectSelector.RemoveTarget(Target);
+            }
             Target = null;
 
             return true;

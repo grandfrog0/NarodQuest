@@ -136,7 +136,7 @@ public class TutorialQuest : AbstractQuest
     {
         // показать инструкцию
         // после того, как игрок перенесет камень в нужную точку перейти в End
-
+        Debug.Log(_dragItem.IsActive);
         _dragItem.IsActive = true;
         _dragItemAnimator.gameObject.SetActive(true);
         _dropTrigger.gameObject.SetActive(true);

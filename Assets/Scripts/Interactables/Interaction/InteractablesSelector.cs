@@ -48,7 +48,7 @@ public class InteractablesSelector : MonoBehaviour
         }
     }
 
-    private void AddTarget(InteractableObject target)
+    public void AddTarget(InteractableObject target)
     {
         if (_interactables.Contains(target))
         {
@@ -63,8 +63,9 @@ public class InteractablesSelector : MonoBehaviour
         _interactables.Add(target);
     }
 
-    private void RemoveTarget(InteractableObject target)
+    public void RemoveTarget(InteractableObject target)
     {
+        Debug.Log(target);
         if (!_interactables.Contains(target))
         {
             return;

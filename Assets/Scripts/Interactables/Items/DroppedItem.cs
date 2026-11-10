@@ -11,6 +11,7 @@ public class DroppedItem : InteractableObject
     [SerializeField] private ItemCountPair _drop;
 
     public bool IsPicked { get; private set; }
+    public override bool IsActive { get => base.IsActive && !IsPicked; set => base.IsActive = value; }
 
     public void Initialize(ItemCountPair item)
     {
@@ -54,6 +55,6 @@ public class DroppedItem : InteractableObject
 
     public override void Interact(InteractionData data)
     {
-        PickUp();
+        TryPickUp(out _);
     }
 }

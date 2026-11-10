@@ -23,7 +23,6 @@ public class Bootstrap : MonoBehaviour
     [SerializeField] private ItemRegistrator _itemRegistrator;
     [SerializeField] private QuestsRegistrator _questsRegistrator;
 
-
     private void Start()
     {
         // Регистраторы

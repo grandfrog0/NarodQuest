@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -25,8 +26,9 @@ public class PlayerTranslator : MonoBehaviour
         {
             OnTransitionComplete.Invoke();
 
+            Vector3 playerPosition = player.position;
             player.position = _other.TargetPosition;
-            //Camera.main.transform.position = Camera.main.GetComponent<CameraController>().TargetPosition;
+            CinemachineCameraController.Instance.Move(_other.TargetPosition - playerPosition);
         }
     }
 
