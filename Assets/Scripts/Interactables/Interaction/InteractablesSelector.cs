@@ -65,7 +65,6 @@ public class InteractablesSelector : MonoBehaviour
 
     public void RemoveTarget(InteractableObject target)
     {
-        Debug.Log(target);
         if (!_interactables.Contains(target))
         {
             return;

@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class ObjectRegistrator : MonoBehaviour
 {
-    static private ObjectRegistrator _instance;
+    private static ObjectRegistrator _instance;
     public static IEnumerable<GameObject> Enumerate() => _instance._registrated.AsEnumerable();
-    static public int GetId(GameObject gameObject)
+    public static int GetId(GameObject gameObject)
     {
         return _instance.GetIdByGameObject(gameObject);
     }
-    static public GameObject Get(int id)
+    public static GameObject Get(int id)
     {
         return _instance.GetById(id);
     }

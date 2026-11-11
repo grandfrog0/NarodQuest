@@ -6,7 +6,6 @@ public class PlayerMovementController : MonoBehaviour
     public UnityEvent<Vector2> OnMoveAxisChanged { get; } = new();
 
     [SerializeField] private PlayerConfig config;
-    [SerializeField] private JoystickController joystick;
     private Rigidbody2D _rigidbody;
 
     [SerializeField] private Animator _animator;
@@ -30,11 +29,6 @@ public class PlayerMovementController : MonoBehaviour
         Initialize();
     }
 
-    private void FixedUpdate()
-    {
-        Move();
-    }
-
     private void Initialize()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -47,9 +41,9 @@ public class PlayerMovementController : MonoBehaviour
         });
     }
 
-    private void Move()
+    public void Move(Vector2 direction)
     {
-        Vector2 totalMovement = joystick.Movement.normalized * Speed * Time.fixedDeltaTime;
+        Vector2 totalMovement = direction * Speed * Time.fixedDeltaTime;
         Vector2 totalPosition = totalMovement + _rigidbody.position;
         _rigidbody.MovePosition(totalPosition);
 

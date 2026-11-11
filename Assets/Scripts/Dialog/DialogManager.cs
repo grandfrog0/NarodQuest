@@ -55,6 +55,12 @@ public class DialogManager : MonoBehaviour
 
     private void ShowDialog()
     {
+        if (_dialogWindowManager.IsTyping)
+        {
+            _dialogWindowManager.FinishTyping();
+            return;
+        }
+
         if (_currentDialog == null || _currentIndex >= _currentDialog.dialog.Count)
         {
             _dialogWindowManager.HideWindow();
@@ -62,7 +68,6 @@ public class DialogManager : MonoBehaviour
             return;
         }
 
-        Debug.Log(_currentDialog);
         OnDialogStart.Invoke();
 
         LogSerializable log = _currentDialog.dialog[_currentIndex];
@@ -81,6 +86,7 @@ public class DialogManager : MonoBehaviour
         }
 
         _dialogWindowManager.SetLog(log, cloudWindowPosition);
+
         _currentIndex++;
     }
 

@@ -51,9 +51,8 @@ public class PlayerBringable : MonoBehaviour
     {
         transform.SetParent(_defaultParent);
 
-        transform.position = dropPosition;
-
         _collider.enabled = true;
+        transform.position = dropPosition;
 
         if (Renderer != null)
         {

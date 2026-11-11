@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text;
 using TMPro;
 using UnityEngine;
 
@@ -7,8 +8,10 @@ public class DialogWindowManager : MonoBehaviour
     [SerializeField] RectTransform cloudWindow;
     [SerializeField] GameObject bottomPanel;
     [SerializeField] TextMeshProUGUI person;
-    [SerializeField] TextMeshProUGUI message;
     [SerializeField] DialogManagerConfig config;
+    [SerializeField] private TextTyper _typer;
+
+    public bool IsTyping => _typer.IsTyping;
 
     public void ShowWindow()
     {
@@ -23,8 +26,14 @@ public class DialogWindowManager : MonoBehaviour
     public void SetLog(LogSerializable log, Vector2 position)
     {
         person.text = log.person.Name;
-        message.text = log.message;
         cloudWindow.anchoredPosition = position;
+
+        _typer.Start(log.message);
+    }
+
+    public void FinishTyping()
+    {
+        _typer.Finish();
     }
 }
 
