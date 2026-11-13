@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using UnityEngine;
+using Zenject;
 
 public class SaveManager : MonoBehaviour
 {
@@ -9,7 +10,13 @@ public class SaveManager : MonoBehaviour
     private string EnvironmentPath => Path.Combine(FolderPath, "environment.json");
     private string QuestsPath => Path.Combine(FolderPath, "quests.json");
 
-    [SerializeField] private StateSaver _stateSaver;
+    private StateSaver _stateSaver;
+
+    [Inject]
+    private void Construct(StateSaver stateSaver)
+    {
+        _stateSaver = stateSaver;
+    }
 
     public void Save()
     {

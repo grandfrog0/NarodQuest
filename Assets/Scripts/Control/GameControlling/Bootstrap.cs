@@ -1,45 +1,67 @@
 using UnityEngine;
+using Zenject;
 
 public class Bootstrap : MonoBehaviour
 {
-    [Header("Player")]
-    [SerializeField] private Transform _player;
+    private SaveManager _saveManager;
+    private CinemachineCameraController _cinemachineCameraController;
+    private LocatorManager _locatorManager;
+    private InventoryManager _inventoryManager;
+    private InventoryVisualizer _inventoryVisualizer;
+    private InteractablesSelector _interactablesSelector;
+    private Interactor _interactor;
+    private BringableObjectController _bringableController;
 
-    [Header("Other")]
-    [SerializeField] private SaveManager _saveManager;
-    [SerializeField] private CinemachineCameraController _cinemachineCameraController;
-    [SerializeField] private LocatorManager _locatorManager;
-    [SerializeField] private TransitionManager _transitionManager;
-    [SerializeField] private InventoryManager _inventoryManager;
-    [SerializeField] private InventoryVisualizer _inventoryVisualizer;
-    [SerializeField] private InteractablesSelector _interactablesSelector;
-    [SerializeField] private Interactor _interactor;
-    [SerializeField] private BringableObjectController _bringableController;
+    private DroppedItemsRegistrator _droppedItemsRegistrator;
+    private DescriptablesRegistrator _descriptablesRegistrator;
+    private ItemRegistrator _itemRegistrator;
+    private QuestsRegistrator _questsRegistrator;
 
-    [Header("Registrators")]
-    [SerializeField] private ObjectRegistrator _objectRegistrator;
-    [SerializeField] private DroppedItemsRegistrator _droppedItemsRegistrator;
-    [SerializeField] private DescriptablesRegistrator _descriptablesRegistrator;
-    [SerializeField] private ItemRegistrator _itemRegistrator;
-    [SerializeField] private QuestsRegistrator _questsRegistrator;
+    [Inject]
+    private void Construct(
+        SaveManager saveManager,
+        CinemachineCameraController cinemachineCameraController,
+        LocatorManager locatorManager,
+        InventoryManager inventoryManager,
+        InventoryVisualizer inventoryVisualizer,
+        InteractablesSelector interactablesSelector,
+        Interactor interactor,
+        BringableObjectController bringableController,
+        DroppedItemsRegistrator droppedItemsRegistrator,
+        DescriptablesRegistrator descriptablesRegistrator,
+        ItemRegistrator itemRegistrator,
+        QuestsRegistrator questsRegistrator
+        )
+    {
+        _saveManager = saveManager;
+        _cinemachineCameraController = cinemachineCameraController;
+        _locatorManager = locatorManager;
+        _inventoryManager = inventoryManager;
+        _inventoryVisualizer = inventoryVisualizer;
+        _interactablesSelector = interactablesSelector;
+        _interactor = interactor;
+        _bringableController = bringableController;
+        _droppedItemsRegistrator = droppedItemsRegistrator;
+        _descriptablesRegistrator = descriptablesRegistrator;
+        _itemRegistrator = itemRegistrator;
+        _questsRegistrator = questsRegistrator;
+    }
 
     private void Start()
     {
         // Регистраторы
-        _objectRegistrator.Initialize();
         _droppedItemsRegistrator.Initialize();
         _descriptablesRegistrator.Initialize();
         _itemRegistrator.Initialize();
 
         // Инвентарь
         _inventoryVisualizer.Initialize();
-        InventoryConfig inventory = _inventoryManager.Initialize(_itemRegistrator);
+        InventoryData inventory = _inventoryManager.Initialize();
 
         _cinemachineCameraController.Initialize();
 
         // Графика
         _locatorManager.Initialize();
-        _transitionManager.Initialize();
 
         // Игрок
         _bringableController.Initialize();
@@ -49,8 +71,8 @@ public class Bootstrap : MonoBehaviour
 
         // Игрок
         _interactablesSelector.Initialize();
-        _interactor.Initialize(_interactablesSelector, inventory, _bringableController);
-
+        _interactor.Initialize(inventory);
+            
         // Другое
         _questsRegistrator.Initialize();
     }

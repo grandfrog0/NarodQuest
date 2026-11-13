@@ -1,5 +1,6 @@
 using System.Linq;
 using UnityEngine;
+using Zenject;
 
 public class StateSaver : MonoBehaviour
 {
@@ -25,25 +26,52 @@ public class StateSaver : MonoBehaviour
     public EnvironmentDto EnvironmentSave { get; private set; }
     public QuestSave QuestSave { get; private set; }
 
-    [SerializeField] private PlayerMovementController _player;
-    [SerializeField] private BringableObjectController _bringableController;
-    [SerializeField] private InventoryManager _inventory;
-    [SerializeField] private CinemachineCameraController _cinemachineCameraController;
-    [SerializeField] private CameraConstraintsRegistrator _cameraConstraintsRegistrator;
-    [SerializeField] private DroppedItemsRegistrator _droppedItemsRegistrator;
-    [SerializeField] private DescriptablesRegistrator _descriptablesRegistrator;
-    [SerializeField] private QuestsRegistrator _questsRegistrator;
-    [SerializeField] private StateObjectsRegistrator _stateObjectsRegistrator;
+    private PlayerMovementController _playerMove;
+    private BringableObjectController _bringableController;
+    private InventoryManager _inventory;
+    private CinemachineCameraController _cameraController;
+    private CameraConstraintsRegistrator _cameraConstraintsRegistrator;
+    private DroppedItemsRegistrator _droppedItemsRegistrator;
+    private DescriptablesRegistrator _descriptablesRegistrator;
+    private QuestsRegistrator _questsRegistrator;
+    private StateObjectsRegistrator _stateObjectsRegistrator;
+    private ObjectRegistrator _objectRegistrator;
+
+    [Inject]
+    private void Construct(
+        PlayerMovementController playerMove, 
+        BringableObjectController bringableController, 
+        InventoryManager inventory, 
+        CinemachineCameraController cameraController, 
+        CameraConstraintsRegistrator cameraConstraintsRegistrator,
+        DroppedItemsRegistrator droppedItemsRegistrator, 
+        DescriptablesRegistrator descriptablesRegistrator,
+        QuestsRegistrator questsRegistrator, 
+        StateObjectsRegistrator stateObjectsRegistrator,
+        ObjectRegistrator objectRegistrator
+        )
+    {
+        _playerMove = playerMove;
+        _bringableController = bringableController;
+        _inventory = inventory;
+        _cameraController = cameraController;
+        _cameraConstraintsRegistrator = cameraConstraintsRegistrator;
+        _droppedItemsRegistrator = droppedItemsRegistrator;
+        _descriptablesRegistrator = descriptablesRegistrator;
+        _questsRegistrator = questsRegistrator;
+        _stateObjectsRegistrator = stateObjectsRegistrator;
+        _objectRegistrator = objectRegistrator;
+    }
 
     public PlayerSave CreatePlayerSave()
     {
         return new PlayerSave
         {
-            Position = _player.transform.position,
-            Axis = _player.Axis,
+            Position = _playerMove.transform.position,
+            Axis = _playerMove.Axis,
             Inventory = _inventory.CreateSerializable(),
             CurrentBringableId = _bringableController.Current?.GetId() ?? -1,
-            CameraConstraints = _cinemachineCameraController.GetConstraints()?.Name ?? "",
+            CameraConstraints = _cameraController.GetConstraints()?.Name ?? "",
         };
     }
     public EnvironmentDto CreateEnvironmentSave()
@@ -67,19 +95,19 @@ public class StateSaver : MonoBehaviour
     {
         PlayerSave = playerSave;
 
-        _player.transform.position = playerSave.Position;
-        _player.Axis = playerSave.Axis;
+        _playerMove.transform.position = playerSave.Position;
+        _playerMove.Axis = playerSave.Axis;
 
         _inventory.ApplySerializable(playerSave.Inventory);
 
-        GameObject bringable = ObjectRegistrator.Get(playerSave.CurrentBringableId);
+        GameObject bringable = _objectRegistrator.Get(playerSave.CurrentBringableId);
         if (bringable != null)
         {
             _bringableController.Bring(bringable.GetComponent<PlayerBringable>());
         }
 
         CameraConstraints constraints = _cameraConstraintsRegistrator.GetByName(playerSave.CameraConstraints);
-        _cinemachineCameraController.SetConstraints(constraints);
+        _cameraController.SetConstraints(constraints);
     }
     public void ApplyEnvironmentSave(EnvironmentDto environmentSave)
     {

@@ -4,15 +4,15 @@ using UnityEngine.InputSystem;
 
 public class InputSystemManager : MonoBehaviour
 {
-    public static UnityEvent<Vector2> OnTouchAtPosition { get; } = new();
-    public static UnityEvent OnTouch { get; } = new();
+    public UnityEvent<Vector2> OnTouchAtPosition { get; } = new();
+    public UnityEvent OnTouch { get; } = new();
 
-    public static Vector2 PositionDelta { get; private set; }
-    public static Vector2 CurrentTouchPosition { get; private set; }
-    public static bool IsTouching { get; private set; }
-    public static Vector2 MoveDirection { get; private set; }
+    public Vector2 PositionDelta { get; private set; }
+    public Vector2 CurrentTouchPosition { get; private set; }
+    public bool IsTouching { get; private set; }
+    public Vector2 MoveDirection { get; private set; }
 
-    public static Vector2 GetCurrentTouchPosition()
+    public Vector2 GetCurrentTouchPosition()
     {
         if (Touchscreen.current == null)
         {
@@ -64,13 +64,11 @@ public class InputSystemManager : MonoBehaviour
     private void OnMovePerformed(InputAction.CallbackContext context)
     {
         MoveDirection = context.ReadValue<Vector2>();
-        Debug.Log("PERFORMED " + MoveDirection);
     }
 
     private void OnMoveCancelled(InputAction.CallbackContext context)
     {
         MoveDirection = Vector2.zero;
-        Debug.Log("CANCELLED " + MoveDirection);
     }
 
     private void SetDelta(InputAction.CallbackContext context)

@@ -1,10 +1,11 @@
 using UnityEngine;
+using Zenject;
 
 public class StepSkipper : MonoBehaviour
 {
     [Header("Main")]
     [SerializeField] private GameQuestStep _firstStep;
-    [SerializeField] private Transform _playerTransform;
+    private Transform _playerTransform;
 
     [Header("Tutorial")]
     [SerializeField] private Transform _tutorialPoint;
@@ -19,6 +20,12 @@ public class StepSkipper : MonoBehaviour
     [SerializeField] private Vector3 _fieldPosition;
 
 #if UNITY_EDITOR
+
+    [Inject]
+    private void Construct(GameObject player)
+    {
+        _playerTransform = player.transform;
+    }
 
     private void Awake()
     {

@@ -3,19 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 public class InventoryManager : MonoBehaviour
 {
     public UnityEvent OnChanged { get; } = new();
     public UnityEvent<int> OnSelectionChanged { get; } = new();
-    private ItemRegistrator _itemRegistrator;
-    private InventoryConfig _inventory;
+    private InventoryData _inventory;
 
     public bool IsEmpty => _inventory.Items.Count == 0;
 
-    public InventoryConfig Initialize(ItemRegistrator itemRegistrator)
+    private ItemRegistrator _itemRegistrator;
+
+    [Inject]
+    private void Construct(ItemRegistrator itemRegistrator)
     {
         _itemRegistrator = itemRegistrator;
+    }
+
+    public InventoryData Initialize()
+    {
         _inventory = new();
         return _inventory;
     }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class VisitGrannyQuest : AbstractQuest
 {
@@ -9,8 +10,9 @@ public class VisitGrannyQuest : AbstractQuest
     [SerializeField] private Transform _hutTransform;
     [Header("Main")]
     [SerializeField] private NPC _grannyNpc;
-
+    private LocatorManager _locatorManager;
     private bool _isInsideHut;
+    private LocatorMark _mark;
 
     private LocatorMark Mark
     {
@@ -18,14 +20,19 @@ public class VisitGrannyQuest : AbstractQuest
         {
             if (_mark == null)
             {
-                _mark = LocatorManager.CreateMark();
+                _mark = _locatorManager.CreateMark();
             }
             return _mark;
         }
     }
-    private LocatorMark _mark;
 
     private Transform CurrentTarget => _isInsideHut ? _grannyNpc.transform : _hutTransform;
+
+    [Inject]
+    protected void Construct(LocatorManager locatorManager)
+    {
+        _locatorManager = locatorManager;
+    }
 
     public void ShowHintToStart()
     {

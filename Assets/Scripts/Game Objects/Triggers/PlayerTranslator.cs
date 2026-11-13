@@ -1,6 +1,7 @@
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 public class PlayerTranslator : MonoBehaviour
 {
@@ -9,6 +10,16 @@ public class PlayerTranslator : MonoBehaviour
     [SerializeField] private PlayerTranslator _other;
     [SerializeField] private Vector3 _offset;
     public Vector3 TargetPosition => transform.position + _offset;
+
+    private TransitionManager _transitionManager;
+    private CinemachineCameraController _cameraController;
+
+    [Inject]
+    private void Construct(TransitionManager transitionManager, CinemachineCameraController cameraController)
+    {
+        _transitionManager = transitionManager;
+        _cameraController = cameraController;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -20,7 +31,7 @@ public class PlayerTranslator : MonoBehaviour
 
     public void Teleport(Transform player)
     {
-        TransitionManager.Transition(0.5f, CompleteTeleport);
+        _transitionManager.Transition(0.5f, CompleteTeleport);
 
         void CompleteTeleport()
         {
@@ -28,7 +39,7 @@ public class PlayerTranslator : MonoBehaviour
 
             Vector3 playerPosition = player.position;
             player.position = _other.TargetPosition;
-            CinemachineCameraController.Instance.Move(_other.TargetPosition - playerPosition);
+            _cameraController.Move(_other.TargetPosition - playerPosition);
         }
     }
 

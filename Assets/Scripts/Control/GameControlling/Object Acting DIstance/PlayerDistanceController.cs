@@ -1,11 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class PlayerDistanceController : MonoBehaviour
 {
-    [SerializeField] private Transform _player;
     [SerializeField] private List<DistanceControlledObject> _controlledObjects;
+    private Transform _player;
+
+    [Inject]
+    private void Construct(GameObject player)
+    {
+        _player = player.transform;
+    }
 
     private void Start()
     {

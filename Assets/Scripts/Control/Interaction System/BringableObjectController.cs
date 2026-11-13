@@ -4,8 +4,6 @@ using UnityEngine.Events;
 
 public class BringableObjectController : MonoBehaviour
 {
-    public static BringableObjectController Instance { get; private set; }
-
     public bool HasObject => Current != null;
     public PlayerBringable Current { get; private set; }
     [SerializeField] private Vector2 _offset = Vector2.down;
@@ -17,7 +15,6 @@ public class BringableObjectController : MonoBehaviour
     public void Initialize()
     {
         _movementController = GetComponent<PlayerMovementController>();
-        Instance = this;
     }
 
     public bool IsCorrectPlace(Vector3 position)

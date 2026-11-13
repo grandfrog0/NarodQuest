@@ -3,17 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 public class InteractablesSelector : MonoBehaviour
 {
-    [SerializeField] private OutlineController _outlineController;
     [SerializeField] private LayerMask _selectMask;
+    private OutlineController _outlineController;
     private CircleCollider2D _collider;
 
     private HashSet<InteractableObject> _interactables;
     private Dictionary<InteractableObject, UnityAction<bool>> _activeListeners;
 
     public IEnumerable<InteractableObject> Targets => _interactables;
+
+    [Inject]
+    private void Construct(OutlineController outlineController)
+    {
+        _outlineController = outlineController;
+    }
 
     public void Initialize()
     {

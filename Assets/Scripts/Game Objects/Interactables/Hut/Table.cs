@@ -4,16 +4,26 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Zenject;
 
 public class Table : InteractableObject, IDescriptable
 {
+    private Transform _player;
+    private ObjectRegistrator _objectRegistrator;
+
     [SerializeField] private List<PlayerBringable> _bringables;
     [SerializeField] private List<ItemRenderer> _items;
     [SerializeField] private ItemRenderer _renderer;
     private Coroutine _observePlayerRoutine;
 
     public int Id => this.GetId();
-    private Transform Player => BringableObjectController.Instance.transform;
+
+    [Inject]
+    private void Construct(GameObject player, ObjectRegistrator objectRegistrator)
+    {
+        _player = player.transform;
+        _objectRegistrator = objectRegistrator;
+    }
 
     private void Start()
     {
@@ -89,7 +99,7 @@ public class Table : InteractableObject, IDescriptable
         while (true)
         {
             //Debug.Log((!isPlayerHigher && Player.transform.position.y > transform.position.y, isPlayerHigher && Player.transform.position.y < transform.position.y));
-            if (!isPlayerHigher && Player.transform.position.y > transform.position.y)
+            if (!isPlayerHigher && _player.transform.position.y > transform.position.y)
             {
                 _renderer.SortingOrder = 1;
                 foreach (PlayerBringable bringable in _bringables)
@@ -103,7 +113,7 @@ public class Table : InteractableObject, IDescriptable
 
                 isPlayerHigher = true;
             }
-            else if (isPlayerHigher && Player.transform.position.y < transform.position.y)
+            else if (isPlayerHigher && _player.transform.position.y < transform.position.y)
             {
                 _renderer.SortingOrder = 0;
                 foreach (PlayerBringable bringable in _bringables)
@@ -148,7 +158,7 @@ public class Table : InteractableObject, IDescriptable
 
             foreach (string idString in tags[bringablesIndex].Split(';'))
             {
-                _bringables.Add(ObjectRegistrator.Get(int.Parse(idString)).GetComponent<PlayerBringable>());
+                _bringables.Add(_objectRegistrator.Get(int.Parse(idString)).GetComponent<PlayerBringable>());
             }
             foreach (PlayerBringable bringable in _bringables)
             {
@@ -164,7 +174,7 @@ public class Table : InteractableObject, IDescriptable
 
             foreach (string idString in tags[itemsIndex].Split(';'))
             {
-                _items.Add(ObjectRegistrator.Get(int.Parse(idString)).GetComponent<ItemRenderer>());
+                _items.Add(_objectRegistrator.Get(int.Parse(idString)).GetComponent<ItemRenderer>());
             }
         }
     }

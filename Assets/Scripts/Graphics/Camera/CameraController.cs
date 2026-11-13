@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 
+[Obsolete]
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private Transform _target;

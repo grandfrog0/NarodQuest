@@ -10,13 +10,13 @@ public class TryToCookThePorridge : AbstractQuest
     {
         base.StartQuest();
 
-        DialogManager.Instance.OnDialogEnd.AddListener(EndQuest);
-        DialogManager.Instance.StartDialog(_dialog);
+        _dialogManager.OnDialogEnd.AddListener(EndQuest);
+        _dialogManager.StartDialog(_dialog);
     }
 
     protected override void EndQuest()
     {
-        DialogManager.Instance.OnDialogEnd.RemoveListener(EndQuest);
+        _dialogManager.OnDialogEnd.RemoveListener(EndQuest);
 
         base.EndQuest();
     }

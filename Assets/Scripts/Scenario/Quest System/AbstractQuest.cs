@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Zenject;
 
 public abstract class AbstractQuest : MonoBehaviour
 {
@@ -16,10 +17,18 @@ public abstract class AbstractQuest : MonoBehaviour
     private bool _isInitialized = false;
     private StateOfQuest? _waitingState = null;
 
+    protected DialogManager _dialogManager;
+
     protected virtual void StartQuest() => CurrentState = StateOfQuest.Started;
     protected virtual void Pause() => CurrentState = StateOfQuest.Paused;
     protected virtual void Continue() => CurrentState = StateOfQuest.Started;
     protected virtual void EndQuest() => CurrentState = StateOfQuest.Finished;
+
+    [Inject]
+    protected virtual void Construct(DialogManager dialogManager)
+    {
+        _dialogManager = dialogManager;
+    }
 
     public void TryStartQuest()
     {

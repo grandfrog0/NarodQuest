@@ -5,30 +5,18 @@ using UnityEngine;
 
 public class ObjectRegistrator : MonoBehaviour
 {
-    private static ObjectRegistrator _instance;
-    public static IEnumerable<GameObject> Enumerate() => _instance._registrated.AsEnumerable();
-    public static int GetId(GameObject gameObject)
-    {
-        return _instance.GetIdByGameObject(gameObject);
-    }
-    public static GameObject Get(int id)
-    {
-        return _instance.GetById(id);
-    }
-
     [SerializeField] private List<GameObject> _registrated;
 
-    public void Initialize()
+    public IEnumerable<GameObject> Enumerate()
     {
-        _instance = this;
+        return _registrated.AsEnumerable();
     }
 
-    private int GetIdByGameObject(GameObject gameObject)
+    public int GetId(GameObject gameObject)
     {
         return _registrated.IndexOf(gameObject);
     }
-
-    private GameObject GetById(int id)
+    public GameObject Get(int id)
     {
         if (id >= 0 && id < _registrated.Count)
         {

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Zenject;
 
 public class NPC : InteractableObject, IDescriptable
 {
@@ -12,18 +13,26 @@ public class NPC : InteractableObject, IDescriptable
 
     public int Id => this.GetId();
 
+    private DialogManager _dialogManager;
+
+    [Inject]
+    private void Construct(DialogManager dialogManager)
+    {
+        _dialogManager = dialogManager;
+    }
+
     public override void Interact(InteractionData data)
     {
-        DialogManager.Instance.StartDialog(_dialog, _companions);
+        _dialogManager.StartDialog(_dialog, _companions);
 
-        DialogManager.Instance.OnDialogEnd.AddListener(OnDialogEnd);
+        _dialogManager.OnDialogEnd.AddListener(OnDialogEnd);
 
         void OnDialogEnd()
         {
             _dialog = _dialog?.NextDialog;
             IsActive = _dialog != null;
 
-            DialogManager.Instance.OnDialogEnd.RemoveListener(OnDialogEnd);
+            _dialogManager.OnDialogEnd.RemoveListener(OnDialogEnd);
             OnDialogComplete?.Invoke();
         }
     }

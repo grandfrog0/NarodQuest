@@ -1,17 +1,18 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class InventoryVisualizer : MonoBehaviour
 {
-    [SerializeField] private InventoryManager _inventoryManager;
     [SerializeField] private Transform _itemsParent;
     [SerializeField] private ItemView _itemViewPrefab;
     [SerializeField] private RectTransform _selectionMark;
     [SerializeField] private RectTransform _horizontalLayoutGroup;
+    [SerializeField] private SpriteRenderer _selectedRenderer;
+    private InventoryManager _inventoryManager;
     private List<ItemView> _itemViews = new();
 
-    [SerializeField] private SpriteRenderer _selectedRenderer;
-
+    [SerializeField] private bool _isHidden;
     public bool IsHidden
     {
         get => _isHidden;
@@ -21,7 +22,12 @@ public class InventoryVisualizer : MonoBehaviour
             RefreshVisibility();
         }
     }
-    [SerializeField] private bool _isHidden;
+
+    [Inject]
+    private void Construct(InventoryManager inventoryManager)
+    {
+        _inventoryManager = inventoryManager;
+    }
 
     public void Refresh()
     {

@@ -1,15 +1,16 @@
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 public class PlayerMovementController : MonoBehaviour
 {
     public UnityEvent<Vector2> OnMoveAxisChanged { get; } = new();
 
     [SerializeField] private PlayerConfig config;
-    private Rigidbody2D _rigidbody;
-
     [SerializeField] private Animator _animator;
-    [SerializeField] private BringableObjectController _bringableController;
+
+    private Rigidbody2D _rigidbody;
+    private BringableObjectController _bringableController;
 
     public float Speed => config.Speed * (_bringableController.HasObject ? config.WeightKoefficient : 1f);
 
@@ -23,6 +24,12 @@ public class PlayerMovementController : MonoBehaviour
         }
     }
     private Vector2 _axis;
+
+    [Inject]
+    private void Construct(BringableObjectController bringableController)
+    {
+        _bringableController = bringableController;
+    }
 
     private void Start()
     {

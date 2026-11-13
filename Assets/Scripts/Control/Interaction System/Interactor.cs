@@ -1,15 +1,18 @@
 using System.Linq;
 using UnityEngine;
+using Zenject;
 
 public class Interactor : MonoBehaviour
 {
-    [SerializeField] private InteractablesSelector _objectSelector;
-    [SerializeField] private OutlineController _outlineController;
-    [SerializeField] private JoystickController _interactiveController;
     [SerializeField] private InteractionPointViewer _interactionPointViewer;
     [SerializeField] private float _selectionDistanceMultiplier = 3f;
-    private InventoryConfig _inventory;
+
+    private JoystickController _interactJoystick;
+    private InteractablesSelector _interactablesSelector;
+    private OutlineController _outlineController;
     private BringableObjectController _bringableObjectController;
+
+    private InventoryData _inventory;
 
     private InteractableObject _target;
     public InteractableObject Target
@@ -35,17 +38,24 @@ public class Interactor : MonoBehaviour
     }
     private Vector3 _interactionPoint;
 
-    public void Initialize(InteractablesSelector objectSelector, InventoryConfig inventory, BringableObjectController bringableController)
+    [Inject]
+    private void Construct(JoystickController interactJoystick, InteractablesSelector interactableSelector, OutlineController outlineController, BringableObjectController bringableController)
     {
-        _objectSelector = objectSelector;
-        _inventory = inventory;
+        _interactJoystick = interactJoystick;
+        _interactablesSelector = interactableSelector;
+        _outlineController = outlineController;
         _bringableObjectController = bringableController;
+    }
 
-        _interactiveController.OnDragging += OnPointerMove;
-        _interactiveController.OnDragStart += OnPointerDragStart;
-        _interactiveController.OnCancelled += OnPointerCancelled;
-        _interactiveController.OnPerformed += OnPointerPerformed;
-        _interactiveController.OnClick += OnPointerClick;
+    public void Initialize(InventoryData inventory)
+    {
+        _inventory = inventory;
+
+        _interactJoystick.OnDragging += OnPointerMove;
+        _interactJoystick.OnDragStart += OnPointerDragStart;
+        _interactJoystick.OnCancelled += OnPointerCancelled;
+        _interactJoystick.OnPerformed += OnPointerPerformed;
+        _interactJoystick.OnClick += OnPointerClick;
     }
 
     private void Update()
@@ -67,7 +77,7 @@ public class Interactor : MonoBehaviour
     /// <param name="direction"></param>
     public void OnPointerMove(Vector2 direction)
     {
-        _interactionPoint = _objectSelector.transform.position + (Vector3)direction * _selectionDistanceMultiplier;
+        _interactionPoint = _interactablesSelector.transform.position + (Vector3)direction * _selectionDistanceMultiplier;
 
         _interactionPointViewer.transform.position = _interactionPoint;
     }
@@ -79,7 +89,7 @@ public class Interactor : MonoBehaviour
     {
         TryInteract();
 
-        _interactionPoint = _objectSelector.transform.position;
+        _interactionPoint = _interactablesSelector.transform.position;
         _interactionPointViewer.gameObject.SetActive(false);
     }
 
@@ -88,7 +98,7 @@ public class Interactor : MonoBehaviour
     /// </summary>
     public void OnPointerClick()
     {
-        _interactionPoint = _objectSelector.transform.position;
+        _interactionPoint = _interactablesSelector.transform.position;
 
         TryInteract();
         _interactionPointViewer.gameObject.SetActive(false);
@@ -101,13 +111,13 @@ public class Interactor : MonoBehaviour
     {
         Target = null;
 
-        _interactionPoint = _objectSelector.transform.position;
+        _interactionPoint = _interactablesSelector.transform.position;
         _interactionPointViewer.gameObject.SetActive(false);
     }
 
     private void HandleNearest()
     {
-        Target = _objectSelector.Targets.OrderBy(x => Vector2.Distance(_interactionPoint, x.transform.position)).FirstOrDefault();
+        Target = _interactablesSelector.Targets.OrderBy(x => Vector2.Distance(_interactionPoint, x.transform.position)).FirstOrDefault();
 
         if (_bringableObjectController.Current != null)
         {
@@ -120,7 +130,7 @@ public class Interactor : MonoBehaviour
     {
         if (_bringableObjectController.Current != null && Target is not Table)
         {
-            bool result = _bringableObjectController.TryDetach(_interactionPoint, _interactionPoint == _objectSelector.transform.position);
+            bool result = _bringableObjectController.TryDetach(_interactionPoint, _interactionPoint == _interactablesSelector.transform.position);
             Target = null;
             return result;
         }
@@ -139,7 +149,7 @@ public class Interactor : MonoBehaviour
 
             if (Target.IsActive == false)
             {
-                _objectSelector.RemoveTarget(Target);
+                _interactablesSelector.RemoveTarget(Target);
             }
 
             Target = null;

@@ -6925,7 +6925,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-  _dialogWindowManager: {fileID: 88865599}
   _dialogConfig: {fileID: 0}
   _dialogManagerConfig: {fileID: 11400000, guid: 83f98d74b14cf71448fd04ab2e30a278, type: 2}
   _skipDialogCooldown: 0.2
@@ -23054,7 +23053,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42f5aa368fd85894ab2e3bcfbdc3b415, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDistanceController
-  _player: {fileID: 241297959}
   _controlledObjects:
   - Object: {fileID: 2085869409}
     Distance: 40
@@ -30152,7 +30150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9780eca0579b774489a3ef4be3d95d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryVisualizer
-  _inventoryManager: {fileID: 1900830170}
   _itemsParent: {fileID: 0}
   _itemViewPrefab: {fileID: 4106418882135553778, guid: 5f52b72711e31d24bb5f89222115c6fc, type: 3}
   _selectionMark: {fileID: 0}
@@ -46456,21 +46453,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c20488f60ce2432478c883a5674a579a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bootstrap
-  _player: {fileID: 241297959}
-  _saveManager: {fileID: 646411931}
-  _cinemachineCameraController: {fileID: 968750920}
-  _locatorManager: {fileID: 1691938657}
-  _transitionManager: {fileID: 1311302705}
-  _inventoryManager: {fileID: 1900830170}
-  _inventoryVisualizer: {fileID: 1682552142}
-  _interactablesSelector: {fileID: 1567047853}
-  _interactor: {fileID: 2107585403}
-  _bringableController: {fileID: 726402081}
-  _objectRegistrator: {fileID: 173057901}
-  _droppedItemsRegistrator: {fileID: 173057903}
-  _descriptablesRegistrator: {fileID: 173057902}
-  _itemRegistrator: {fileID: 11400000, guid: 0e325caf101bf5e4e8fe8e70f8abcba5, type: 2}
-  _questsRegistrator: {fileID: 188549118}
 --- !u!4 &611850870
 Transform:
   m_ObjectHideFlags: 0
@@ -48160,9 +48142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8e2f0dc4c0d69a48b90140de28e6f55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInputRouter
-  _inputSystemManager: {fileID: 629927957}
-  _moveJoystick: {fileID: 1897740057}
-  _playerMovementController: {fileID: 726402086}
 --- !u!1001 &630873524
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49390,7 +49369,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce2523554a49b19448deccd2fbedbeeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SaveManager
-  _stateSaver: {fileID: 646411932}
 --- !u!114 &646411932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49403,15 +49381,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8d35d6ae4b7bb941ad415bd8c9c8ca4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StateSaver
-  _player: {fileID: 726402086}
-  _bringableController: {fileID: 726402081}
-  _inventory: {fileID: 1900830170}
-  _cinemachineCameraController: {fileID: 968750920}
-  _cameraConstraintsRegistrator: {fileID: 1984326095}
-  _droppedItemsRegistrator: {fileID: 173057903}
-  _descriptablesRegistrator: {fileID: 173057902}
-  _questsRegistrator: {fileID: 188549118}
-  _stateObjectsRegistrator: {fileID: 173057904}
 --- !u!1001 &646638042
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -843492,7 +843461,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StepSkipper
   _firstStep: 0
-  _playerTransform: {fileID: 241297959}
   _tutorialPoint: {fileID: 910481604}
   _hutPosition: {x: 54.7, y: 54.25, z: 0}
   _milkmaidPosition: {x: 237, y: -70, z: 0}
@@ -872199,7 +872167,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9780eca0579b774489a3ef4be3d95d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryVisualizer
-  _inventoryManager: {fileID: 1900830170}
   _itemsParent: {fileID: 1621399796}
   _itemViewPrefab: {fileID: 4106418882135553778, guid: 5f52b72711e31d24bb5f89222115c6fc, type: 3}
   _selectionMark: {fileID: 1427338471}
@@ -873380,7 +873347,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e16035997cbb8e4ba125f9656abceb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocatorManager
-  _playerTransform: {fileID: 241297959}
   _markPrefab: {fileID: 6757193245983708134, guid: d0ef14da7ff76b0448b15d45aba82688, type: 3}
   _markParent: {fileID: 198729585}
 --- !u!1001 &1692711925
@@ -881799,6 +881765,107 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1133054076514658866, guid: 5560280b1a0bfd543a03dc1929bcd86f, type: 3}
   m_PrefabInstance: {fileID: 1793960830}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1794950039
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1794950042}
+  - component: {fileID: 1794950041}
+  - component: {fileID: 1794950040}
+  m_Layer: 0
+  m_Name: SceneContext
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1794950040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794950039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2565bf7cd729f5749b8d96c0c27dc0aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameInstaller
+  _player: {fileID: 1560100008}
+  _moveJoystick: {fileID: 1897740057}
+  _interactJoystick: {fileID: 308608212}
+  _inputSystemManager: {fileID: 629927957}
+  _objectRegistrator: {fileID: 173057901}
+  _saveManager: {fileID: 646411931}
+  _stateSaver: {fileID: 646411932}
+  _transitionManager: {fileID: 1311302705}
+  _dialogManager: {fileID: 88865597}
+  _dialogWindowManager: {fileID: 88865599}
+  _cameraConstraintsRegistrator: {fileID: 1984326095}
+  _droppedItemsRegistrator: {fileID: 173057903}
+  _descriptablesRegistrator: {fileID: 173057902}
+  _questsRegistrator: {fileID: 188549118}
+  _stateObjectsRegistrator: {fileID: 173057904}
+  _itemRegistrator: {fileID: 11400000, guid: 0e325caf101bf5e4e8fe8e70f8abcba5, type: 2}
+  _cameraController: {fileID: 968750920}
+  _bringableObjectController: {fileID: 726402081}
+  _playerMove: {fileID: 726402086}
+  _outlineController: {fileID: 2107585402}
+  _interactablesSelector: {fileID: 1567047853}
+  _inventoryManager: {fileID: 1900830170}
+  _inventoryVisualizer: {fileID: 1682552142}
+  _interactor: {fileID: 2107585403}
+--- !u!114 &1794950041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794950039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Zenject::Zenject.SceneContext
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 1794950040}
+  _installerPrefabs: []
+  _autoRun: 1
+  OnPreInstall:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPostInstall:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPreResolve:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPostResolve:
+    m_PersistentCalls:
+      m_Calls: []
+  _parentNewObjectsUnderSceneContext: 0
+  _contractNames: []
+  _parentContractNames: []
+--- !u!4 &1794950042
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794950039}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1795307342
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2494885,9 +2494952,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a03b92f5c759b914892671af0e9695f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactor
-  _objectSelector: {fileID: 1567047853}
-  _outlineController: {fileID: 2107585402}
-  _interactiveController: {fileID: 308608212}
   _interactionPointViewer: {fileID: 715052302}
   _selectionDistanceMultiplier: 3
 --- !u!1001 &2108235459
@@ -2500911,6 +2500975,7 @@ SceneRoots:
   - {fileID: 532844427}
   - {fileID: 1183756650}
   - {fileID: 611850870}
+  - {fileID: 1794950042}
   - {fileID: 1352387708}
   - {fileID: 1419738728}
   - {fileID: 241297957}

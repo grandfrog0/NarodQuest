@@ -12,7 +12,7 @@ public class Teat : MonoBehaviour
     [SerializeField] ParticleSystem milkParticles;
 
     Image _teatImage;
-    float _time;
+    //float _time;
 
     void Awake()
     {
@@ -26,6 +26,7 @@ public class Teat : MonoBehaviour
 
     void Update()
     {
+        /*
         if (_time >= config.teatMinTimeMilking)
             EndMilking();
 
@@ -50,6 +51,7 @@ public class Teat : MonoBehaviour
             //Debug.Log($"Play -- {index}");
             milkParticles.Play();
         }
+        */
     }
 
     //public void OnDrag(PointerEventData eventData)
@@ -69,7 +71,7 @@ public class Teat : MonoBehaviour
         udder.TeatMilked(index);
 
         milkParticles.Stop();
-        _time = 0f;
+        //_time = 0f;
     }
 
     bool IsPointerOverImage(Vector2 screenPosition)

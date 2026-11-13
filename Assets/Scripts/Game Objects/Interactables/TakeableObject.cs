@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Zenject;
 
 /// <summary>
 /// Объект, контролирующий поведение PlayerBringable
@@ -13,10 +14,17 @@ public class TakeableObject : InteractableObject, IDescriptable
     public int Id => this.GetId();
 
     private PlayerBringable _bringable;
+    private BringableObjectController _bringableController;
+
+    [Inject]
+    private void Construct(BringableObjectController bringableController)
+    {
+        _bringableController = bringableController;
+    }
 
     public override void Interact(InteractionData data)
     {
-        bool isBrought = BringableObjectController.Instance.SwitchBring(_bringable, data.Point);
+        bool isBrought = _bringableController.SwitchBring(_bringable, data.Point);
         IsActive = !isBrought;
     }
 
@@ -27,7 +35,7 @@ public class TakeableObject : InteractableObject, IDescriptable
 
     public List<string> GetTags()
     {
-        if (BringableObjectController.Instance.Current == Bringable)
+        if (_bringableController.Current == Bringable)
         {
             return new List<string>();
         }

@@ -5,21 +5,14 @@ using UnityEngine.UI;
 
 public class TransitionManager : MonoBehaviour
 {
-    private static TransitionManager _instance;
-
     [SerializeField] private Image _fade;
     private Coroutine _coroutine;
 
-    public void Initialize()
+    public bool Transition(float seconds = 0.5f, Action onComplete = null)
     {
-        _instance = this;
-    }
-
-    public static bool Transition(float seconds = 0.5f, Action onComplete = null)
-    {
-        if (_instance._coroutine == null)
+        if (_coroutine == null)
         {
-            _instance._coroutine = _instance.StartCoroutine(_instance.TransitionRoutine(seconds, onComplete));
+            _coroutine = StartCoroutine(TransitionRoutine(seconds, onComplete));
             return true;
         }
         return false;

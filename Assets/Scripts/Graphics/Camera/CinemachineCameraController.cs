@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class CinemachineCameraController : MonoBehaviour
 {
-    public static CinemachineCameraController Instance { get; private set; }
-
     [SerializeField] private Transform _target;
     [SerializeField] private CameraConfig _config;
     [SerializeField] private CameraConstraints _constraints;
@@ -54,14 +52,6 @@ public class CinemachineCameraController : MonoBehaviour
 
     public void Initialize()
     {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-
         _cam = GetComponent<CinemachineCamera>();
         _camFollow = GetComponent<CinemachineFollow>();
         _camConfiner = GetComponent<CinemachineConfiner2D>();

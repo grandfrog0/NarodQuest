@@ -2,17 +2,17 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 public class DialogManager : MonoBehaviour
 {
-    public static DialogManager Instance { get; private set; }
-
     [SerializeField] UnityEvent _onDialogStart;
     [SerializeField] UnityEvent _onDialogEnd;
     public UnityEvent OnDialogStart => _onDialogStart;
     public UnityEvent OnDialogEnd => _onDialogEnd;
 
-    [SerializeField] private DialogWindowManager _dialogWindowManager;
+    private InputSystemManager _inputSystemManager;
+    private DialogWindowManager _dialogWindowManager;
     [SerializeField] private DialogConfig _dialogConfig;
     [SerializeField] private DialogManagerConfig _dialogManagerConfig;
     [SerializeField] private float _skipDialogCooldown;
@@ -27,19 +27,25 @@ public class DialogManager : MonoBehaviour
 
     private Camera _mainCamera;
 
+    [Inject]
+    private void Construct(InputSystemManager inputSystemManager, DialogWindowManager dialogWindowManager)
+    {
+        _inputSystemManager = inputSystemManager;
+        _dialogWindowManager = dialogWindowManager;
+    }
+
     void OnEnable()
     {
-        InputSystemManager.OnTouch.AddListener(TryShowDialog);
+        _inputSystemManager.OnTouch.AddListener(TryShowDialog);
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
-        InputSystemManager.OnTouch.RemoveListener(TryShowDialog);
+        _inputSystemManager.OnTouch.RemoveListener(TryShowDialog);
     }
 
-    void Start()
+    private void Start()
     {
-        Instance = this;
         _mainCamera = Camera.main;
     }
 

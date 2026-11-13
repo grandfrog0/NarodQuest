@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-//[CreateAssetMenu(fileName = "inventory", menuName = "SO/Inventory/Inventory Config")]
-public class InventoryConfig : IEnumerable<ItemCountPair>
+public class InventoryData : IEnumerable<ItemCountPair>
 {
     public List<ItemCountPair> Items = new();
     public int SelectedIndex = -1;

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 public class TutorialQuest : AbstractQuest
 {
@@ -23,8 +24,17 @@ public class TutorialQuest : AbstractQuest
     [SerializeField] private Animator _dragItemAnimator;
     [SerializeField] private DropTakeableTrigger _dropTrigger;
     [SerializeField] private Animator _dropTriggerAnimator;
+
     [Header("End")]
     [SerializeField] private DialogConfig _endDialog;
+
+    private LocatorManager _locatorManager;
+
+    [Inject]
+    private void Construct(LocatorManager locatorManager)
+    {
+        _locatorManager = locatorManager;
+    }
 
     public TutorialQuestStep CurrentStep
     {
@@ -97,12 +107,12 @@ public class TutorialQuest : AbstractQuest
         // показать приветствие
         // после пропуска приветствия перейти в Movement
 
-        DialogManager.Instance.StartDialog(_greetingsDialog, null);
-        DialogManager.Instance.OnDialogEnd.AddListener(GoToMovementInstructions);
+        _dialogManager.StartDialog(_greetingsDialog, null);
+        _dialogManager.OnDialogEnd.AddListener(GoToMovementInstructions);
 
         void GoToMovementInstructions()
         {
-            DialogManager.Instance.OnDialogEnd.RemoveListener(GoToMovementInstructions);
+            _dialogManager.OnDialogEnd.RemoveListener(GoToMovementInstructions);
             CurrentStep = TutorialQuestStep.Movement;
         }
     }
@@ -112,8 +122,8 @@ public class TutorialQuest : AbstractQuest
         // после того, как игрок оттянет джойстик и дойдет до нужной точки перейти в BringItem
 
         _movementTrigger.Enable();
-        LocatorManager.SetTarget(_movementTrigger.transform);
-        DialogManager.Instance.StartDialog(_movementDialog, null);
+        _locatorManager.SetTarget(_movementTrigger.transform);
+        _dialogManager.StartDialog(_movementDialog, null);
     }
     private void ShowBringItemInstruction()
     {
@@ -129,25 +139,24 @@ public class TutorialQuest : AbstractQuest
         _targetItem.gameObject.SetActive(true);
         _targetItem.OnPicked += OnTargetItemBrought;
 
-        LocatorManager.SetTarget(_targetItem.transform);
-        DialogManager.Instance.StartDialog(_bringItemDialog, null);
+        _locatorManager.SetTarget(_targetItem.transform);
+        _dialogManager.StartDialog(_bringItemDialog, null);
     }
     private void ShowDragItemInstruction()
     {
         // показать инструкцию
         // после того, как игрок перенесет камень в нужную точку перейти в End
-        Debug.Log(_dragItem.IsActive);
         _dragItem.IsActive = true;
         _dragItemAnimator.gameObject.SetActive(true);
         _dropTrigger.gameObject.SetActive(true);
         _dropTriggerAnimator.gameObject.SetActive(false);
 
-        LocatorManager.SetTarget(_dragItem.transform);
+        _locatorManager.SetTarget(_dragItem.transform);
         _dragItem.Bringable.OnDrag += OnDrag;
 
         _dropTrigger.OnTrigger.AddListener(OnTargetDragDropped);
 
-        DialogManager.Instance.StartDialog(_dragItemDialog, null);
+        _dialogManager.StartDialog(_dragItemDialog, null);
 
         void OnDrag(PlayerBringable _)
         {
@@ -155,7 +164,7 @@ public class TutorialQuest : AbstractQuest
             _dropTriggerAnimator.gameObject.SetActive(true);
             _dragItemAnimator.Play("trigger");
 
-            LocatorManager.SetTarget(_dropTrigger.transform);
+            _locatorManager.SetTarget(_dropTrigger.transform);
         }
     }
     private void ShowEnd()
@@ -168,32 +177,32 @@ public class TutorialQuest : AbstractQuest
         _dragItem.IsActive = false;
         _dragItemAnimator.gameObject.SetActive(false);
 
-        DialogManager.Instance.OnDialogEnd.AddListener(End);
-        DialogManager.Instance.StartDialog(_endDialog, null);
+        _dialogManager.OnDialogEnd.AddListener(End);
+        _dialogManager.StartDialog(_endDialog, null);
 
         void End()
         {
-            DialogManager.Instance.OnDialogEnd.RemoveListener(End);
+            _dialogManager.OnDialogEnd.RemoveListener(End);
             EndQuest();
         }
     }
 
     public void OnMovementTargetReceived()
     {
-        LocatorManager.Clear();
+        _locatorManager.Clear();
         CurrentStep = TutorialQuestStep.BringItem;
     }
 
     public void OnTargetItemBrought(ItemCountPair drop)
     {
-        LocatorManager.Clear();
+        _locatorManager.Clear();
         CurrentStep = TutorialQuestStep.DragItem;
     }
 
     public void OnTargetDragDropped()
     {
         _dropTriggerAnimator.Play("trigger");
-        LocatorManager.Clear();
+        _locatorManager.Clear();
         CurrentStep = TutorialQuestStep.End;
     }
 
