@@ -20,18 +20,14 @@ public class OutlineController : MonoBehaviour
         outline.Initalize(target.Outline ?? _defaultOutlineConfig);
 
         _outlines[target] = outline;
-
-        //Debug.Log($"setted {target}, {string.Join("; ", _outlines)}");
     }
 
     public void RemoveTarget(InteractableObject target)
     {
         if (_outlines.Remove(target, out OutlineView outline))
         {
-            //Debug.Log($"removed {target}, {string.Join("; ", _outlines)}");
             outline.Dispose();
         }
-        //else Debug.Log($"not removed {target}, {string.Join("; ", _outlines)}");
     }
 
     public void SelectTarget(InteractableObject target)

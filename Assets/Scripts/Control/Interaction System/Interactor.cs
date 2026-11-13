@@ -141,6 +141,7 @@ public class Interactor : MonoBehaviour
             {
                 _objectSelector.RemoveTarget(Target);
             }
+
             Target = null;
 
             return true;

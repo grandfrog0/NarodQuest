@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using static UnityEngine.Rendering.STP;
 
 public class OutlineView : MonoBehaviour, IDisposable
 {
@@ -9,6 +10,7 @@ public class OutlineView : MonoBehaviour, IDisposable
 
     private Color _defaultOutlineColor;
     private Color _highlightedOutlineColor;
+    private Vector3 _offset;
 
     public OutlineState State
     {
@@ -52,6 +54,7 @@ public class OutlineView : MonoBehaviour, IDisposable
             _defaultOutlineColor.b, 
             _defaultOutlineColor.a * 0.34f
             );
+        _offset = config.Offset;
 
         _outlineRenderer.sprite = config.OutlineSprite;
         _outlineRenderer.color = _defaultOutlineColor;
@@ -60,7 +63,7 @@ public class OutlineView : MonoBehaviour, IDisposable
         _arrowRenderer.sprite = config.ArrowSprite;
         _arrowRenderer.color = config.ArrowColor;
 
-        transform.localPosition = config.Offset;
+        transform.localPosition = _offset;
         transform.localScale = config.Size;
     }
 
@@ -82,8 +85,11 @@ public class OutlineView : MonoBehaviour, IDisposable
         if (_parent != null)
         {
             transform.SetParent(_parent);
+            transform.localPosition = _offset;
+            _animator.Play("pulse");
         }
 
+        Debug.Log(State);
         State = State;
     }
 

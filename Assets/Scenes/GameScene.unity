@@ -8659,7 +8659,7 @@ Transform:
   m_GameObject: {fileID: 114555356}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.2, y: -0.9, z: 0}
+  m_LocalPosition: {x: 0, y: -0.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -30232,9 +30232,8 @@ GameObject:
   m_Component:
   - component: {fileID: 402675389}
   - component: {fileID: 402675390}
-  - component: {fileID: 402675391}
+  - component: {fileID: 402675394}
   - component: {fileID: 402675392}
-  - component: {fileID: 402675393}
   m_Layer: 6
   m_Name: Gate
   m_TagString: Interactable
@@ -30251,7 +30250,7 @@ Transform:
   m_GameObject: {fileID: 402675387}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 22.27, y: -22.58, z: -2.06}
+  m_LocalPosition: {x: 24.07, y: -22.58, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -30292,7 +30291,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 1.2, y: -0.6405214}
+  m_Offset: {x: 0, y: -0.6405214}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -30304,7 +30303,23 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2.5099998, y: 0.4189573}
   m_EdgeRadius: 0
---- !u!95 &402675391
+--- !u!114 &402675392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 402675387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81934da26322f60479535130a069d31f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractableGate
+  _outline: {fileID: 0}
+  _selectionOrder: 0
+  _isOpened: 0
+  _animator: {fileID: 402675394}
+--- !u!95 &402675394
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
@@ -30326,58 +30341,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &402675392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 402675387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81934da26322f60479535130a069d31f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InteractableGate
-  _outline: {fileID: 0}
-  _selectionOrder: 0
-  _isOpened: 0
-  _animator: {fileID: 402675391}
---- !u!58 &402675393
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 402675387}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 1.2110956, y: 0.0105102}
-  m_Radius: 2
 --- !u!1001 &403849931
 PrefabInstance:
   m_ObjectHideFlags: 0
