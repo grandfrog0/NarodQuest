@@ -20,7 +20,6 @@ public class BringableObjectController : MonoBehaviour
     public bool IsCorrectPlace(Vector3 position)
     {
         RaycastHit2D hit = Physics2D.Raycast(position, Vector2.zero, 1f, _obstacleMask);
-        Debug.Log(hit.collider, hit.collider);
         return hit.collider == null || hit.collider.GetComponent<Table>();
     }
 

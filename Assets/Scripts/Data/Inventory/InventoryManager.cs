@@ -16,15 +16,12 @@ public class InventoryManager : MonoBehaviour
     private ItemRegistrator _itemRegistrator;
 
     [Inject]
-    private void Construct(ItemRegistrator itemRegistrator)
+    private void Construct(ItemRegistrator itemRegistrator, InventoryData inventory)
     {
         _itemRegistrator = itemRegistrator;
-    }
+        _inventory = inventory;
 
-    public InventoryData Initialize()
-    {
-        _inventory = new();
-        return _inventory;
+        Debug.Log("Inventory Construct: " + _inventory);
     }
 
     public InventorySerializable CreateSerializable()
@@ -108,6 +105,7 @@ public class InventoryManager : MonoBehaviour
     {
         _inventory.Items.Remove(pair);
     }
+
     public void Clear()
     {
         _inventory.Items.Clear();

@@ -6,10 +6,7 @@ public class Bootstrap : MonoBehaviour
     private SaveManager _saveManager;
     private CinemachineCameraController _cinemachineCameraController;
     private LocatorManager _locatorManager;
-    private InventoryManager _inventoryManager;
-    private InventoryVisualizer _inventoryVisualizer;
     private InteractablesSelector _interactablesSelector;
-    private Interactor _interactor;
     private BringableObjectController _bringableController;
 
     private DroppedItemsRegistrator _droppedItemsRegistrator;
@@ -23,9 +20,7 @@ public class Bootstrap : MonoBehaviour
         CinemachineCameraController cinemachineCameraController,
         LocatorManager locatorManager,
         InventoryManager inventoryManager,
-        InventoryVisualizer inventoryVisualizer,
         InteractablesSelector interactablesSelector,
-        Interactor interactor,
         BringableObjectController bringableController,
         DroppedItemsRegistrator droppedItemsRegistrator,
         DescriptablesRegistrator descriptablesRegistrator,
@@ -36,10 +31,7 @@ public class Bootstrap : MonoBehaviour
         _saveManager = saveManager;
         _cinemachineCameraController = cinemachineCameraController;
         _locatorManager = locatorManager;
-        _inventoryManager = inventoryManager;
-        _inventoryVisualizer = inventoryVisualizer;
         _interactablesSelector = interactablesSelector;
-        _interactor = interactor;
         _bringableController = bringableController;
         _droppedItemsRegistrator = droppedItemsRegistrator;
         _descriptablesRegistrator = descriptablesRegistrator;
@@ -54,10 +46,6 @@ public class Bootstrap : MonoBehaviour
         _descriptablesRegistrator.Initialize();
         _itemRegistrator.Initialize();
 
-        // Инвентарь
-        _inventoryVisualizer.Initialize();
-        InventoryData inventory = _inventoryManager.Initialize();
-
         _cinemachineCameraController.Initialize();
 
         // Графика
@@ -71,7 +59,6 @@ public class Bootstrap : MonoBehaviour
 
         // Игрок
         _interactablesSelector.Initialize();
-        _interactor.Initialize(inventory);
             
         // Другое
         _questsRegistrator.Initialize();

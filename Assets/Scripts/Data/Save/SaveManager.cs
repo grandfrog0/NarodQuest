@@ -6,7 +6,7 @@ using Zenject;
 public class SaveManager : MonoBehaviour
 {
     private string FolderPath => Application.persistentDataPath;
-    private string PlayerPath => Path.Combine(FolderPath, "Player.json");
+    private string PlayerPath => Path.Combine(FolderPath, "player.json");
     private string EnvironmentPath => Path.Combine(FolderPath, "environment.json");
     private string QuestsPath => Path.Combine(FolderPath, "quests.json");
 
@@ -94,18 +94,36 @@ public class SaveManager : MonoBehaviour
 
         void LoadPlayer()
         {
+            if (!File.Exists(PlayerPath))
+            {
+                Debug.Log("Файл сохранения Player не был найден.");
+                return;
+            }
+
             string json = File.ReadAllText(PlayerPath);
             PlayerSave playerSave = JsonUtility.FromJson<PlayerSave>(json);
             _stateSaver.ApplyPlayerSave(playerSave);
         }
         void LoadEnvironment()
         {
+            if (!File.Exists(EnvironmentPath))
+            {
+                Debug.Log("Файл сохранения Environment не был найден.");
+                return;
+            }
+
             string json = File.ReadAllText(EnvironmentPath);
             EnvironmentDto environmentSave = JsonUtility.FromJson<EnvironmentDto>(json);
             _stateSaver.ApplyEnvironmentSave(environmentSave);
         }
         void LoadQuests()
         {
+            if (!File.Exists(QuestsPath))
+            {
+                Debug.Log("Файл сохранения Quests не был найден.");
+                return;
+            }
+
             string json = File.ReadAllText(QuestsPath);
             QuestSave questSave = JsonUtility.FromJson<QuestSave>(json);
             _stateSaver.ApplyQuestSave(questSave);

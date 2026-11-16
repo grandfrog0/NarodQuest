@@ -7,7 +7,6 @@ public class InventoryVisualizer : MonoBehaviour
     [SerializeField] private Transform _itemsParent;
     [SerializeField] private ItemView _itemViewPrefab;
     [SerializeField] private RectTransform _selectionMark;
-    [SerializeField] private RectTransform _horizontalLayoutGroup;
     [SerializeField] private SpriteRenderer _selectedRenderer;
     private InventoryManager _inventoryManager;
     private List<ItemView> _itemViews = new();
@@ -27,6 +26,12 @@ public class InventoryVisualizer : MonoBehaviour
     private void Construct(InventoryManager inventoryManager)
     {
         _inventoryManager = inventoryManager;
+    }
+
+    private void Start()
+    {
+        _inventoryManager.OnChanged.AddListener(Refresh);
+        _inventoryManager.OnSelectionChanged.AddListener(OnSelectionChanged);
     }
 
     public void Refresh()
@@ -62,6 +67,7 @@ public class InventoryVisualizer : MonoBehaviour
     {
         if (selectedIndex == -1)
         {
+            Debug.Log(_selectionMark, _selectionMark);
             _selectionMark.gameObject.SetActive(false);
             _selectedRenderer.gameObject.SetActive(false);
             return;
@@ -85,9 +91,9 @@ public class InventoryVisualizer : MonoBehaviour
         _itemViews.Clear();
     }
 
-    public void Initialize()
+    private void OnDestroy()
     {
-        _inventoryManager.OnChanged.AddListener(Refresh);
-        _inventoryManager.OnSelectionChanged.AddListener(OnSelectionChanged);
+        _inventoryManager.OnChanged.RemoveListener(Refresh);
+        _inventoryManager.OnSelectionChanged.RemoveListener(OnSelectionChanged);
     }
 }

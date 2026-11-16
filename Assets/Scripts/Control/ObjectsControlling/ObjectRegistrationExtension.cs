@@ -5,8 +5,7 @@ public static class ObjectRegistrationExtension
 {
     private static ObjectRegistrator _objectRegistrator;
 
-    [Inject]
-    private static void Construct(ObjectRegistrator objectRegistrator)
+    public static void Construct(ObjectRegistrator objectRegistrator)
     {
         _objectRegistrator = objectRegistrator;
     }

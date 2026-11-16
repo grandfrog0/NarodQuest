@@ -30110,7 +30110,6 @@ GameObject:
   - component: {fileID: 401638432}
   - component: {fileID: 401638431}
   - component: {fileID: 401638430}
-  - component: {fileID: 401638429}
   m_Layer: 5
   m_Name: Quest Canvas
   m_TagString: Untagged
@@ -30138,24 +30137,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &401638429
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 401638427}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9780eca0579b774489a3ef4be3d95d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InventoryVisualizer
-  _itemsParent: {fileID: 0}
-  _itemViewPrefab: {fileID: 4106418882135553778, guid: 5f52b72711e31d24bb5f89222115c6fc, type: 3}
-  _selectionMark: {fileID: 0}
-  _horizontalLayoutGroup: {fileID: 0}
-  _selectedRenderer: {fileID: 0}
-  _isHidden: 0
 --- !u!114 &401638430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -851047,7 +851028,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.50980395}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.5686275}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -872170,7 +872151,6 @@ MonoBehaviour:
   _itemsParent: {fileID: 1621399796}
   _itemViewPrefab: {fileID: 4106418882135553778, guid: 5f52b72711e31d24bb5f89222115c6fc, type: 3}
   _selectionMark: {fileID: 1427338471}
-  _horizontalLayoutGroup: {fileID: 0}
   _selectedRenderer: {fileID: 241297958}
   _isHidden: 0
 --- !u!114 &1682552143
@@ -881816,8 +881796,6 @@ MonoBehaviour:
   _playerMove: {fileID: 726402086}
   _outlineController: {fileID: 2107585402}
   _interactablesSelector: {fileID: 1567047853}
-  _inventoryManager: {fileID: 1900830170}
-  _inventoryVisualizer: {fileID: 1682552142}
   _interactor: {fileID: 2107585403}
   _locatorManager: {fileID: 1691938657}
 --- !u!114 &1794950041
@@ -881835,6 +881813,7 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 1794950040}
+  - {fileID: 1900830172}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -890189,6 +890168,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1900830171}
   - component: {fileID: 1900830170}
+  - component: {fileID: 1900830172}
   m_Layer: 0
   m_Name: Inventory Manager
   m_TagString: Untagged
@@ -890223,6 +890203,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1352387708}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1900830172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900830169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cc3d6896d1eb284c83caeb50ba3f61e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryInstaller
+  _inventoryManager: {fileID: 1900830170}
+  _inventoryVisualizer: {fileID: 1682552142}
 --- !u!1001 &1900832976
 PrefabInstance:
   m_ObjectHideFlags: 0

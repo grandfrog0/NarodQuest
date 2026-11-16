@@ -32,8 +32,6 @@ public class GameInstaller : MonoInstaller
     [SerializeField] private PlayerMovementController _playerMove;
     [SerializeField] private OutlineController _outlineController;
     [SerializeField] private InteractablesSelector _interactablesSelector;
-    [SerializeField] private InventoryManager _inventoryManager;
-    [SerializeField] private InventoryVisualizer _inventoryVisualizer;
     [SerializeField] private Interactor _interactor;
     [SerializeField] private LocatorManager _locatorManager;
 
@@ -67,8 +65,6 @@ public class GameInstaller : MonoInstaller
         Container.BindInstance(_playerMove);
         Container.BindInstance(_outlineController);
         Container.BindInstance(_interactablesSelector);
-        Container.BindInstance(_inventoryManager);
-        Container.BindInstance(_inventoryVisualizer);
         Container.BindInstance(_interactor);
         Container.BindInstance(_locatorManager);
     }

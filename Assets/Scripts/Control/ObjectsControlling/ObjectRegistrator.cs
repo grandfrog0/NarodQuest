@@ -7,6 +7,11 @@ public class ObjectRegistrator : MonoBehaviour
 {
     [SerializeField] private List<GameObject> _registrated;
 
+    private void Awake()
+    {
+        ObjectRegistrationExtension.Construct(this);
+    }
+
     public IEnumerable<GameObject> Enumerate()
     {
         return _registrated.AsEnumerable();

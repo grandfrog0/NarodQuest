@@ -39,18 +39,23 @@ public class Interactor : MonoBehaviour
     private Vector3 _interactionPoint;
 
     [Inject]
-    private void Construct(JoystickController interactJoystick, InteractablesSelector interactableSelector, OutlineController outlineController, BringableObjectController bringableController)
+    private void Construct(
+        JoystickController interactJoystick, 
+        InteractablesSelector interactableSelector, 
+        OutlineController outlineController, 
+        BringableObjectController bringableController,
+        InventoryData inventory)
     {
         _interactJoystick = interactJoystick;
         _interactablesSelector = interactableSelector;
         _outlineController = outlineController;
         _bringableObjectController = bringableController;
+
+        _inventory = inventory;
     }
 
-    public void Initialize(InventoryData inventory)
+    private void Start()
     {
-        _inventory = inventory;
-
         _interactJoystick.OnDragging += OnPointerMove;
         _interactJoystick.OnDragStart += OnPointerDragStart;
         _interactJoystick.OnCancelled += OnPointerCancelled;
@@ -158,5 +163,14 @@ public class Interactor : MonoBehaviour
         }
 
         return false;
+    }
+
+    private void OnDestroy()
+    {
+        _interactJoystick.OnDragging -= OnPointerMove;
+        _interactJoystick.OnDragStart -= OnPointerDragStart;
+        _interactJoystick.OnCancelled -= OnPointerCancelled;
+        _interactJoystick.OnPerformed -= OnPointerPerformed;
+        _interactJoystick.OnClick -= OnPointerClick;
     }
 }
