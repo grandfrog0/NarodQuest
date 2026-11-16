@@ -55,6 +55,7 @@ public class StepSkipper : MonoBehaviour
                 _playerTransform.position = _fieldPosition;
                 break;
         }
+        Debug.Log($"Player translated: {_playerTransform.position} ({_milkmaidPosition}) {step} ");
     }
 
 #endif

@@ -20,8 +20,6 @@ public class InventoryManager : MonoBehaviour
     {
         _itemRegistrator = itemRegistrator;
         _inventory = inventory;
-
-        Debug.Log("Inventory Construct: " + _inventory);
     }
 
     public InventorySerializable CreateSerializable()

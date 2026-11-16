@@ -1,12 +1,20 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class OutlineController : MonoBehaviour
 {
-    [SerializeField] private OutlineView _selectionOutlinePrefab;
-    [SerializeField] private OutlineConfig _defaultOutlineConfig;
+    private OutlineConfig _defaultOutline;
+    private OutlineView.Factory _factory;
 
     private Dictionary<InteractableObject, OutlineView> _outlines = new();
+
+    [Inject]
+    private void Construct(OutlineView.Factory factory, OutlineConfig defaultOutline)
+    {
+        _factory = factory;
+        _defaultOutline = defaultOutline;
+    }
 
     public void AddTarget(InteractableObject target)
     {
@@ -15,9 +23,11 @@ public class OutlineController : MonoBehaviour
             return;
         }
 
-        OutlineView outline = Instantiate(_selectionOutlinePrefab, target.transform);
+        OutlineConfig config = target.Outline ?? _defaultOutline;
+
+        OutlineView outline = _factory.Create(config, target.transform);
+        Debug.Log(outline.transform.parent, outline);
         outline.State = OutlineState.Highlighted;
-        outline.Initalize(target.Outline ?? _defaultOutlineConfig);
 
         _outlines[target] = outline;
     }

@@ -19,7 +19,6 @@ public class Bootstrap : MonoBehaviour
         SaveManager saveManager,
         CinemachineCameraController cinemachineCameraController,
         LocatorManager locatorManager,
-        InventoryManager inventoryManager,
         InteractablesSelector interactablesSelector,
         BringableObjectController bringableController,
         DroppedItemsRegistrator droppedItemsRegistrator,

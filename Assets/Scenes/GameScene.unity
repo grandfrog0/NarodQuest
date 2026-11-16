@@ -17717,7 +17717,7 @@ PrefabInstance:
     - target: {fileID: 4002888142507513062, guid: 916fc759f1cff3a4f95243d40bcd72f2, type: 3}
       propertyPath: _outlineController
       value: 
-      objectReference: {fileID: 2107585402}
+      objectReference: {fileID: 0}
     - target: {fileID: 8127068896405604266, guid: 916fc759f1cff3a4f95243d40bcd72f2, type: 3}
       propertyPath: m_Name
       value: Player
@@ -843441,7 +843441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9966828c3805a284fa88c1bade9a385a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StepSkipper
-  _firstStep: 0
+  _firstStep: 3
   _tutorialPoint: {fileID: 910481604}
   _hutPosition: {x: 54.7, y: 54.25, z: 0}
   _milkmaidPosition: {x: 237, y: -70, z: 0}
@@ -846478,6 +846478,7 @@ Transform:
   - {fileID: 88865598}
   - {fileID: 1900830171}
   - {fileID: 2107585401}
+  - {fileID: 2060938406}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1352929626
@@ -881794,7 +881795,7 @@ MonoBehaviour:
   _cameraController: {fileID: 968750920}
   _bringableObjectController: {fileID: 726402081}
   _playerMove: {fileID: 726402086}
-  _outlineController: {fileID: 2107585402}
+  _outlineController: {fileID: 0}
   _interactablesSelector: {fileID: 1567047853}
   _interactor: {fileID: 2107585403}
   _locatorManager: {fileID: 1691938657}
@@ -881814,6 +881815,7 @@ MonoBehaviour:
   _monoInstallers:
   - {fileID: 1794950040}
   - {fileID: 1900830172}
+  - {fileID: 2060938408}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -2491597,6 +2491599,66 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6772711913401337829, guid: e059d38c46c88af44a39a98b7f8f3b75, type: 3}
   m_PrefabInstance: {fileID: 2058392378}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2060938405
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2060938406}
+  - component: {fileID: 2060938408}
+  - component: {fileID: 2060938407}
+  m_Layer: 0
+  m_Name: Outline
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2060938406
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060938405}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1352387708}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2060938407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060938405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17c8b3975389dd94fb6d8a462cd4d595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutlineController
+--- !u!114 &2060938408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060938405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0fcbd67c1dd8248ba2013ddaee2690, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutlineInstaller
+  _outlineController: {fileID: 2060938407}
+  _outlineViewPrefab: {fileID: 2970958449724380204, guid: fb807cd7cdcc3bc4a8acaf4b0cb70aa2, type: 3}
+  _defaultOutlineConfig: {fileID: 11400000, guid: 8355245e20776104b87809a4a18d9631, type: 2}
 --- !u!1001 &2061189805
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2494898,7 +2494960,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2107585401}
   - component: {fileID: 2107585403}
-  - component: {fileID: 2107585402}
   m_Layer: 0
   m_Name: Interaction
   m_TagString: Untagged
@@ -2494921,20 +2494982,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1352387708}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2107585402
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2107585400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17c8b3975389dd94fb6d8a462cd4d595, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::OutlineController
-  _selectionOutlinePrefab: {fileID: 2970958449724380204, guid: fb807cd7cdcc3bc4a8acaf4b0cb70aa2, type: 3}
-  _defaultOutlineConfig: {fileID: 11400000, guid: 8355245e20776104b87809a4a18d9631, type: 2}
 --- !u!114 &2107585403
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,16 +1,17 @@
 using System;
 using UnityEngine;
-using static UnityEngine.Rendering.STP;
+using Zenject;
 
-public class OutlineView : MonoBehaviour, IDisposable
+public class OutlineView : MonoBehaviour, IPoolable<OutlineConfig, Transform, IMemoryPool>, IDisposable
 {
     [SerializeField] private Animator _animator;
     [SerializeField] private SpriteRenderer _outlineRenderer;
     [SerializeField] private SpriteRenderer _arrowRenderer;
 
-    private Color _defaultOutlineColor;
+    private IMemoryPool _pool;
+
+    private OutlineConfig _config;
     private Color _highlightedOutlineColor;
-    private Vector3 _offset;
 
     public OutlineState State
     {
@@ -45,26 +46,27 @@ public class OutlineView : MonoBehaviour, IDisposable
     private Transform _parent;
     private bool _isAnimationPlaying = false;
 
-    public void Initalize(OutlineConfig config)
+    private void Initialize(OutlineConfig config, Transform parent)
     {
-        _defaultOutlineColor = config.OutlineColor;
+        _config = config;
+
         _highlightedOutlineColor = new Color(
-            _defaultOutlineColor.r, 
-            _defaultOutlineColor.g, 
-            _defaultOutlineColor.b, 
-            _defaultOutlineColor.a * 0.34f
+            _config.OutlineColor.r,
+            _config.OutlineColor.g,
+            _config.OutlineColor.b,
+            _config.OutlineColor.a * 0.34f
             );
-        _offset = config.Offset;
 
-        _outlineRenderer.sprite = config.OutlineSprite;
-        _outlineRenderer.color = _defaultOutlineColor;
-        _outlineRenderer.sortingOrder = config.SortingOrder;
+        _outlineRenderer.sprite = _config.OutlineSprite;
+        _outlineRenderer.color = _config.OutlineColor;
+        _outlineRenderer.sortingOrder = _config.SortingOrder;
 
-        _arrowRenderer.sprite = config.ArrowSprite;
-        _arrowRenderer.color = config.ArrowColor;
+        _arrowRenderer.sprite = _config.ArrowSprite;
+        _arrowRenderer.color = _config.ArrowColor;
 
-        transform.localPosition = _offset;
-        transform.localScale = config.Size;
+        transform.SetParent(parent);
+        transform.localPosition = _config.Offset;
+        transform.localScale = _config.Size;
     }
 
     public void Interact()
@@ -85,11 +87,10 @@ public class OutlineView : MonoBehaviour, IDisposable
         if (_parent != null)
         {
             transform.SetParent(_parent);
-            transform.localPosition = _offset;
+            transform.localPosition = _config.Offset;
             _animator.Play("pulse");
         }
 
-        Debug.Log(State);
         State = State;
     }
 
@@ -102,13 +103,32 @@ public class OutlineView : MonoBehaviour, IDisposable
         }
         else
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            _pool.Despawn(this);
         }
     }
 
     private void SetDynamic(bool value)
     {
         _arrowRenderer.gameObject.SetActive(value);
-        _outlineRenderer.color = value ? _defaultOutlineColor : _highlightedOutlineColor;
+        _outlineRenderer.color = value ? _config.OutlineColor : _highlightedOutlineColor;
     }
+
+    public void OnSpawned(OutlineConfig config, Transform parent, IMemoryPool pool)
+    {
+        _pool = pool;
+
+        gameObject.SetActive(true);
+        Initialize(config, parent);
+    }
+
+    public void OnDespawned()
+    {
+        _config = null;
+        transform.parent = null;
+
+        gameObject.SetActive(false);
+    }
+
+    public class Factory : PlaceholderFactory<OutlineConfig, Transform, OutlineView> { }
 }

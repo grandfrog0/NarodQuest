@@ -30,7 +30,6 @@ public class GameInstaller : MonoInstaller
     [SerializeField] private CinemachineCameraController _cameraController;
     [SerializeField] private BringableObjectController _bringableObjectController;
     [SerializeField] private PlayerMovementController _playerMove;
-    [SerializeField] private OutlineController _outlineController;
     [SerializeField] private InteractablesSelector _interactablesSelector;
     [SerializeField] private Interactor _interactor;
     [SerializeField] private LocatorManager _locatorManager;
@@ -63,7 +62,6 @@ public class GameInstaller : MonoInstaller
         Container.BindInstance(_cameraController);
         Container.BindInstance(_bringableObjectController);
         Container.BindInstance(_playerMove);
-        Container.BindInstance(_outlineController);
         Container.BindInstance(_interactablesSelector);
         Container.BindInstance(_interactor);
         Container.BindInstance(_locatorManager);
