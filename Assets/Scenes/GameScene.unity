@@ -881819,6 +881819,7 @@ MonoBehaviour:
   _inventoryManager: {fileID: 1900830170}
   _inventoryVisualizer: {fileID: 1682552142}
   _interactor: {fileID: 2107585403}
+  _locatorManager: {fileID: 1691938657}
 --- !u!114 &1794950041
 MonoBehaviour:
   m_ObjectHideFlags: 0
