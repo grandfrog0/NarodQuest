@@ -9,6 +9,7 @@ public class OutlineConfig : ScriptableObject
 
     public Sprite ArrowSprite;
     public Color ArrowColor;
+    public Vector3 ArrowOffset;
 
     public Vector3 Offset;
     public Vector3 Size;

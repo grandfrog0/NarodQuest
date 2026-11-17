@@ -6,6 +6,7 @@ public class OutlineView : MonoBehaviour, IPoolable<OutlineConfig, Transform, IM
 {
     [SerializeField] private Animator _animator;
     [SerializeField] private SpriteRenderer _outlineRenderer;
+    [SerializeField] private Transform _arrowOffset;
     [SerializeField] private SpriteRenderer _arrowRenderer;
 
     private IMemoryPool _pool;
@@ -63,6 +64,8 @@ public class OutlineView : MonoBehaviour, IPoolable<OutlineConfig, Transform, IM
 
         _arrowRenderer.sprite = _config.ArrowSprite;
         _arrowRenderer.color = _config.ArrowColor;
+
+        _arrowOffset.transform.localPosition = _config.ArrowOffset;
 
         transform.SetParent(parent);
         transform.localPosition = _config.Offset;
