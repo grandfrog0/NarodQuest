@@ -24,8 +24,9 @@ public class OutlineController : MonoBehaviour
         }
 
         OutlineConfig config = target.Outline ?? _defaultOutline;
+        OutlineData data = config.CreateData();
 
-        OutlineView outline = _factory.Create(config, target.transform);
+        OutlineView outline = _factory.Create(data, target.transform);
         Debug.Log(outline.transform.parent, outline);
         outline.State = OutlineState.Highlighted;
 

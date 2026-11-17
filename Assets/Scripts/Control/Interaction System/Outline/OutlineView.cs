@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using Zenject;
 
-public class OutlineView : MonoBehaviour, IPoolable<OutlineConfig, Transform, IMemoryPool>, IDisposable
+public class OutlineView : MonoBehaviour, IPoolable<OutlineData, Transform, IMemoryPool>, IDisposable
 {
     [SerializeField] private Animator _animator;
     [SerializeField] private SpriteRenderer _outlineRenderer;
@@ -11,8 +11,7 @@ public class OutlineView : MonoBehaviour, IPoolable<OutlineConfig, Transform, IM
 
     private IMemoryPool _pool;
 
-    private OutlineConfig _config;
-    private Color _highlightedOutlineColor;
+    private OutlineData _data;
 
     public OutlineState State
     {
@@ -47,29 +46,22 @@ public class OutlineView : MonoBehaviour, IPoolable<OutlineConfig, Transform, IM
     private Transform _parent;
     private bool _isAnimationPlaying = false;
 
-    private void Initialize(OutlineConfig config, Transform parent)
+    private void Initialize(OutlineData data, Transform parent)
     {
-        _config = config;
+        _data = data;
 
-        _highlightedOutlineColor = new Color(
-            _config.OutlineColor.r,
-            _config.OutlineColor.g,
-            _config.OutlineColor.b,
-            _config.OutlineColor.a * 0.34f
-            );
+        _outlineRenderer.sprite = _data.OutlineSprite;
+        _outlineRenderer.color = _data.OutlineSelectedColor;
+        _outlineRenderer.sortingOrder = _data.SortingOrder;
 
-        _outlineRenderer.sprite = _config.OutlineSprite;
-        _outlineRenderer.color = _config.OutlineColor;
-        _outlineRenderer.sortingOrder = _config.SortingOrder;
+        _arrowRenderer.sprite = _data.ArrowSprite;
+        _arrowRenderer.color = _data.ArrowSelectedColor;
 
-        _arrowRenderer.sprite = _config.ArrowSprite;
-        _arrowRenderer.color = _config.ArrowColor;
-
-        _arrowOffset.transform.localPosition = _config.ArrowOffset;
+        _arrowOffset.localPosition = _data.ArrowOffset;
 
         transform.SetParent(parent);
-        transform.localPosition = _config.Offset;
-        transform.localScale = _config.Size;
+        transform.localPosition = _data.OutlineOffset;
+        transform.localScale = _data.OutlineSize;
     }
 
     public void Interact()
@@ -90,7 +82,7 @@ public class OutlineView : MonoBehaviour, IPoolable<OutlineConfig, Transform, IM
         if (_parent != null)
         {
             transform.SetParent(_parent);
-            transform.localPosition = _config.Offset;
+            transform.localPosition = _data.OutlineOffset;
             _animator.Play("pulse");
         }
 
@@ -114,24 +106,26 @@ public class OutlineView : MonoBehaviour, IPoolable<OutlineConfig, Transform, IM
     private void SetDynamic(bool value)
     {
         _arrowRenderer.gameObject.SetActive(value);
-        _outlineRenderer.color = value ? _config.OutlineColor : _highlightedOutlineColor;
+
+        _outlineRenderer.color = value ? _data.OutlineSelectedColor : _data.OutlineHighlightedColor;
+        _arrowRenderer.color = value ? _data.ArrowSelectedColor : _data.ArrowHighlightedColor;
     }
 
-    public void OnSpawned(OutlineConfig config, Transform parent, IMemoryPool pool)
+    public void OnSpawned(OutlineData data, Transform parent, IMemoryPool pool)
     {
         _pool = pool;
 
         gameObject.SetActive(true);
-        Initialize(config, parent);
+        Initialize(data, parent);
     }
 
     public void OnDespawned()
     {
-        _config = null;
+        _data = null;
         transform.parent = null;
 
         gameObject.SetActive(false);
     }
 
-    public class Factory : PlaceholderFactory<OutlineConfig, Transform, OutlineView> { }
+    public class Factory : PlaceholderFactory<OutlineData, Transform, OutlineView> { }
 }

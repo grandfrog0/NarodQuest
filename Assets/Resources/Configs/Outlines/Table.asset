@@ -12,11 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bae8f17c46aa3ee4492efdd460e97197, type: 3}
   m_Name: Table
   m_EditorClassIdentifier: Assembly-CSharp::OutlineConfig
-  OutlineSprite: {fileID: -2680822287206719846, guid: ec7904752457a394f902f2d0fd2b1aed, type: 3}
-  OutlineColor: {r: 1, g: 1, b: 1, a: 0.14901961}
-  ArrowSprite: {fileID: 0}
-  ArrowColor: {r: 1, g: 1, b: 1, a: 0.5058824}
-  ArrowOffset: {x: 0, y: 0, z: 0}
-  Offset: {x: 0, y: 0.5, z: 0}
-  Size: {x: 0.375, y: 0.45, z: 1}
-  SortingOrder: -5
+  _graphics: {fileID: 11400000, guid: 608c2fe9c65250a43a203732c6d3876a, type: 2}
+  _outlineOffset: {x: 0, y: 0.4, z: 0}
+  _arrowOffset: {x: 0, y: 0, z: 0}
+  _outlineSize: {x: 0.3, y: 0.46875, z: 1}

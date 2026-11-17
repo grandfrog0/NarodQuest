@@ -11,7 +11,7 @@ public class OutlineInstaller : MonoInstaller
     {
         Container.BindInstance(_outlineController);
 
-        Container.BindFactory<OutlineConfig, Transform, OutlineView, OutlineView.Factory>()
+        Container.BindFactory<OutlineData, Transform, OutlineView, OutlineView.Factory>()
             .FromPoolableMemoryPool(x => x
                 .FromComponentInNewPrefab(_outlineViewPrefab)
                 );
