@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CowsController : MonoBehaviour
 {
@@ -9,6 +10,14 @@ public class CowsController : MonoBehaviour
     [SerializeField] private float _stepAngle;
     [SerializeField] private float _stepMagnitude;
     [SerializeField] private CowData[] _cows;
+
+    private void Start()
+    {
+        foreach (CowData cow in _cows)
+        {
+            cow.OnCollisionEnter += OnCowCollisionEnter;
+        }
+    }
 
     private void FixedUpdate()
     {
@@ -23,6 +32,9 @@ public class CowsController : MonoBehaviour
                             cow.MoveDirection = Random.insideUnitCircle.normalized;
                             cow.MoveTime = Random.Range(_moveTimeRange.x, _moveTimeRange.y);
                             cow.MoveSpeed = Random.Range(_speedRange.x, _speedRange.y);
+
+                            float movementAxis = cow.MoveDirection.x >= 0 ? 1 : -1;
+                            cow.Model.localScale = new Vector3(movementAxis * cow.Model.localScale.x, cow.Model.localScale.y, 1);
                             break;
 
                         case > 0:
@@ -49,6 +61,19 @@ public class CowsController : MonoBehaviour
                     }
                     break;
             }
+        }
+    }
+
+    private void OnCowCollisionEnter(CowData cow)
+    {
+        cow.MoveTime = 0.001f;
+    }
+
+    private void OnDestroy()
+    {
+        foreach (CowData cow in _cows)
+        {
+            cow.OnCollisionEnter -= OnCowCollisionEnter;
         }
     }
 }

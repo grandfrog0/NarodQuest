@@ -22,6 +22,8 @@ public class PlayerDistanceController : MonoBehaviour
     {
         WaitForSeconds period = new WaitForSeconds(1f);
 
+        yield return null;
+
         while (true)
         {
             foreach (DistanceControlledObject obj in _controlledObjects)
