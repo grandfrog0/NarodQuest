@@ -7,7 +7,7 @@ public class OutlineController : MonoBehaviour
     private OutlineConfig _defaultOutline;
     private OutlineView.Factory _factory;
 
-    private Dictionary<InteractableObject, OutlineView> _outlines = new();
+    private Dictionary<IOutlineContainer, OutlineView> _outlines = new();
 
     [Inject]
     private void Construct(OutlineView.Factory factory, OutlineConfig defaultOutline)
@@ -16,32 +16,60 @@ public class OutlineController : MonoBehaviour
         _defaultOutline = defaultOutline;
     }
 
-    public void AddTarget(InteractableObject target)
+    public OutlineView AddForced(IOutlineContainer target)
+    {
+        OutlineView outlineView = _outlines.TryGetValue(target, out OutlineView view) ? view : AddTarget(target);
+        outlineView.SetForced(true);
+
+        return outlineView;
+    }
+
+    public OutlineView RemoveForced(IOutlineContainer target)
+    {
+        Debug.Log(_outlines.ContainsKey(target));
+        if (_outlines.Remove(target, out OutlineView outline))
+        {
+            outline.Dispose();
+        }
+
+        return outline;
+    }
+
+    public OutlineView AddTarget(IOutlineContainer target)
     {
         if (_outlines.ContainsKey(target))
         {
-            return;
+            return null;
         }
 
         OutlineConfig config = target.Outline ?? _defaultOutline;
         OutlineData data = config.CreateData();
 
         OutlineView outline = _factory.Create(data, target.transform);
-        Debug.Log(outline.transform.parent, outline);
         outline.State = OutlineState.Highlighted;
 
         _outlines[target] = outline;
+
+        return outline;
     }
 
-    public void RemoveTarget(InteractableObject target)
+    public OutlineView RemoveTarget(IOutlineContainer target)
     {
-        if (_outlines.Remove(target, out OutlineView outline))
+        if (_outlines.TryGetValue(target, out OutlineView outline))
         {
+            if (outline.IsForced)
+            {
+                return null;
+            }
+
+            _outlines.Remove(target);
             outline.Dispose();
         }
+
+        return outline;
     }
 
-    public void SelectTarget(InteractableObject target)
+    public void SelectTarget(IOutlineContainer target)
     {
         if (!_outlines.ContainsKey(target))
         {
@@ -51,7 +79,7 @@ public class OutlineController : MonoBehaviour
         _outlines[target].State = OutlineState.Selected;
     }
 
-    public void DeselectTarget(InteractableObject target)
+    public void DeselectTarget(IOutlineContainer target)
     {
         if (!_outlines.ContainsKey(target))
         {
@@ -61,7 +89,7 @@ public class OutlineController : MonoBehaviour
         _outlines[target].State = OutlineState.Highlighted;
     }
 
-    public void OnBeforeTargetInteracting(InteractableObject target)
+    public void OnBeforeTargetInteracting(IOutlineContainer target)
     {
         if (!_outlines.ContainsKey(target))
         {

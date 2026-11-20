@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class InteractableObject : MonoBehaviour
+public abstract class InteractableObject : MonoBehaviour, IOutlineContainer
 {
     public UnityEvent<bool> OnActiveChanged { get; } = new();
     public virtual bool IsActive

@@ -2,9 +2,12 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class DropTakeableTrigger : MonoBehaviour
+public class DropTakeableTrigger : MonoBehaviour, IOutlineContainer
 {
     public UnityEvent OnTrigger => _onTrigger;
+
+    public OutlineConfig Outline => null;
+
     [SerializeField] private UnityEvent _onTrigger = new();
 
     [SerializeField] string _targetTag = "Interactable";

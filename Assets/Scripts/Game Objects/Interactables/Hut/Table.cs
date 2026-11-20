@@ -29,9 +29,28 @@ public class Table : InteractableObject, IDescriptable
     {
         foreach (PlayerBringable bringable in _bringables)
         {
-            bringable.Renderer.SortingOrder = 1;
-            bringable.OnDrag += OnItemDrag;
+            AddBringable(bringable);
         }
+    }
+
+    private void AddBringable(PlayerBringable bringable)
+    {
+        if (bringable.Renderer != null)
+        {
+            bringable.Renderer.SortingOrder = 1;
+        }
+
+        bringable.OnDrag += OnItemDrag;
+    }
+
+    private void RemoveBringable(PlayerBringable bringable)
+    {
+        if (bringable.Renderer != null)
+        {
+            bringable.Renderer.SortingOrder = 0;
+        }
+
+        bringable.OnDrag -= OnItemDrag;
     }
 
     public override void Interact(InteractionData data)
@@ -61,12 +80,7 @@ public class Table : InteractableObject, IDescriptable
 
     private void OnItemDrag(PlayerBringable bringable)
     {
-        if (bringable.Renderer != null)
-        {
-            bringable.Renderer.SortingOrder = 0;
-        }
-
-        bringable.OnDrag -= OnItemDrag;
+        RemoveBringable(bringable);
         _bringables.Remove(bringable);
     }
 
@@ -150,20 +164,20 @@ public class Table : InteractableObject, IDescriptable
         {
             foreach (PlayerBringable bringable in _bringables)
             {
-                bringable.Renderer.SortingOrder = 0;
-                bringable.OnDrag -= OnItemDrag;
+                RemoveBringable(bringable);
             }
             _bringables.Clear();
 
-
-            foreach (string idString in tags[bringablesIndex].Split(';'))
+            if (!string.IsNullOrWhiteSpace(tags[bringablesIndex]))
             {
-                _bringables.Add(_objectRegistrator.Get(int.Parse(idString)).GetComponent<PlayerBringable>());
-            }
-            foreach (PlayerBringable bringable in _bringables)
-            {
-                bringable.Renderer.SortingOrder = 1;
-                bringable.OnDrag += OnItemDrag;
+                foreach (string idString in tags[bringablesIndex].Split(';'))
+                {
+                    _bringables.Add(_objectRegistrator.Get(int.Parse(idString)).GetComponent<PlayerBringable>());
+                }
+                foreach (PlayerBringable bringable in _bringables)
+                {
+                    AddBringable(bringable);
+                }
             }
         }
 
@@ -172,9 +186,12 @@ public class Table : InteractableObject, IDescriptable
         {
             _items.Clear();
 
-            foreach (string idString in tags[itemsIndex].Split(';'))
+            if (!string.IsNullOrWhiteSpace(tags[itemsIndex]))
             {
-                _items.Add(_objectRegistrator.Get(int.Parse(idString)).GetComponent<ItemRenderer>());
+                foreach (string idString in tags[itemsIndex].Split(';'))
+                {
+                    _items.Add(_objectRegistrator.Get(int.Parse(idString)).GetComponent<ItemRenderer>());
+                }
             }
         }
     }

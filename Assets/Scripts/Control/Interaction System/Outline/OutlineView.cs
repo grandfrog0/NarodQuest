@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using Zenject;
+using static UnityEngine.Rendering.DebugUI;
 
 public class OutlineView : MonoBehaviour, IPoolable<OutlineData, Transform, IMemoryPool>, IDisposable
 {
@@ -43,6 +44,11 @@ public class OutlineView : MonoBehaviour, IPoolable<OutlineData, Transform, IMem
     }
     private OutlineState _state;
 
+    private bool _isDynamic;
+
+    public bool IsForced => _isForced;
+    private bool _isForced;
+
     private Transform _parent;
     private bool _isAnimationPlaying = false;
 
@@ -53,7 +59,6 @@ public class OutlineView : MonoBehaviour, IPoolable<OutlineData, Transform, IMem
         _outlineRenderer.sprite = _data.OutlineSprite;
         _outlineRenderer.color = _data.OutlineSelectedColor;
         _outlineRenderer.sortingOrder = _data.SortingOrder;
-
         _arrowRenderer.sprite = _data.ArrowSprite;
         _arrowRenderer.color = _data.ArrowSelectedColor;
 
@@ -62,6 +67,8 @@ public class OutlineView : MonoBehaviour, IPoolable<OutlineData, Transform, IMem
         transform.SetParent(parent);
         transform.localPosition = _data.OutlineOffset;
         transform.localScale = _data.OutlineSize;
+
+        _isForced = false;
     }
 
     public void Interact()
@@ -73,6 +80,12 @@ public class OutlineView : MonoBehaviour, IPoolable<OutlineData, Transform, IMem
 
         _isAnimationPlaying = true;
         _animator.Play("trigger");
+    }
+
+    public void SetForced(bool value)
+    {
+        _isForced = value;
+        Refresh();
     }
 
     public void OnAnimationFinished()
@@ -105,10 +118,24 @@ public class OutlineView : MonoBehaviour, IPoolable<OutlineData, Transform, IMem
 
     private void SetDynamic(bool value)
     {
-        _arrowRenderer.gameObject.SetActive(value);
+        _isDynamic = value;
+        Refresh();
+    }
 
-        _outlineRenderer.color = value ? _data.OutlineSelectedColor : _data.OutlineHighlightedColor;
-        _arrowRenderer.color = value ? _data.ArrowSelectedColor : _data.ArrowHighlightedColor;
+    private void Refresh()
+    {
+        _arrowRenderer.gameObject.SetActive(_isForced || _isDynamic);
+
+        if (_isForced)
+        {
+            _outlineRenderer.color = _isDynamic ? _data.OutlineForcedColor : _data.OutlineHighlightedForcedColor;
+            _arrowRenderer.color = _isDynamic ? _data.ArrowForcedColor : _data.ArrowHighlightedForcedColor;
+        }
+        else
+        {
+            _outlineRenderer.color = _isDynamic ? _data.OutlineSelectedColor : _data.OutlineHighlightedColor;
+            _arrowRenderer.color = _isDynamic ? _data.ArrowSelectedColor : _data.ArrowHighlightedColor;
+        }
     }
 
     public void OnSpawned(OutlineData data, Transform parent, IMemoryPool pool)

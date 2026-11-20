@@ -21,19 +21,19 @@ public class TutorialQuest : AbstractQuest
     [Header("DragItem")]
     [SerializeField] private DialogConfig _dragItemDialog;
     [SerializeField] private TakeableObject _dragItem;
-    [SerializeField] private Animator _dragItemAnimator;
     [SerializeField] private DropTakeableTrigger _dropTrigger;
-    [SerializeField] private Animator _dropTriggerAnimator;
 
     [Header("End")]
     [SerializeField] private DialogConfig _endDialog;
 
     private LocatorManager _locatorManager;
+    private OutlineController _outlineController;
 
     [Inject]
-    private void Construct(LocatorManager locatorManager)
+    private void Construct(LocatorManager locatorManager, OutlineController outlineController)
     {
         _locatorManager = locatorManager;
+        _outlineController = outlineController;
     }
 
     public TutorialQuestStep CurrentStep
@@ -65,9 +65,7 @@ public class TutorialQuest : AbstractQuest
         _movementTrigger.Disable();
         _targetItem.gameObject.SetActive(false);
         _dragItem.IsActive = false;
-        _dragItemAnimator.gameObject.SetActive(false);
         _dropTrigger.gameObject.SetActive(false);
-        _dropTriggerAnimator.gameObject.SetActive(false);
     }
 
     protected override void EndQuest()
@@ -102,6 +100,18 @@ public class TutorialQuest : AbstractQuest
         }
     }
 
+    private void MarkTarget(IOutlineContainer target)
+    {
+        _outlineController.AddForced(target);
+        _locatorManager.SetTarget(target.transform);
+    }
+
+    private void UnmarkTarget(IOutlineContainer target)
+    {
+        _outlineController.RemoveForced(target);
+        _locatorManager.Clear();
+    }
+
     private void Greetings()
     {
         // показать приветствие
@@ -122,7 +132,7 @@ public class TutorialQuest : AbstractQuest
         // после того, как игрок оттянет джойстик и дойдет до нужной точки перейти в BringItem
 
         _movementTrigger.Enable();
-        _locatorManager.SetTarget(_movementTrigger.transform);
+        MarkTarget(_movementTrigger);
         _dialogManager.StartDialog(_movementDialog, null);
     }
     private void ShowBringItemInstruction()
@@ -139,7 +149,7 @@ public class TutorialQuest : AbstractQuest
         _targetItem.gameObject.SetActive(true);
         _targetItem.OnPicked += OnTargetItemBrought;
 
-        _locatorManager.SetTarget(_targetItem.transform);
+        MarkTarget(_targetItem);
         _dialogManager.StartDialog(_bringItemDialog, null);
     }
     private void ShowDragItemInstruction()
@@ -147,11 +157,9 @@ public class TutorialQuest : AbstractQuest
         // показать инструкцию
         // после того, как игрок перенесет камень в нужную точку перейти в End
         _dragItem.IsActive = true;
-        _dragItemAnimator.gameObject.SetActive(true);
         _dropTrigger.gameObject.SetActive(true);
-        _dropTriggerAnimator.gameObject.SetActive(false);
 
-        _locatorManager.SetTarget(_dragItem.transform);
+        MarkTarget(_dragItem);
         _dragItem.Bringable.OnDrag += OnDrag;
 
         _dropTrigger.OnTrigger.AddListener(OnTargetDragDropped);
@@ -161,10 +169,9 @@ public class TutorialQuest : AbstractQuest
         void OnDrag(PlayerBringable _)
         {
             _dragItem.Bringable.OnDrag -= OnDrag;
-            _dropTriggerAnimator.gameObject.SetActive(true);
-            _dragItemAnimator.Play("trigger");
 
-            _locatorManager.SetTarget(_dropTrigger.transform);
+            UnmarkTarget(_dragItem);
+            MarkTarget(_dropTrigger);
         }
     }
     private void ShowEnd()
@@ -175,7 +182,6 @@ public class TutorialQuest : AbstractQuest
         _dropTrigger.OnTrigger.RemoveListener(OnTargetDragDropped);
         //_dropTrigger.gameObject.SetActive(false);
         _dragItem.IsActive = false;
-        _dragItemAnimator.gameObject.SetActive(false);
 
         _dialogManager.OnDialogEnd.AddListener(End);
         _dialogManager.StartDialog(_endDialog, null);
@@ -189,20 +195,20 @@ public class TutorialQuest : AbstractQuest
 
     public void OnMovementTargetReceived()
     {
-        _locatorManager.Clear();
+        UnmarkTarget(_movementTrigger);
         CurrentStep = TutorialQuestStep.BringItem;
     }
 
     public void OnTargetItemBrought(ItemCountPair drop)
     {
-        _locatorManager.Clear();
+        UnmarkTarget(_targetItem);
         CurrentStep = TutorialQuestStep.DragItem;
     }
 
     public void OnTargetDragDropped()
     {
-        _dropTriggerAnimator.Play("trigger");
-        _locatorManager.Clear();
+        UnmarkTarget(_dropTrigger);
+
         CurrentStep = TutorialQuestStep.End;
     }
 
@@ -252,9 +258,7 @@ public class TutorialQuest : AbstractQuest
             SkipBringItem();
 
             _dragItem.gameObject.SetActive(false);
-            _dragItemAnimator.gameObject.SetActive(false);
             _dropTrigger.gameObject.SetActive(false);
-            _dropTriggerAnimator.gameObject.SetActive(false);
         }
     }
 

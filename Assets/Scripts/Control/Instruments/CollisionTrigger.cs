@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class CollisionTrigger : MonoBehaviour
+public class CollisionTrigger : MonoBehaviour, IOutlineContainer
 {
     [SerializeField] private string _tag = "Player";
-    public UnityEvent OnTrigger => _onTrigger;
     [SerializeField] private UnityEvent _onTrigger;
+
+    public UnityEvent OnTrigger => _onTrigger;
+    public OutlineConfig Outline => null;
 
     public void Enable()
     {
