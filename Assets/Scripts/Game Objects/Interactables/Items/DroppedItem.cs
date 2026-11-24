@@ -15,6 +15,11 @@ public class DroppedItem : InteractableObject
 
     public void Initialize(ItemCountPair item)
     {
+        if (_renderer == null)
+        {
+            _renderer = GetComponent<SpriteRenderer>();
+        }
+        
         _renderer.sprite = item.Item.Icon;
         OnPicked += x => FindAnyObjectByType<InventoryManager>().Add(x.Item, x.Count);
 

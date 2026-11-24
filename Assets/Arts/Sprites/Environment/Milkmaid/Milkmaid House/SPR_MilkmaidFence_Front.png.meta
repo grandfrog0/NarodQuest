@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 74560070cc7f29f47b68270728ce2172
+guid: e4a509560e6c6784199e7ecfeef49cb0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7631646959289212487
-    second: NewScene_1_0
+      213: -1667166955635819387
+    second: zaborsperedi_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,11 +46,11 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
+  alignment: 9
+  spritePivot: {x: 0.49530384, y: 0.07654978}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: NewScene_1_0
+      name: zaborsperedi_0
       rect:
         serializedVersion: 2
-        x: 833
-        y: 196
-        width: 268
-        height: 693
+        x: 0
+        y: 0
+        width: 1394
+        height: 269
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 74e9f9ba97e09e960800000000000000
-      internalID: 7631646959289212487
+      spriteID: 58cbe04ac780dd8e0800000000000000
+      internalID: -1667166955635819387
       vertices: []
       indices: 
       edges: []
@@ -139,7 +139,7 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 0
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      NewScene_1_0: 7631646959289212487
+      zaborsperedi_0: -1667166955635819387
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

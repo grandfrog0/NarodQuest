@@ -26,10 +26,6 @@ public class InventoryVisualizer : MonoBehaviour
     private void Construct(InventoryManager inventoryManager)
     {
         _inventoryManager = inventoryManager;
-    }
-
-    private void Start()
-    {
         _inventoryManager.OnChanged.AddListener(Refresh);
         _inventoryManager.OnSelectionChanged.AddListener(OnSelectionChanged);
     }
