@@ -23,7 +23,12 @@ public class CollisionTrigger : MonoBehaviour, IOutlineContainer
     {
         if (collision.CompareTag(_tag) && !collision.isTrigger)
         {
-            _onTrigger.Invoke();
+            Trigger();
         }
+    }
+
+    protected virtual void Trigger()
+    {
+        _onTrigger.Invoke();
     }
 }

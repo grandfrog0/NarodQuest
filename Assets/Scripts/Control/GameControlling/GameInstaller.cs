@@ -21,7 +21,7 @@ public class GameInstaller : MonoInstaller
     [SerializeField] private CameraConstraintsRegistrator _cameraConstraintsRegistrator;
     [SerializeField] private DroppedItemsRegistrator _droppedItemsRegistrator;
     [SerializeField] private DescriptablesRegistrator _descriptablesRegistrator;
-    [SerializeField] private QuestsRegistrator _questsRegistrator;
+    [SerializeField] private OBSOLETE_QuestsRegistrator _questsRegistrator;
     [SerializeField] private StateObjectsRegistrator _stateObjectsRegistrator;
     [SerializeField] private ItemRegistrator _itemRegistrator;
 

@@ -12,7 +12,7 @@ public class Bootstrap : MonoBehaviour
     private DroppedItemsRegistrator _droppedItemsRegistrator;
     private DescriptablesRegistrator _descriptablesRegistrator;
     private ItemRegistrator _itemRegistrator;
-    private QuestsRegistrator _questsRegistrator;
+    private OBSOLETE_QuestsRegistrator _questsRegistrator;
 
     [Inject]
     private void Construct(
@@ -24,7 +24,7 @@ public class Bootstrap : MonoBehaviour
         DroppedItemsRegistrator droppedItemsRegistrator,
         DescriptablesRegistrator descriptablesRegistrator,
         ItemRegistrator itemRegistrator,
-        QuestsRegistrator questsRegistrator
+        OBSOLETE_QuestsRegistrator questsRegistrator
         )
     {
         _saveManager = saveManager;

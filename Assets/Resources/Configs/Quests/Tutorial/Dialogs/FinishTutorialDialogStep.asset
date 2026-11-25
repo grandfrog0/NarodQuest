@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c85dfc54a8df7448ace1cc5d49dec7e, type: 3}
+  m_Name: FinishTutorialDialogStep
+  m_EditorClassIdentifier: Assembly-CSharp::DialogQuestStep
+  _dialogConfig: {fileID: 11400000, guid: f249352d53a06e04aac252d5cab96c6d, type: 2}

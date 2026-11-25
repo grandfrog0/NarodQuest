@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ee7ab044881f3344a9b2900795bb0dd, type: 3}
+  m_Name: TutorialQuestInfo
+  m_EditorClassIdentifier: Assembly-CSharp::QuestInfo
+  _startConditions: []
+  _steps:
+  - {fileID: 11400000, guid: cecc168fff035eb4d9b6d056f3f8091a, type: 2}
+  - {fileID: 11400000, guid: 5806f1c1e6b05914f8b7047d62b03197, type: 2}
+  - {fileID: 11400000, guid: b12a9db47bfbdf74d85850778b73b687, type: 2}
+  - {fileID: 11400000, guid: 7d34203c228efee45813b38d555fb6ea, type: 2}
+  - {fileID: 11400000, guid: 016445db8fba93b48ba5b9877bd6bc92, type: 2}
+  - {fileID: 11400000, guid: 89014be219860cb47be44b172f070369, type: 2}
+  - {fileID: 11400000, guid: 3de325947bb2bb64499ead33a81802b9, type: 2}
+  - {fileID: 11400000, guid: 7fac9d9d6542e9741a7ed37e94594259, type: 2}
+  _endActions: []

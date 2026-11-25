@@ -33,7 +33,7 @@ public class StateSaver : MonoBehaviour
     private CameraConstraintsRegistrator _cameraConstraintsRegistrator;
     private DroppedItemsRegistrator _droppedItemsRegistrator;
     private DescriptablesRegistrator _descriptablesRegistrator;
-    private QuestsRegistrator _questsRegistrator;
+    private OBSOLETE_QuestsRegistrator _questsRegistrator;
     private StateObjectsRegistrator _stateObjectsRegistrator;
     private ObjectRegistrator _objectRegistrator;
 
@@ -46,7 +46,7 @@ public class StateSaver : MonoBehaviour
         CameraConstraintsRegistrator cameraConstraintsRegistrator,
         DroppedItemsRegistrator droppedItemsRegistrator, 
         DescriptablesRegistrator descriptablesRegistrator,
-        QuestsRegistrator questsRegistrator, 
+        OBSOLETE_QuestsRegistrator questsRegistrator, 
         StateObjectsRegistrator stateObjectsRegistrator,
         ObjectRegistrator objectRegistrator
         )
@@ -133,7 +133,7 @@ public class StateSaver : MonoBehaviour
 
         foreach (QuestData data in questSave.Quests)
         {
-            AbstractQuest quest = _questsRegistrator.Quests.First(x => x.Name == data.Name);
+            OBSOLETE_AbstractQuest quest = _questsRegistrator.Quests.First(x => x.Name == data.Name);
             quest.ApplyTags(data.Tags);
         }
     }

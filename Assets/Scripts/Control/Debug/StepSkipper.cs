@@ -4,7 +4,7 @@ using Zenject;
 public class StepSkipper : MonoBehaviour
 {
     [Header("Main")]
-    [SerializeField] private GameQuestStep _firstStep;
+    [SerializeField] private OBSOLETE_GameQuestStep _firstStep;
     private Transform _playerTransform;
 
     [Header("Tutorial")]
@@ -29,29 +29,29 @@ public class StepSkipper : MonoBehaviour
 
     private void Awake()
     {
-        if (_firstStep is not GameQuestStep.None)
+        if (_firstStep is not OBSOLETE_GameQuestStep.None)
         {
             Jump(_firstStep);
         }
     }
 
-    public void Jump(GameQuestStep step)
+    public void Jump(OBSOLETE_GameQuestStep step)
     {
         switch (step)
         {
-            case GameQuestStep.Tutorial:
+            case OBSOLETE_GameQuestStep.Tutorial:
                 _playerTransform.position = _tutorialPoint.position;
                 break;
 
-            case GameQuestStep.VisitGranny:
+            case OBSOLETE_GameQuestStep.VisitGranny:
                 _playerTransform.position = _hutPosition;
                 break;
 
-            case GameQuestStep.ComeToTheMilkmaid:
+            case OBSOLETE_GameQuestStep.ComeToTheMilkmaid:
                 _playerTransform.position = _milkmaidPosition;
                 break;
 
-            case GameQuestStep.ComeToTheField:
+            case OBSOLETE_GameQuestStep.ComeToTheField:
                 _playerTransform.position = _fieldPosition;
                 break;
         }

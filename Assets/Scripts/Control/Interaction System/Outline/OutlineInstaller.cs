@@ -3,13 +3,12 @@ using Zenject;
 
 public class OutlineInstaller : MonoInstaller
 {
-    [SerializeField] private OutlineController _outlineController;
     [SerializeField] private OutlineView _outlineViewPrefab;
     [SerializeField] private OutlineConfig _defaultOutlineConfig;
 
     public override void InstallBindings()
     {
-        Container.BindInstance(_outlineController);
+        Container.Bind<OutlineController>().FromNew().AsSingle();
 
         Container.BindFactory<OutlineData, Transform, OutlineView, OutlineView.Factory>()
             .FromPoolableMemoryPool(x => x

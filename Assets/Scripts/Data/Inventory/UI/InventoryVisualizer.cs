@@ -63,7 +63,6 @@ public class InventoryVisualizer : MonoBehaviour
     {
         if (selectedIndex == -1)
         {
-            Debug.Log(_selectionMark, _selectionMark);
             _selectionMark.gameObject.SetActive(false);
             _selectedRenderer.gameObject.SetActive(false);
             return;

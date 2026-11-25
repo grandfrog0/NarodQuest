@@ -9,7 +9,7 @@ public class DialogManager : MonoBehaviour
     [SerializeField] UnityEvent _onDialogStart;
     [SerializeField] UnityEvent _onDialogEnd;
     public UnityEvent OnDialogStart => _onDialogStart;
-    public UnityEvent OnDialogEnd => _onDialogEnd;
+    public UnityEvent OnDialogComplete => _onDialogEnd;
 
     private InputSystemManager _inputSystemManager;
     private DialogWindowManager _dialogWindowManager;
@@ -49,7 +49,7 @@ public class DialogManager : MonoBehaviour
         _mainCamera = Camera.main;
     }
 
-    public void StartDialog(DialogConfig dialog, List<CompanionSerializable> companions = null)
+    public void Show(DialogConfig dialog, List<CompanionSerializable> companions = null)
     {
         _currentIndex = 0;
         _currentDialog = dialog;
@@ -70,7 +70,7 @@ public class DialogManager : MonoBehaviour
         if (_currentDialog == null || _currentIndex >= _currentDialog.dialog.Count)
         {
             _dialogWindowManager.HideWindow();
-            OnDialogEnd.Invoke();
+            OnDialogComplete.Invoke();
             return;
         }
 

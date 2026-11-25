@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class OutlineController : MonoBehaviour
+public class OutlineController
 {
     private OutlineConfig _defaultOutline;
     private OutlineView.Factory _factory;
@@ -26,7 +26,6 @@ public class OutlineController : MonoBehaviour
 
     public OutlineView RemoveForced(IOutlineContainer target)
     {
-        Debug.Log(_outlines.ContainsKey(target));
         if (_outlines.Remove(target, out OutlineView outline))
         {
             outline.Dispose();

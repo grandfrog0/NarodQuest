@@ -23,16 +23,16 @@ public class NPC : InteractableObject, IDescriptable
 
     public override void Interact(InteractionData data)
     {
-        _dialogManager.StartDialog(_dialog, _companions);
+        _dialogManager.Show(_dialog, _companions);
 
-        _dialogManager.OnDialogEnd.AddListener(OnDialogEnd);
+        _dialogManager.OnDialogComplete.AddListener(OnDialogEnd);
 
         void OnDialogEnd()
         {
             _dialog = _dialog?.NextDialog;
             IsActive = _dialog != null;
 
-            _dialogManager.OnDialogEnd.RemoveListener(OnDialogEnd);
+            _dialogManager.OnDialogComplete.RemoveListener(OnDialogEnd);
             OnDialogComplete?.Invoke();
         }
     }
