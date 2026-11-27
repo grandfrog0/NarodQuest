@@ -13829,7 +13829,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 188549114}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0b177d84cf7dce4ab880f94aacc321c, type: 3}
   m_Name: 
@@ -19821,6 +19821,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DroppedItem
   _outline: {fileID: 0}
+  _isActive: 1
   _renderer: {fileID: 80536228}
   _drop:
     Item: {fileID: 11400000, guid: 1d9d13156f57f08428f2f34e2b220a99, type: 2}
@@ -21681,6 +21682,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TakeableObject
   _outline: {fileID: 11400000, guid: d5d80f9e95021824b9f267b2c6aece94, type: 2}
+  _isActive: 1
 --- !u!114 &285945075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21693,6 +21695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 078408984e65dff4d8538f4c4de34151, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerBringable
+  _isActive: 1
   _offsetHorizontal: {x: 0, y: 0}
   _offsetVertical: {x: 0.4, y: 0}
   _offset: {x: 0, y: 1}
@@ -30115,6 +30118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableGate
   _outline: {fileID: 0}
+  _isActive: 1
   _isOpened: 0
   _animator: {fileID: 402675394}
 --- !u!95 &402675394
@@ -177621,6 +177625,10 @@ PrefabInstance:
       value: 1.060196
       objectReference: {fileID: 0}
     - target: {fileID: 7698058897433912495, guid: d0b4fdd3711b0a044a14e5a06ffc43a6, type: 3}
+      propertyPath: _isActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7698058897433912495, guid: d0b4fdd3711b0a044a14e5a06ffc43a6, type: 3}
       propertyPath: _renderer
       value: 
       objectReference: {fileID: 5766379328550859678}
@@ -177636,7 +177644,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4909504443066323711, guid: d0b4fdd3711b0a044a14e5a06ffc43a6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2611386286903629079}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4040013001924209730, guid: d0b4fdd3711b0a044a14e5a06ffc43a6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1417242291}
   m_SourcePrefab: {fileID: 100100000, guid: d0b4fdd3711b0a044a14e5a06ffc43a6, type: 3}
 --- !u!1001 &954013024
 PrefabInstance:
@@ -182407,6 +182418,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 80566827}
     m_Modifications:
     - target: {fileID: 485785694439590101, guid: 7023211779ccf254cbe73c9fd83d2e4f, type: 3}
+      propertyPath: _isActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 485785694439590101, guid: 7023211779ccf254cbe73c9fd83d2e4f, type: 3}
       propertyPath: _offset.y
       value: 1.05
       objectReference: {fileID: 0}
@@ -182479,8 +182494,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7555047774009299162, guid: 7023211779ccf254cbe73c9fd83d2e4f, type: 3}
-      propertyPath: _outline
-      value: 
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8698052322451207513, guid: 7023211779ccf254cbe73c9fd83d2e4f, type: 3}
       propertyPath: _renderers.Array.size
@@ -182507,8 +182522,11 @@ PrefabInstance:
       addedObject: {fileID: 426817002}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2052711336008620603, guid: 7023211779ccf254cbe73c9fd83d2e4f, type: 3}
-      insertIndex: -1
+      insertIndex: 2
       addedObject: {fileID: 1290365368}
+    - targetCorrespondingSourceObject: {fileID: 2052711336008620603, guid: 7023211779ccf254cbe73c9fd83d2e4f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1290365372}
   m_SourcePrefab: {fileID: 100100000, guid: 7023211779ccf254cbe73c9fd83d2e4f, type: 3}
 --- !u!114 &1026587541 stripped
 MonoBehaviour:
@@ -183518,6 +183536,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4850658230669435690, guid: a3b7761b72167f848bdffec83e1f50e4, type: 3}
   m_PrefabInstance: {fileID: 9154938399874867759}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1037776843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311226101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41b398dec4c5dcc4e948aee8fce7adad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TaggedObject
+  _tag: Tutorial Drop Item Point
 --- !u!1001 &1038966633
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -185012,6 +185043,7 @@ GameObject:
   - component: {fileID: 1054964656}
   - component: {fileID: 1054964657}
   - component: {fileID: 1054964658}
+  - component: {fileID: 1054964659}
   m_Layer: 0
   m_Name: Movement Trigger
   m_TagString: Untagged
@@ -185098,6 +185130,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1054964659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1054964654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41b398dec4c5dcc4e948aee8fce7adad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TaggedObject
+  _tag: Tutorial Movement Trigger
 --- !u!1001 &1055214393
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -189220,6 +189265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Table
   _outline: {fileID: 11400000, guid: 87169dd1151a49f44b6062f93a3625c4, type: 2}
+  _isActive: 1
   _bringables:
   - {fileID: 1314600133}
   _items:
@@ -840659,6 +840705,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.25, y: 1.2}
   m_EdgeRadius: 0
+--- !u!114 &1290365372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100340744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41b398dec4c5dcc4e948aee8fce7adad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TaggedObject
+  _tag: Tutorial Drag Item
 --- !u!1001 &1290571068
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -842625,7 +842684,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9966828c3805a284fa88c1bade9a385a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StepSkipper
-  _firstStep: 3
+  _firstStep: 0
   _tutorialPoint: {fileID: 910481604}
   _hutPosition: {x: 54.7, y: 54.25, z: 0}
   _milkmaidPosition: {x: 237, y: -70, z: 0}
@@ -842804,6 +842863,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TakeableObject
   _outline: {fileID: 0}
+  _isActive: 1
 --- !u!114 &1314600133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -842816,6 +842876,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 078408984e65dff4d8538f4c4de34151, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerBringable
+  _isActive: 1
   _offsetHorizontal: {x: 0, y: 0}
   _offsetVertical: {x: 0, y: 0}
   _offset: {x: 0, y: 1}
@@ -849382,6 +849443,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f11db959c739b9f4da0e38528ca36e19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DroppedItem
+--- !u!114 &1417242291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1417242288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41b398dec4c5dcc4e948aee8fce7adad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TaggedObject
+  _tag: Tutorial Pick Item
 --- !u!1001 &1418802010
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -868289,6 +868363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DroppedItem
   _outline: {fileID: 0}
+  _isActive: 1
   _renderer: {fileID: 15412992}
   _drop:
     Item: {fileID: 11400000, guid: 11e228b2c53b77440a14b94ffe0fe95f, type: 2}
@@ -888270,6 +888345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TakeableObject
   _outline: {fileID: 0}
+  _isActive: 1
 --- !u!114 &1891538168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -888282,6 +888358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 078408984e65dff4d8538f4c4de34151, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerBringable
+  _isActive: 1
   _offsetHorizontal: {x: 0, y: 0}
   _offsetVertical: {x: 0, y: 0}
   _offset: {x: 0, y: 1}
@@ -2500248,7 +2500325,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3950338909081831509, guid: a3b7761b72167f848bdffec83e1f50e4, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4850658230669435690, guid: a3b7761b72167f848bdffec83e1f50e4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2500298,7 +2500375,10 @@ PrefabInstance:
     - {fileID: 6374230391368651583, guid: a3b7761b72167f848bdffec83e1f50e4, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3950338909081831509, guid: a3b7761b72167f848bdffec83e1f50e4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1037776843}
   m_SourcePrefab: {fileID: 100100000, guid: a3b7761b72167f848bdffec83e1f50e4, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

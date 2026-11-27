@@ -113,15 +113,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: dark_tree_bottom
+      name: dark_tree
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 555
-        height: 381
+        height: 595
       alignment: 9
-      pivot: {x: 0.5, y: 0.08}
+      pivot: {x: 0.5, y: 0.021276606}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -130,28 +130,6 @@ TextureImporter:
       bones: []
       spriteID: afb772d8ca6c36d00800000000000000
       internalID: 964833189592267770
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: dark_tree_top
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 381
-        width: 555
-        height: 214
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 80cfc4eb53d4e004790c299e4e6827d1
-      internalID: -1020855246
       vertices: []
       indices: 
       edges: []
@@ -170,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      dark_tree_bottom: 964833189592267770
+      dark_tree: 964833189592267770
       dark_tree_top: -1020855246
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

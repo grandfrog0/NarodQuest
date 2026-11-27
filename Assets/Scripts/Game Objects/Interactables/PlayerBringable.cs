@@ -13,7 +13,13 @@ public class PlayerBringable : MonoBehaviour
     private Collider2D _collider;
     private Transform _defaultParent;
 
-    public bool IsActive { get; set; } = true;
+    [SerializeField] private bool _isActive = true;
+    public bool IsActive
+    {
+        get => _isActive;
+        set => _isActive = value;
+    }
+
     public ItemRenderer Renderer
     {
         get

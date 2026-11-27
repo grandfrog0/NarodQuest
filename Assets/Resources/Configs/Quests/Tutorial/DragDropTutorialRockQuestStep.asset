@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b3d7a769f701904ab464167d079c0b6, type: 3}
   m_Name: DragDropTutorialRockQuestStep
   m_EditorClassIdentifier: Assembly-CSharp::DragDropItemQuestStep
+  _target1Tag: Tutorial Drag Item
+  _target2Tag: Tutorial Drop Item Point

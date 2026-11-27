@@ -113,15 +113,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: light_tree_bottom
+      name: light_tree
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 555
-        height: 372
+        height: 595
       alignment: 9
-      pivot: {x: 0.5, y: 0.08}
+      pivot: {x: 0.5, y: 0.03827538}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -130,28 +130,6 @@ TextureImporter:
       bones: []
       spriteID: aa057b63c0c2f8380800000000000000
       internalID: -8966899902102155094
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: light_tree_top
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 372
-        width: 555
-        height: 223
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 454d795714fad42469ce04ae2226e672
-      internalID: 690558153
       vertices: []
       indices: 
       edges: []
@@ -170,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      light_tree_bottom: -8966899902102155094
+      light_tree: -8966899902102155094
       light_tree_top: 690558153
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

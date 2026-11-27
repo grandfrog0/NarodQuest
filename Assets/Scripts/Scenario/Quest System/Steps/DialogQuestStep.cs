@@ -12,18 +12,17 @@ public class DialogQuestStep : QuestStep
     private void Construct(DialogManager dialogManager)
     {
         _dialogManager = dialogManager;
-        Debug.Log("SO Initialized.");
     }
 
     public override void Start()
     {
         _dialogManager.Show(_dialogConfig);
         _dialogManager.OnDialogComplete.AddListener(OnDialogComplete);
+    }
 
-        void OnDialogComplete()
-        {
-            _dialogManager.OnDialogComplete.RemoveListener(OnDialogComplete);
-            Finish();
-        }
+    private void OnDialogComplete()
+    {
+        _dialogManager.OnDialogComplete.RemoveListener(OnDialogComplete);
+        Finish();
     }
 }

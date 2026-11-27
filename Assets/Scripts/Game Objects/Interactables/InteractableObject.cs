@@ -13,9 +13,11 @@ public abstract class InteractableObject : MonoBehaviour, IOutlineContainer
             OnActiveChanged.Invoke(value);
         }
     }
-    private bool _isActive = true;
-    public OutlineConfig Outline => _outline;
     [SerializeField] private OutlineConfig _outline;
+    [SerializeField] private bool _isActive = true;
+
+    public OutlineConfig Outline => _outline;
     public virtual float SizeMultiplier => 1f;
+
     public abstract void Interact(InteractionData data);
 }

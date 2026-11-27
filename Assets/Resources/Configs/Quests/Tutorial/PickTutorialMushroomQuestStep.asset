@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c85dfc54a8df7448ace1cc5d49dec7e, type: 3}
-  m_Name: BringTutorialMushroomDialogStep
-  m_EditorClassIdentifier: Assembly-CSharp::DialogQuestStep
-  _dialogConfig: {fileID: 11400000, guid: 514ae2a6df28a644da5dc43859f02d8e, type: 2}
+  m_Script: {fileID: 11500000, guid: 574963a4255795140936ec2d70caaa8c, type: 3}
+  m_Name: PickTutorialMushroomQuestStep
+  m_EditorClassIdentifier: Assembly-CSharp::BringItemQuestStep
+  _targetTag: Tutorial Pick Item

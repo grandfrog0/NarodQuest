@@ -54,6 +54,8 @@ public class TutorialQuest : OBSOLETE_AbstractQuest
 
     protected override void StartQuest()
     {
+        return;
+
         base.StartQuest();
         CurrentStep = TutorialQuestStep.Start;
 
@@ -62,6 +64,8 @@ public class TutorialQuest : OBSOLETE_AbstractQuest
 
     private void Disactivate()
     {
+        return;
+
         _movementTrigger.Disable();
         _targetItem.gameObject.SetActive(false);
         _dragItem.IsActive = false;
@@ -76,6 +80,8 @@ public class TutorialQuest : OBSOLETE_AbstractQuest
 
     private void ManageStep(TutorialQuestStep step)
     {
+        return;
+
         switch (step)
         {
             case TutorialQuestStep.Start:
@@ -214,6 +220,8 @@ public class TutorialQuest : OBSOLETE_AbstractQuest
 
     private void SkipTo(TutorialQuestStep step)
     {
+        return;
+
         if (CurrentState is OBSOLETE_StateOfQuest.Finished)
         {
             return;

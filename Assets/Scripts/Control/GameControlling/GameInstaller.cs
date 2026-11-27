@@ -58,6 +58,8 @@ public class GameInstaller : MonoInstaller
         Container.BindInstance(_stateObjectsRegistrator);
         Container.BindInstance(_itemRegistrator);
 
+        Container.Bind<TaggedObjectsContainer>().FromNew().AsSingle();
+
         // Services
         Container.BindInstance(_cameraController);
         Container.BindInstance(_bringableObjectController);
@@ -65,5 +67,7 @@ public class GameInstaller : MonoInstaller
         Container.BindInstance(_interactablesSelector);
         Container.BindInstance(_interactor);
         Container.BindInstance(_locatorManager);
+
+        Container.Bind<HintService>().FromNew().AsSingle();
     }
 }

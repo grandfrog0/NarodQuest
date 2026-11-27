@@ -113,15 +113,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: spruce_bottom
+      name: spruce
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 531
-        height: 483
+        height: 785
       alignment: 9
-      pivot: {x: 0.5, y: 0.05}
+      pivot: {x: 0.5, y: 0.02372897}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -130,28 +130,6 @@ TextureImporter:
       bones: []
       spriteID: 30c3559ee74506fe0800000000000000
       internalID: -1197864596823262205
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spruce_top
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 483
-        width: 531
-        height: 302
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 651852de72c395842a82142766bcdf21
-      internalID: 493626557
       vertices: []
       indices: 
       edges: []
@@ -170,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      spruce_bottom: -1197864596823262205
+      spruce: -1197864596823262205
       spruce_top: 493626557
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

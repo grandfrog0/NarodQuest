@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49857efaf65b8d04b8bf5372d6ab1357, type: 3}
   m_Name: ReachTutorialPointQuestStep
   m_EditorClassIdentifier: Assembly-CSharp::ReachPointQuestStep
+  _targetTag: Tutorial Movement Trigger
