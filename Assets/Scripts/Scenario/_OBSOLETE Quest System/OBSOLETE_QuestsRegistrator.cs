@@ -8,11 +8,19 @@ public class OBSOLETE_QuestsRegistrator : MonoBehaviour
 
     public void Initialize()
     {
-        return;
+        //return;
 
-        foreach (OBSOLETE_AbstractQuest quest in _quests)
+        //foreach (OBSOLETE_AbstractQuest quest in _quests)
+        //{
+        //    quest.Initialize();
+        //}
+    }
+
+    public class OBSOLETE_AbstractQuest
+    {
+        public void Initialize()
         {
-            quest.Initialize();
+
         }
     }
 }

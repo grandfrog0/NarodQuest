@@ -2,11 +2,14 @@ using UnityEngine;
 
 public class LocatorMark : MonoBehaviour
 {
-    [SerializeField] RectTransform _rect;
-    [SerializeField] GameObject _graphics;
-    [SerializeField] Vector2 _offset;
+    [SerializeField] private GameObject _graphics;
+    [SerializeField] private float _offset;
+    private RectTransform _rect;
     private Transform _target;
     private bool _isTargetOnScreen;
+
+    float _halfWidth;
+    float _halfHeight;
 
     public Transform Target
     {
@@ -16,6 +19,13 @@ public class LocatorMark : MonoBehaviour
             gameObject.SetActive(true);
             _target = value;
         }
+    }
+
+    public void Initialize()
+    {
+        _rect = GetComponent<RectTransform>();
+        _halfWidth = Screen.width / 2 - _offset;
+        _halfHeight = Screen.height / 2 - _offset;
     }
 
     public void Handle(float deltaTime)
@@ -50,7 +60,13 @@ public class LocatorMark : MonoBehaviour
 
     private Vector2 Clamp(Vector3 position)
     {
-        return new Vector2(Mathf.Clamp(position.x - Screen.width / 2, Screen.width / -2 + _offset.x, Screen.width / 2 - _offset.x), Mathf.Clamp(position.y - Screen.height / 2, Screen.height / -2 + _offset.y, Screen.height / 2 - _offset.y));
+        position.x -= _halfWidth;
+        position.y -= _halfHeight;
+
+        float multiplier = Mathf.Min(Mathf.Abs(_halfHeight / position.y), Mathf.Abs(_halfWidth / position.x));
+        float magnitude = position.magnitude * multiplier;
+
+        return Vector2.ClampMagnitude(position, magnitude);
     }
 
     public void Clear()

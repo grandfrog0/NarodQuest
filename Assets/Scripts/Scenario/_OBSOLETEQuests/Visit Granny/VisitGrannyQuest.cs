@@ -68,20 +68,26 @@ public class VisitGrannyQuest : OBSOLETE_AbstractQuest
         return result;
     }
 
+    
+
     public override void ApplyTags(List<string> tags)
     {
         base.ApplyTags(tags);
         
         //_isInsideHut = tags[^1] == "1";
 
-        if (CurrentState is OBSOLETE_StateOfQuest.Started)
-        {
-            ShowHintToStart();
-        }
+        //if (/*CurrentState is OBSOLETE_StateOfQuest.Started*/ false)
+        //{
+        //    ShowHintToStart();
+        //}
     }
 
     private void RefreshMark()
     {
         Mark.Target = CurrentTarget;
     }
+}
+public class OBSOLETE_StateOfQuest
+{
+    public class Started { }
 }

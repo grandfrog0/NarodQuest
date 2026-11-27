@@ -87,7 +87,7 @@ public class StateSaver : MonoBehaviour
     {
         return new QuestSave
         {
-            Quests = _questsRegistrator.Quests.Select(x => new QuestData { Name = x.Name, Tags = x.GetTags() }).ToList()
+            //Quests = _questsRegistrator.Quests.Select(x => new QuestData { Name = x.Name, Tags = x.GetTags() }).ToList()
         };
     }
 
@@ -133,8 +133,8 @@ public class StateSaver : MonoBehaviour
 
         foreach (QuestData data in questSave.Quests)
         {
-            OBSOLETE_AbstractQuest quest = _questsRegistrator.Quests.First(x => x.Name == data.Name);
-            quest.ApplyTags(data.Tags);
+            //OBSOLETE_AbstractQuest quest = _questsRegistrator.Quests.First(x => x.Name == data.Name);
+            //quest.ApplyTags(data.Tags);
         }
     }
 }

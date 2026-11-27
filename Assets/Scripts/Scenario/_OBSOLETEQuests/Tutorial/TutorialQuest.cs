@@ -4,12 +4,9 @@ using UnityEngine;
 using UnityEngine.Events;
 using Zenject;
 
-public class TutorialQuest : OBSOLETE_AbstractQuest
+public class TutorialQuest
 {
-    public override OBSOLETE_GameQuestStep GameStep => OBSOLETE_GameQuestStep.Tutorial;
-
-    [SerializeField] private UnityEvent _onCompleted;
-
+    /*
     [Header("Start")]
     [SerializeField] private DialogConfig _greetingsDialog;
     [Header("Movement")]
@@ -25,16 +22,6 @@ public class TutorialQuest : OBSOLETE_AbstractQuest
 
     [Header("End")]
     [SerializeField] private DialogConfig _endDialog;
-
-    private LocatorManager _locatorManager;
-    private OutlineController _outlineController;
-
-    [Inject]
-    private void Construct(LocatorManager locatorManager, OutlineController outlineController)
-    {
-        _locatorManager = locatorManager;
-        _outlineController = outlineController;
-    }
 
     public TutorialQuestStep CurrentStep
     {
@@ -52,11 +39,11 @@ public class TutorialQuest : OBSOLETE_AbstractQuest
         Disactivate();
     }
 
-    protected override void StartQuest()
+    protected void StartQuest()
     {
         return;
 
-        base.StartQuest();
+        //base.StartQuest();
         CurrentStep = TutorialQuestStep.Start;
 
         Disactivate();
@@ -72,11 +59,11 @@ public class TutorialQuest : OBSOLETE_AbstractQuest
         _dropTrigger.gameObject.SetActive(false);
     }
 
-    protected override void EndQuest()
-    {
-        base.EndQuest();
-        _onCompleted.Invoke();
-    }
+    //protected override void EndQuest()
+    //{
+    //    base.EndQuest();
+    //    _onCompleted.Invoke();
+    //}
 
     private void ManageStep(TutorialQuestStep step)
     {
@@ -108,14 +95,14 @@ public class TutorialQuest : OBSOLETE_AbstractQuest
 
     private void MarkTarget(IOutlineContainer target)
     {
-        _outlineController.AddForced(target);
-        _locatorManager.SetTarget(target.transform);
+        //_outlineController.AddForced(target);
+        //_locatorManager.SetTarget(target.transform);
     }
 
     private void UnmarkTarget(IOutlineContainer target)
     {
-        _outlineController.RemoveForced(target);
-        _locatorManager.Clear();
+        //_outlineController.RemoveForced(target);
+        //_locatorManager.Clear();
     }
 
     private void Greetings()
@@ -123,14 +110,14 @@ public class TutorialQuest : OBSOLETE_AbstractQuest
         // показать приветствие
         // после пропуска приветствия перейти в Movement
 
-        _dialogManager.Show(_greetingsDialog, null);
-        _dialogManager.OnDialogComplete.AddListener(GoToMovementInstructions);
+        //_dialogManager.Show(_greetingsDialog, null);
+        //_dialogManager.OnDialogComplete.AddListener(GoToMovementInstructions);
 
-        void GoToMovementInstructions()
-        {
-            _dialogManager.OnDialogComplete.RemoveListener(GoToMovementInstructions);
-            CurrentStep = TutorialQuestStep.Movement;
-        }
+        //void GoToMovementInstructions()
+        //{
+        //    _dialogManager.OnDialogComplete.RemoveListener(GoToMovementInstructions);
+        //    CurrentStep = TutorialQuestStep.Movement;
+        //}
     }
     private void ShowMovementInstructions()
     {
@@ -139,7 +126,7 @@ public class TutorialQuest : OBSOLETE_AbstractQuest
 
         _movementTrigger.Enable();
         MarkTarget(_movementTrigger);
-        _dialogManager.Show(_movementDialog, null);
+        //_dialogManager.Show(_movementDialog, null);
     }
     private void ShowBringItemInstruction()
     {
@@ -284,4 +271,5 @@ public class TutorialQuest : OBSOLETE_AbstractQuest
         TutorialQuestStep step = Enum.Parse<TutorialQuestStep>(tags[1]);
         SkipTo(step);
     }
+    */
 }

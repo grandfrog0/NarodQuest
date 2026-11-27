@@ -21,6 +21,8 @@ public class LocatorManager : MonoBehaviour
     public LocatorMark CreateMark()
     {
         LocatorMark mark = Instantiate(_markPrefab, _markParent);
+        mark.Initialize();
+
         _marks.Add(mark);
         return mark;
     }
