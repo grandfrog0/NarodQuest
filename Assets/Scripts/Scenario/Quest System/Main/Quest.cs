@@ -39,7 +39,7 @@ public class Quest : IQuest
 
     public bool TryStart()
     {
-        if (CanStart())
+        if (State is QuestState.None && Info.StartConditions.All(x => x.IsReady()))
         {
             Start();
             return true;
@@ -68,11 +68,6 @@ public class Quest : IQuest
 
         CurrentStep = stepIndex;
         Debug.Log($"Skipped to step {CurrentStep}");
-    }
-
-    public bool CanStart()
-    {
-        return State is QuestState.None && Info.StartConditions.All(x => x.IsReady());
     }
 
     private void Start()

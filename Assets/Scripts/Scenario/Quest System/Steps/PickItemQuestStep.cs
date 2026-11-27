@@ -20,12 +20,12 @@ public class PickItemQuestStep : RequireTargetQuestStep<DroppedItem>
         Finish();
     }
 
-    public override void Skip()
+    protected override void HandleSkip()
     {
         Target.MarkPickedUp(true);
     }
 
-    private void OnDestroy()
+    protected override void HandleFinish()
     {
         Target.OnPicked -= OnPicked;
     }

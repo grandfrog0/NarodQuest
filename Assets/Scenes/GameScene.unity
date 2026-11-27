@@ -23386,6 +23386,7 @@ MonoBehaviour:
   xInverse: 1
   maxDistance: 300
   _cancelDistance: 50
+  _questInfo: {fileID: 11400000, guid: 82ff0c0b839f37848a58e46261af9333, type: 2}
 --- !u!114 &308608213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -889028,6 +889029,7 @@ MonoBehaviour:
   xInverse: 0
   maxDistance: 300
   _cancelDistance: 20
+  _questInfo: {fileID: 0}
 --- !u!114 &1897740058
 MonoBehaviour:
   m_ObjectHideFlags: 0

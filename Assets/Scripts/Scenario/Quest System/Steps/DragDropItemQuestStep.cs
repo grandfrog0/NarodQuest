@@ -32,14 +32,13 @@ public class DragDropItemQuestStep : RequireTargetQuestStep<TakeableObject, Drop
         Finish();
     }
 
-    public override void Skip()
+    protected override void HandleSkip()
     {
         Target1.IsActive = false;
         Target2.gameObject.SetActive(false);
     }
 
-    //TODO
-    private void OnDestroy()
+    protected override void HandleFinish()
     {
         Target1.Bringable.OnDrag -= OnDrag;
         Target2.OnTrigger.RemoveListener(OnDrop);

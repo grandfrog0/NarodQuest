@@ -32,7 +32,17 @@ public class JoystickController : MonoBehaviour, IDragHandler, IEndDragHandler, 
     {
         Initialize();
 
-        _launcher.TryLaunch(_questInfo);
+        if (_questInfo)
+        {
+            Debug.Log(_launcher);
+            _launcher.TryLaunch(_questInfo);
+
+            int a = 0;
+            OnPerformed += () =>
+            {
+                _launcher.SkipTo(_questInfo, ++a);
+            };
+        }
     }
 
     void Initialize()
