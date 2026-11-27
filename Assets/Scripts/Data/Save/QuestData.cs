@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
+[Serializable, Obsolete]
 public class QuestData
 {
     public string Name;

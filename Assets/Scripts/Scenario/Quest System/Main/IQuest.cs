@@ -9,7 +9,8 @@ public interface IQuest
     public QuestState State { get; }
     public int CurrentStep { get; }
 
-    public void TryStart();
+    public bool TryStart();
+    public void SkipTo(int stepIndex);
 
     public class Factory : PlaceholderFactory<QuestInfo, IQuest> { }
 }

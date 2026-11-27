@@ -37,19 +37,48 @@ public class Quest : IQuest
         _container = container;
     }
 
-    public void TryStart()
+    public bool TryStart()
     {
-        if (State is QuestState.None && Info.StartConditions.All(x => x.IsReady()))
+        if (CanStart())
         {
             Start();
+            return true;
         }
+
+        return false;
+    }
+
+    public void SkipTo(int stepIndex)
+    {
+        for (CurrentStep = 0; CurrentStep < stepIndex; CurrentStep++)
+        {
+            if (CurrentStep >= Info.Steps.Count)
+            {
+                Finish();
+                return;
+            }
+
+            QuestStep step = Info.Steps[CurrentStep];
+
+            _container.Inject(step);
+            step.Skip();
+
+            Debug.Log($"Step {CurrentStep} skipped");
+        }
+
+        CurrentStep = stepIndex;
+        Debug.Log($"Skipped to step {CurrentStep}");
+    }
+
+    public bool CanStart()
+    {
+        return State is QuestState.None && Info.StartConditions.All(x => x.IsReady());
     }
 
     private void Start()
     {
         CurrentStep = -1;
         State = QuestState.Started;
-
         Next();
     }
 

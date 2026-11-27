@@ -25,4 +25,13 @@ public class DialogQuestStep : QuestStep
         _dialogManager.OnDialogComplete.RemoveListener(OnDialogComplete);
         Finish();
     }
+
+    protected override void HandleSkip()
+    {
+
+    }
+    protected override void HandleFinish()
+    {
+        _dialogManager.OnDialogComplete.RemoveListener(OnDialogComplete);
+    }
 }

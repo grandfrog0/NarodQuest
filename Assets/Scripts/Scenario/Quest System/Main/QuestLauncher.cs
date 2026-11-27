@@ -30,6 +30,16 @@ public class QuestLauncher
         Debug.Log(_quests.Count);
     }
 
+    public void SkipTo(QuestInfo info, int stepIndex)
+    {
+        IQuest quest = _quests.FirstOrDefault(x => x?.Info == info);
+
+        if (quest != null)
+        {
+            quest.SkipTo(stepIndex);
+        }
+    }
+
     private void OnQuestFinished(object sender, System.EventArgs e)
     {
         if (sender is IQuest quest)

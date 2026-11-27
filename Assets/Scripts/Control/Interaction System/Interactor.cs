@@ -13,6 +13,7 @@ public class Interactor : MonoBehaviour
     private BringableObjectController _bringableObjectController;
 
     private InventoryData _inventory;
+    private InventoryManager _inventoryManager;
 
     private InteractableObject _target;
     public InteractableObject Target
@@ -44,7 +45,8 @@ public class Interactor : MonoBehaviour
         InteractablesSelector interactableSelector, 
         OutlineController outlineController, 
         BringableObjectController bringableController,
-        InventoryData inventory)
+        InventoryData inventory,
+        InventoryManager inventoryManager)
     {
         _interactJoystick = interactJoystick;
         _interactablesSelector = interactableSelector;
@@ -52,6 +54,7 @@ public class Interactor : MonoBehaviour
         _bringableObjectController = bringableController;
 
         _inventory = inventory;
+        _inventoryManager = inventoryManager;
     }
 
     private void Start()
@@ -144,13 +147,13 @@ public class Interactor : MonoBehaviour
         {
             _outlineController.OnBeforeTargetInteracting(Target);
 
-            Target.Interact(new InteractionData
-            {
-                Point = _interactionPoint,
-                Player = gameObject,
-                Inventory = _inventory,
-                BringableController = _bringableObjectController
-            });
+            Target.Interact(new InteractionData(
+                point: _interactionPoint,
+                player: gameObject,
+                inventory: _inventory,
+                inventoryManager: _inventoryManager,
+                bringableController: _bringableObjectController
+            ));
 
             if (Target.IsActive == false)
             {

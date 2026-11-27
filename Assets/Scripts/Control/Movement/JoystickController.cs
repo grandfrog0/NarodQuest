@@ -3,6 +3,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Zenject;
 
 public class JoystickController : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
@@ -24,9 +25,14 @@ public class JoystickController : MonoBehaviour, IDragHandler, IEndDragHandler, 
 
     private bool _isCancelled;
 
+    [Inject] QuestLauncher _launcher;
+    [SerializeField] private QuestInfo _questInfo;
+
     void Awake()
     {
         Initialize();
+
+        _launcher.TryLaunch(_questInfo);
     }
 
     void Initialize()

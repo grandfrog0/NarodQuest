@@ -1602,10 +1602,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0f7bf80d4b62e4489ef0a8b9544c97d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ComeToTheField
-  _isTrigger: 1
-  <CurrentState>k__BackingField: 0
-  _isInitialized: 0
-  _dialogManager: {fileID: 0}
   _dialog: {fileID: 11400000, guid: 9c06b8bb43159d646a5ffd2d73570c8d, type: 2}
 --- !u!1001 &23513643
 PrefabInstance:
@@ -40955,10 +40951,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1476db0ad63eaa54388040ff676bed07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GoToTheFarmerQuest
-  _isTrigger: 1
-  <CurrentState>k__BackingField: 0
-  _isInitialized: 0
-  _dialogManager: {fileID: 0}
   _dialog: {fileID: 11400000, guid: 0520fbd24e72e5f4a8398654a9f27dcc, type: 2}
 --- !u!1001 &547174434
 PrefabInstance:
@@ -62281,10 +62273,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7985235d0ff1f7428695602416753f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GoToTheWoodcutter
-  _isTrigger: 1
-  <CurrentState>k__BackingField: 0
-  _isInitialized: 0
-  _dialogManager: {fileID: 0}
   _dialog: {fileID: 11400000, guid: 42409e3637d201f4b981f5153c923c40, type: 2}
 --- !u!1001 &820098997
 PrefabInstance:
@@ -860326,10 +860314,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4418111f035467340869db51b1e5563c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TryToTrickTheRobbersQuest
-  _isTrigger: 1
-  <CurrentState>k__BackingField: 0
-  _isInitialized: 0
-  _dialogManager: {fileID: 0}
   _dialog: {fileID: 11400000, guid: 2a6fc7a39fda48a4da09c82200d36940, type: 2}
 --- !u!1001 &1542692245
 PrefabInstance:
@@ -866396,15 +866380,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04cc27adf864e024aa105a1f52b9b0b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VisitGrannyQuest
-  _isTrigger: 1
-  <CurrentState>k__BackingField: 0
-  _isInitialized: 0
-  _dialogManager: {fileID: 0}
   _hutTransform: {fileID: 1097294971}
   _grannyNpc: {fileID: 434514644922587715}
-  _locatorManager: {fileID: 0}
-  _isInsideHut: 0
-  _mark: {fileID: 0}
 --- !u!1 &1624727934
 GameObject:
   m_ObjectHideFlags: 0

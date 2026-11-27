@@ -20,6 +20,11 @@ public class ReachPointQuestStep : RequireTargetQuestStep<CollisionTrigger>
         Finish();
     }
 
+    public override void Skip()
+    {
+        Target.Disable();
+    }
+
     private void OnDestroy()
     {
         Target.OnTrigger.RemoveListener(OnTrigger);

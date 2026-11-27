@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class DroppedItem : InteractableObject
 {
     public event Action<ItemCountPair> OnPicked;
+    public event Action<ItemCountPair> OnUnpicked;
 
     [SerializeField] private SpriteRenderer _renderer;
     [SerializeField] private ItemCountPair _drop;
@@ -38,6 +39,17 @@ public class DroppedItem : InteractableObject
         return true;
     }
 
+    public bool TryUnpick()
+    {
+        if (!IsPicked)
+        {
+            return false;
+        }
+
+        Unpick();
+        return true;
+    }
+
     public void MarkPickedUp(bool value)
     {
         IsPicked = value;
@@ -51,6 +63,13 @@ public class DroppedItem : InteractableObject
         gameObject.SetActive(false);
 
         return _drop;
+    }
+
+    private void Unpick()
+    {
+        IsPicked = false;
+        OnUnpicked?.Invoke(_drop);
+        gameObject.SetActive(true);
     }
 
     private void Start()
