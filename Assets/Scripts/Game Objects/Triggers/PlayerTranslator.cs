@@ -9,16 +9,23 @@ public class PlayerTranslator : MonoBehaviour
 
     [SerializeField] private PlayerTranslator _other;
     [SerializeField] private Vector3 _offset;
+    public PlayerTranslator Other => _other;
     public Vector3 TargetPosition => transform.position + _offset;
+    public Location Location { get; private set; }
 
     private TransitionManager _transitionManager;
-    private CinemachineCameraController _cameraController;
+    private PlayerLocationHandler _playerLocationHandler;
+
+    public void Initialize(Location location)
+    {
+        Location = location;
+    }
 
     [Inject]
-    private void Construct(TransitionManager transitionManager, CinemachineCameraController cameraController)
+    private void Construct(TransitionManager transitionManager, PlayerLocationHandler playerLocationHandler)
     {
         _transitionManager = transitionManager;
-        _cameraController = cameraController;
+        _playerLocationHandler = playerLocationHandler;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -39,7 +46,7 @@ public class PlayerTranslator : MonoBehaviour
 
             Vector3 playerPosition = player.position;
             player.position = _other.TargetPosition;
-            _cameraController.Move(_other.TargetPosition - playerPosition);
+            _playerLocationHandler.Current = _other.Location;
         }
     }
 

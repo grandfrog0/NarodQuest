@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using Zenject;
-using static UnityEngine.Rendering.DebugUI;
 
 public class OutlineView : MonoBehaviour, IPoolable<OutlineData, Transform, IMemoryPool>, IDisposable
 {

@@ -30,7 +30,6 @@ public class GameInstaller : MonoInstaller
     [SerializeField] private PlayerMovementController _playerMove;
     [SerializeField] private InteractablesSelector _interactablesSelector;
     [SerializeField] private Interactor _interactor;
-    [SerializeField] private LocatorManager _locatorManager;
 
     public override void InstallBindings()
     {
@@ -63,6 +62,5 @@ public class GameInstaller : MonoInstaller
         Container.BindInstance(_playerMove);
         Container.BindInstance(_interactablesSelector);
         Container.BindInstance(_interactor);
-        Container.BindInstance(_locatorManager);
     }
 }

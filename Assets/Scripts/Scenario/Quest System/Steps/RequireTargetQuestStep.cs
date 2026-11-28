@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 public abstract class RequireTargetQuestStep<T> : QuestStep where T : Component

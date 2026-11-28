@@ -22,7 +22,7 @@ public class TakeableObject : InteractableObject, IDescriptable
         _bringableController = bringableController;
     }
 
-    public override void Interact(InteractionData data)
+    protected override void HandleInteraction(InteractionData data)
     {
         bool isBrought = _bringableController.SwitchBring(_bringable, data.Point);
         IsActive = !isBrought;

@@ -81,7 +81,7 @@ public class DroppedItem : InteractableObject
         Initialize(_drop);
     }
 
-    public override void Interact(InteractionData data)
+    protected override void HandleInteraction(InteractionData data)
     {
         TryPickUp(data.InventoryManager.Add);
     }

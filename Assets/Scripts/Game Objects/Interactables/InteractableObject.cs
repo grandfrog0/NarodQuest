@@ -1,9 +1,12 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
 public abstract class InteractableObject : MonoBehaviour, IOutlineContainer
 {
+    public event EventHandler<InteractionData> OnInteract;
     public UnityEvent<bool> OnActiveChanged { get; } = new();
+
     public virtual bool IsActive
     {
         get => _isActive;
@@ -19,5 +22,10 @@ public abstract class InteractableObject : MonoBehaviour, IOutlineContainer
     public OutlineConfig Outline => _outline;
     public virtual float SizeMultiplier => 1f;
 
-    public abstract void Interact(InteractionData data);
+    public void Interact(InteractionData data)
+    {
+        HandleInteraction(data);
+        OnInteract?.Invoke(this, data);
+    }
+    protected abstract void HandleInteraction(InteractionData data);
 }

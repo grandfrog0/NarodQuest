@@ -6,6 +6,7 @@ using Zenject;
 public class LocatorManager : MonoBehaviour
 {
     private Transform _player;
+    private LocatorPositionCalculator _locatorPositionCalculator;
 
     [SerializeField] LocatorMark _markPrefab;
     [SerializeField] Transform _markParent;
@@ -13,15 +14,16 @@ public class LocatorManager : MonoBehaviour
     private LocatorMark _mark;
 
     [Inject]
-    private void Construct(GameObject player)
+    private void Construct(GameObject player, LocatorPositionCalculator locatorPositionCalculator)
     {
         _player = player.transform;
+        _locatorPositionCalculator = locatorPositionCalculator;
     }
 
     public LocatorMark CreateMark()
     {
         LocatorMark mark = Instantiate(_markPrefab, _markParent);
-        mark.Initialize();
+        mark.Initialize(_locatorPositionCalculator);
 
         _marks.Add(mark);
         return mark;

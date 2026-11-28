@@ -1,7 +1,4 @@
-using System;
-using Unity.Android.Types;
 using UnityEngine;
-using static UnityEngine.Rendering.STP;
 
 [CreateAssetMenu(fileName = "Outline", menuName = "SO/Outline Config")]
 public class OutlineConfig : ScriptableObject
@@ -23,7 +20,7 @@ public class OutlineConfig : ScriptableObject
         Color arrowHighlightedForcedColor = new Color(Graphics.ForcedColor.r, Graphics.ForcedColor.g, Graphics.ForcedColor.b, Graphics.ArrowOpacity * 0.34f);
         Color arrowSelectedColor = new Color(Graphics.DefaultColor.r, Graphics.DefaultColor.g, Graphics.DefaultColor.b, Graphics.ArrowOpacity);
         Color arrowHighlightedColor = new Color(arrowSelectedColor.r, arrowSelectedColor.g, arrowSelectedColor.b, Graphics.ArrowOpacity * 0.34f);
-        
+
         Color outlineForcedColor = new Color(Graphics.ForcedColor.r, Graphics.ForcedColor.g, Graphics.ForcedColor.b, Graphics.OutlineOpacity);
         Color outlineHighlightedForcedColor = new Color(Graphics.ForcedColor.r, Graphics.ForcedColor.g, Graphics.ForcedColor.b, Graphics.OutlineOpacity * 0.34f);
         Color outlineSelectedColor = new Color(Graphics.DefaultColor.r, Graphics.DefaultColor.g, Graphics.DefaultColor.b, Graphics.OutlineOpacity);
@@ -33,12 +30,12 @@ public class OutlineConfig : ScriptableObject
             arrowForcedColor,
             arrowHighlightedForcedColor,
             arrowSelectedColor,
-            arrowHighlightedColor, 
+            arrowHighlightedColor,
 
             outlineForcedColor,
             outlineHighlightedForcedColor,
             outlineSelectedColor,
-            outlineHighlightedColor, 
+            outlineHighlightedColor,
 
             arrowSprite: Graphics.ArrowSprite,
             outlineSprite: Graphics.OutlineSprite,

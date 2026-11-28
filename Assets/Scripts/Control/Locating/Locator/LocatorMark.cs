@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 public class LocatorMark : MonoBehaviour
 {
@@ -17,12 +18,18 @@ public class LocatorMark : MonoBehaviour
         set
         {
             gameObject.SetActive(true);
+
             _target = value;
+            _locationRelativeTarget = _target.GetComponent<ILocationRelative>();
         }
     }
+    private ILocationRelative _locationRelativeTarget;
+    private LocatorPositionCalculator _locatorPositionCalculator;
 
-    public void Initialize()
+    public void Initialize(LocatorPositionCalculator locatorPositionCalculator)
     {
+        _locatorPositionCalculator = locatorPositionCalculator;
+
         _rect = GetComponent<RectTransform>();
         _halfWidth = Screen.width / 2 - _offset;
         _halfHeight = Screen.height / 2 - _offset;
@@ -35,7 +42,8 @@ public class LocatorMark : MonoBehaviour
             return;
         }
 
-        Vector3 targetPosition = Camera.main.WorldToScreenPoint(_target.position);
+        Vector3 targetWorldPosition = _locatorPositionCalculator.Calculate(_target.position, _locationRelativeTarget?.Location);
+        Vector3 targetPosition = Camera.main.WorldToScreenPoint(targetWorldPosition);
 
         bool isOnScreen = IsOnScreen(targetPosition);
 
@@ -72,6 +80,8 @@ public class LocatorMark : MonoBehaviour
     public void Clear()
     {
         _target = null;
+        _locationRelativeTarget = null;
+
         gameObject.SetActive(false);
     }
 }

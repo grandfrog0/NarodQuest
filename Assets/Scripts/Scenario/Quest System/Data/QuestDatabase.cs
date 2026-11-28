@@ -15,6 +15,7 @@ public class QuestDatabase : ScriptableObject
         {
             if (info != null)
             {
+                Debug.Log(info.Id);
                 _questsById[info.Id] = info;
             }
         }

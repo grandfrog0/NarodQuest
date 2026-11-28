@@ -39,7 +39,7 @@ public class Quest : IQuest
 
     public bool TryStart()
     {
-        if (State is QuestState.None && Info.StartConditions.All(x => x.IsReady()))
+        if (State is QuestState.None && Info.Conditions.All(x => x.IsReady()))
         {
             Start();
             return true;
@@ -125,9 +125,9 @@ public class Quest : IQuest
 
     private void Finish()
     {
-        foreach (QuestFinishAction action in Info.EndActions)
+        foreach (QuestReward reward in Info.Rewards)
         {
-            action.Invoke();
+            reward.Receive();
         }
 
         State = QuestState.Finished;

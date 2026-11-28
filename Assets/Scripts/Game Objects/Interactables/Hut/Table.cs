@@ -53,7 +53,7 @@ public class Table : InteractableObject, IDescriptable
         bringable.OnDrag -= OnItemDrag;
     }
 
-    public override void Interact(InteractionData data)
+    protected override void HandleInteraction(InteractionData data)
     {
         BringableObjectController bringableController = data.BringableController;
 

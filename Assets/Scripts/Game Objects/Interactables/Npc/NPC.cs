@@ -21,7 +21,7 @@ public class NPC : InteractableObject, IDescriptable
         _dialogManager = dialogManager;
     }
 
-    public override void Interact(InteractionData data)
+    protected override void HandleInteraction(InteractionData data)
     {
         _dialogManager.Show(_dialog, _companions);
 

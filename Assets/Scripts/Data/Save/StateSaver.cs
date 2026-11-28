@@ -25,8 +25,7 @@ public class StateSaver : MonoBehaviour
     private PlayerMovementController _playerMove;
     private BringableObjectController _bringableController;
     private InventoryManager _inventory;
-    private CinemachineCameraController _cameraController;
-    private CameraConstraintsRegistrator _cameraConstraintsRegistrator;
+    private PlayerLocationHandler _playerLocationHandler;
     private DroppedItemsRegistrator _droppedItemsRegistrator;
     private DescriptablesRegistrator _descriptablesRegistrator;
     private StateObjectsRegistrator _stateObjectsRegistrator;
@@ -38,8 +37,7 @@ public class StateSaver : MonoBehaviour
         PlayerMovementController playerMove, 
         BringableObjectController bringableController, 
         InventoryManager inventory, 
-        CinemachineCameraController cameraController, 
-        CameraConstraintsRegistrator cameraConstraintsRegistrator,
+        PlayerLocationHandler playerLocationHandler,
         DroppedItemsRegistrator droppedItemsRegistrator, 
         DescriptablesRegistrator descriptablesRegistrator,
         StateObjectsRegistrator stateObjectsRegistrator,
@@ -50,8 +48,7 @@ public class StateSaver : MonoBehaviour
         _playerMove = playerMove;
         _bringableController = bringableController;
         _inventory = inventory;
-        _cameraController = cameraController;
-        _cameraConstraintsRegistrator = cameraConstraintsRegistrator;
+        _playerLocationHandler = playerLocationHandler;
         _droppedItemsRegistrator = droppedItemsRegistrator;
         _descriptablesRegistrator = descriptablesRegistrator;
         _stateObjectsRegistrator = stateObjectsRegistrator;
@@ -67,7 +64,7 @@ public class StateSaver : MonoBehaviour
             Axis = _playerMove.Axis,
             Inventory = _inventory.CreateSerializable(),
             CurrentBringableId = _bringableController.Current?.GetId() ?? -1,
-            CameraConstraints = _cameraController.GetConstraints()?.Name ?? "",
+            LocationId = _playerLocationHandler.GetId(),
         };
     }
     public EnvironmentDto CreateEnvironmentSave()
@@ -97,8 +94,7 @@ public class StateSaver : MonoBehaviour
             _bringableController.Bring(bringable.GetComponent<PlayerBringable>());
         }
 
-        CameraConstraints constraints = _cameraConstraintsRegistrator.GetByName(playerSave.CameraConstraints);
-        _cameraController.SetConstraints(constraints);
+        _playerLocationHandler.SetById(playerSave.LocationId);
     }
     public void ApplyEnvironmentSave(EnvironmentDto environmentSave)
     {

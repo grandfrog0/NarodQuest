@@ -48,6 +48,7 @@ public class SaveManager : MonoBehaviour
             if (!File.Exists(PlayerPath) || !File.Exists(EnvironmentPath) || !File.Exists(QuestsPath))
             {
                 Debug.LogWarning("Файлы сохранения не были найдены.");
+                return;
             }
 
             string playerSaveJson = File.ReadAllText(PlayerPath);

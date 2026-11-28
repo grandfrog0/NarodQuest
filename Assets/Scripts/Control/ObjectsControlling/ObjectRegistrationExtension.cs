@@ -10,7 +10,7 @@ public static class ObjectRegistrationExtension
         _objectRegistrator = objectRegistrator;
     }
 
-    public static int GetId(this MonoBehaviour mono)
+    public static int GetId(this MonoBehaviour mono) 
     {
         return _objectRegistrator.GetId(mono.gameObject);
     }

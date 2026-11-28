@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class DroppedItemsRegistrator : MonoBehaviour
+public class DroppedItemsRegistrator : MonoBehaviour 
 {
     public List<DroppedItem> DroppedItems { get; private set; }
 
