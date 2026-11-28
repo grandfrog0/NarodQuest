@@ -28,7 +28,7 @@ public class DialogQuestStep : QuestStep
 
     protected override void HandleSkip()
     {
-
+        _dialogManager.FinishPermanent(_dialogConfig);
     }
     protected override void HandleFinish()
     {

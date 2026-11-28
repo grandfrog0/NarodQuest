@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5ec2760a8115c14797ee578ffb01537, type: 3}
   m_Name: QuestInstaller
   m_EditorClassIdentifier: Assembly-CSharp::QuestInstaller
+  _questDatabase: {fileID: 11400000, guid: 6975042f3b300b44a891ef6828f5078f, type: 2}

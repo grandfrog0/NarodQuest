@@ -3,14 +3,14 @@ using Zenject;
 
 public interface IQuest
 {
-    public event EventHandler OnFinished;
+    event EventHandler OnFinished;
 
-    public QuestInfo Info { get; }
-    public QuestState State { get; }
-    public int CurrentStep { get; }
+    QuestInfo Info { get; }
+    QuestState State { get; }
+    int CurrentStep { get; }
 
-    public bool TryStart();
-    public void SkipTo(int stepIndex);
+    void Initialize(QuestState state, int stepIndex);
+    bool TryStart();
 
-    public class Factory : PlaceholderFactory<QuestInfo, IQuest> { }
+    class Factory : PlaceholderFactory<QuestInfo, IQuest> { }
 }

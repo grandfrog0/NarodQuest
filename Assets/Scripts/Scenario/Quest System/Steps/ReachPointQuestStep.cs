@@ -27,6 +27,7 @@ public class ReachPointQuestStep : RequireTargetQuestStep<CollisionTrigger>
 
     protected override void HandleFinish()
     {
+        HintService.Unmark(Target);
         Target.OnTrigger.RemoveListener(OnTrigger);
     }
 }

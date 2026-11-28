@@ -22,31 +22,30 @@ public class DroppedItem : InteractableObject
         }
         
         _renderer.sprite = item.Item.Icon;
-        OnPicked += x => FindAnyObjectByType<InventoryManager>().Add(x.Item, x.Count);
+        //OnPicked += x => FindAnyObjectByType<InventoryManager>().Add(x.Item, x.Count);
 
         IsPicked = false;
     }
 
-    public bool TryPickUp(out ItemCountPair drop)
+    public bool TryPickUp(Action<Item, int> pickAction)
     {
         if (IsPicked)
         {
-            drop = null;
             return false;
         }
 
-        drop = PickUp();
+        PickUp(pickAction);
         return true;
     }
 
-    public bool TryUnpick()
+    public bool TryUnpick(Action<Item, int> unpickAction)
     {
         if (!IsPicked)
         {
             return false;
         }
 
-        Unpick();
+        Unpick(unpickAction);
         return true;
     }
 
@@ -56,20 +55,25 @@ public class DroppedItem : InteractableObject
         gameObject.SetActive(!IsPicked);
     }
 
-    private ItemCountPair PickUp()
+    private ItemCountPair PickUp(Action<Item, int> pickAction)
     {
         IsPicked = true;
+
+        pickAction?.Invoke(_drop.Item, _drop.Count);
         OnPicked?.Invoke(_drop);
+
         gameObject.SetActive(false);
 
         return _drop;
     }
 
-    private void Unpick()
+    private void Unpick(Action<Item, int> unpickAction)
     {
         IsPicked = false;
-        OnUnpicked?.Invoke(_drop);
         gameObject.SetActive(true);
+
+        unpickAction?.Invoke(_drop.Item, _drop.Count);
+        OnUnpicked?.Invoke(_drop);
     }
 
     private void Start()
@@ -79,6 +83,6 @@ public class DroppedItem : InteractableObject
 
     public override void Interact(InteractionData data)
     {
-        TryPickUp(out _);
+        TryPickUp(data.InventoryManager.Add);
     }
 }

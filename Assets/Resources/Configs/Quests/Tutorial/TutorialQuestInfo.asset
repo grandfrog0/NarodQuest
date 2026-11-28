@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ee7ab044881f3344a9b2900795bb0dd, type: 3}
   m_Name: TutorialQuestInfo
   m_EditorClassIdentifier: Assembly-CSharp::QuestInfo
+  _id: Tutorial
   _startConditions: []
   _steps:
   - {fileID: 11400000, guid: cecc168fff035eb4d9b6d056f3f8091a, type: 2}

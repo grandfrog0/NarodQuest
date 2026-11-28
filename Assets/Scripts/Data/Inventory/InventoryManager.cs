@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Zenject;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager
 {
     public UnityEvent OnChanged { get; } = new();
     public UnityEvent<int> OnSelectionChanged { get; } = new();
@@ -32,13 +32,7 @@ public class InventoryManager : MonoBehaviour
         _inventory.ApplySerializable(_itemRegistrator.GetByName, serializable);
         OnChanged.Invoke();
 
-        StartCoroutine(SelectionChanged());
-
-        IEnumerator SelectionChanged()
-        {
-            yield return null;
-            OnSelectionChanged.Invoke(_inventory.SelectedIndex);
-        }
+        OnSelectionChanged.Invoke(_inventory.SelectedIndex);
     }
 
     public void SelectItem(int index)

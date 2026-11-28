@@ -48,7 +48,18 @@ public class Quest : IQuest
         return false;
     }
 
-    public void SkipTo(int stepIndex)
+    public void Initialize(QuestState state, int stepIndex)
+    {
+        State = state;
+
+        if (State is QuestState.Started)
+        {
+            SkipTo(stepIndex);
+            Next();
+        }
+    }
+
+    private void SkipTo(int stepIndex)
     {
         for (CurrentStep = 0; CurrentStep < stepIndex; CurrentStep++)
         {
@@ -66,8 +77,9 @@ public class Quest : IQuest
             Debug.Log($"Step {CurrentStep} skipped");
         }
 
-        CurrentStep = stepIndex;
-        Debug.Log($"Skipped to step {CurrentStep}");
+        CurrentStep = stepIndex - 1;
+
+        Debug.Log($"Current step: {CurrentStep}");
     }
 
     private void Start()
@@ -118,11 +130,12 @@ public class Quest : IQuest
             action.Invoke();
         }
 
+        State = QuestState.Finished;
         OnFinished?.Invoke(this, EventArgs.Empty);
     }
 
     public override string ToString()
     {
-        return $"Quest ({Info.name})";
+        return $"Quest ({Info.Id})";
     }
 }

@@ -22,10 +22,6 @@ public class StateSaver : MonoBehaviour
             10. Ограничения камеры
     */
 
-    public PlayerSave PlayerSave { get; private set; }
-    public EnvironmentDto EnvironmentSave { get; private set; }
-    public QuestSave QuestSave { get; private set; }
-
     private PlayerMovementController _playerMove;
     private BringableObjectController _bringableController;
     private InventoryManager _inventory;
@@ -33,9 +29,9 @@ public class StateSaver : MonoBehaviour
     private CameraConstraintsRegistrator _cameraConstraintsRegistrator;
     private DroppedItemsRegistrator _droppedItemsRegistrator;
     private DescriptablesRegistrator _descriptablesRegistrator;
-    private OBSOLETE_QuestsRegistrator _questsRegistrator;
     private StateObjectsRegistrator _stateObjectsRegistrator;
     private ObjectRegistrator _objectRegistrator;
+    private QuestStateHandler _questStateHandler;
 
     [Inject]
     private void Construct(
@@ -46,9 +42,9 @@ public class StateSaver : MonoBehaviour
         CameraConstraintsRegistrator cameraConstraintsRegistrator,
         DroppedItemsRegistrator droppedItemsRegistrator, 
         DescriptablesRegistrator descriptablesRegistrator,
-        OBSOLETE_QuestsRegistrator questsRegistrator, 
         StateObjectsRegistrator stateObjectsRegistrator,
-        ObjectRegistrator objectRegistrator
+        ObjectRegistrator objectRegistrator,
+        QuestStateHandler questStateHandler
         )
     {
         _playerMove = playerMove;
@@ -58,9 +54,9 @@ public class StateSaver : MonoBehaviour
         _cameraConstraintsRegistrator = cameraConstraintsRegistrator;
         _droppedItemsRegistrator = droppedItemsRegistrator;
         _descriptablesRegistrator = descriptablesRegistrator;
-        _questsRegistrator = questsRegistrator;
         _stateObjectsRegistrator = stateObjectsRegistrator;
         _objectRegistrator = objectRegistrator;
+        _questStateHandler = questStateHandler;
     }
 
     public PlayerSave CreatePlayerSave()
@@ -85,16 +81,11 @@ public class StateSaver : MonoBehaviour
     }
     public QuestSave CreateQuestSave()
     {
-        return new QuestSave
-        {
-            //Quests = _questsRegistrator.Quests.Select(x => new QuestData { Name = x.Name, Tags = x.GetTags() }).ToList()
-        };
+        return _questStateHandler.CreateSave();
     }
 
     public void ApplyPlayerSave(PlayerSave playerSave)
     {
-        PlayerSave = playerSave;
-
         _playerMove.transform.position = playerSave.Position;
         _playerMove.Axis = playerSave.Axis;
 
@@ -111,8 +102,6 @@ public class StateSaver : MonoBehaviour
     }
     public void ApplyEnvironmentSave(EnvironmentDto environmentSave)
     {
-        EnvironmentSave = environmentSave;
-
         foreach (int itemId in environmentSave.RaisedObjectsIds)
         {
             DroppedItem item = _droppedItemsRegistrator.DroppedItems.First(x => x.GetId() == itemId);
@@ -129,12 +118,6 @@ public class StateSaver : MonoBehaviour
     }
     public void ApplyQuestSave(QuestSave questSave)
     {
-        QuestSave = questSave;
-
-        foreach (QuestData data in questSave.Quests)
-        {
-            //OBSOLETE_AbstractQuest quest = _questsRegistrator.Quests.First(x => x.Name == data.Name);
-            //quest.ApplyTags(data.Tags);
-        }
+        _questStateHandler.ApplySave(questSave);
     }
 }

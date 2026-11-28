@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 public class InventoryVisualizer : MonoBehaviour
 {
-    [SerializeField] private Transform _itemsParent;
+    [SerializeField] private GameObject _viewPanel;
+    [SerializeField] private RectTransform _itemsParent;
     [SerializeField] private ItemView _itemViewPrefab;
     [SerializeField] private RectTransform _selectionMark;
     [SerializeField] private SpriteRenderer _selectedRenderer;
@@ -30,9 +32,16 @@ public class InventoryVisualizer : MonoBehaviour
         _inventoryManager.OnSelectionChanged.AddListener(OnSelectionChanged);
     }
 
+    private void Start()
+    {
+        RefreshVisibility();
+    }
+
     public void Refresh()
     {
         Clear();
+
+        RefreshVisibility();
 
         int i = 0;
         foreach (ItemCountPair pair in _inventoryManager.GetEnumerator())
@@ -45,13 +54,11 @@ public class InventoryVisualizer : MonoBehaviour
 
             i++;
         }
-
-        RefreshVisibility();
     }
 
     private void RefreshVisibility()
     {
-        gameObject.SetActive(!_isHidden && !_inventoryManager.IsEmpty);
+        _viewPanel.SetActive(!_isHidden && !_inventoryManager.IsEmpty);
     }
 
     private void OnItemViewClick(int index)
@@ -61,6 +68,8 @@ public class InventoryVisualizer : MonoBehaviour
 
     public void OnSelectionChanged(int selectedIndex)
     {
+        LayoutRebuilder.ForceRebuildLayoutImmediate(_itemsParent);
+
         if (selectedIndex == -1)
         {
             _selectionMark.gameObject.SetActive(false);

@@ -22,46 +22,22 @@ public class SaveManager : MonoBehaviour
     {
         try
         {
-            SavePlayer();
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError("Ошибка сохранения данных игрока: " + ex);
-        }
-        try
-        {
-            SaveEnvironment();
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError("Ошибка сохранения данных окружения: " + ex);
-        }
-        try
-        {
-            SaveQuests();
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError("Ошибка сохранения данных: " + ex);
-        }
-
-        void SavePlayer()
-        {
             PlayerSave playerSave = _stateSaver.CreatePlayerSave();
-            string json = JsonUtility.ToJson(playerSave, true);
-            File.WriteAllText(PlayerPath, json);
-        }
-        void SaveEnvironment()
-        {
+            string playerSaveJson = JsonUtility.ToJson(playerSave, true);
+
             EnvironmentDto environmentSave = _stateSaver.CreateEnvironmentSave();
-            string json = JsonUtility.ToJson(environmentSave, true);
-            File.WriteAllText(EnvironmentPath, json);
-        }
-        void SaveQuests()
-        {
+            string environmentSaveJson = JsonUtility.ToJson(environmentSave, true);
+
             QuestSave questSave = _stateSaver.CreateQuestSave();
-            string json = JsonUtility.ToJson(questSave, true);
-            File.WriteAllText(QuestsPath, json);
+            string questSaveJson = JsonUtility.ToJson(questSave, true);
+
+            File.WriteAllText(PlayerPath, playerSaveJson);
+            File.WriteAllText(EnvironmentPath, environmentSaveJson);
+            File.WriteAllText(QuestsPath, questSaveJson);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Ошибка сохранения данных: {ex}");
         }
     }
 
@@ -69,64 +45,27 @@ public class SaveManager : MonoBehaviour
     {
         try
         {
-            LoadPlayer();
-        }
-        catch (Exception ex)
-        {
-            Debug.LogWarning("Ошибка загрузки данных игрока: " + ex);
-        }
-        try
-        {
-            LoadEnvironment();
-        }
-        catch (Exception ex)
-        {
-            Debug.LogWarning("Ошибка загрузки данных окружения: " + ex);
-        }
-        try
-        {
-            LoadQuests();
-        }
-        catch (Exception ex)
-        {
-            Debug.LogWarning("Ошибка загрузки данных квестов: " + ex);
-        }
-
-        void LoadPlayer()
-        {
-            if (!File.Exists(PlayerPath))
+            if (!File.Exists(PlayerPath) || !File.Exists(EnvironmentPath) || !File.Exists(QuestsPath))
             {
-                Debug.Log("Файл сохранения Player не был найден.");
-                return;
+                Debug.LogWarning("Файлы сохранения не были найдены.");
             }
 
-            string json = File.ReadAllText(PlayerPath);
-            PlayerSave playerSave = JsonUtility.FromJson<PlayerSave>(json);
+            string playerSaveJson = File.ReadAllText(PlayerPath);
+            PlayerSave playerSave = JsonUtility.FromJson<PlayerSave>(playerSaveJson);
+
+            string environmentSaveJson = File.ReadAllText(EnvironmentPath);
+            EnvironmentDto environmentSave = JsonUtility.FromJson<EnvironmentDto>(environmentSaveJson);
+
+            string questSaveJson = File.ReadAllText(QuestsPath);
+            QuestSave questSave = JsonUtility.FromJson<QuestSave>(questSaveJson);
+
             _stateSaver.ApplyPlayerSave(playerSave);
-        }
-        void LoadEnvironment()
-        {
-            if (!File.Exists(EnvironmentPath))
-            {
-                Debug.Log("Файл сохранения Environment не был найден.");
-                return;
-            }
-
-            string json = File.ReadAllText(EnvironmentPath);
-            EnvironmentDto environmentSave = JsonUtility.FromJson<EnvironmentDto>(json);
             _stateSaver.ApplyEnvironmentSave(environmentSave);
-        }
-        void LoadQuests()
-        {
-            if (!File.Exists(QuestsPath))
-            {
-                Debug.Log("Файл сохранения Quests не был найден.");
-                return;
-            }
-
-            string json = File.ReadAllText(QuestsPath);
-            QuestSave questSave = JsonUtility.FromJson<QuestSave>(json);
             _stateSaver.ApplyQuestSave(questSave);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Ошибка загрузки данных: {ex}");
         }
     }
 
@@ -135,26 +74,12 @@ public class SaveManager : MonoBehaviour
         try
         {
             File.Delete(PlayerPath);
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError("Ошибка удаления данных игрока: " + ex);
-        }
-        try
-        {
             File.Delete(EnvironmentPath);
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError("Ошибка удаления данных окружения: " + ex);
-        }
-        try
-        {
             File.Delete(QuestsPath);
         }
         catch (Exception ex)
         {
-            Debug.LogError("Ошибка удаления данных квестов: " + ex);
+            Debug.LogError("Ошибка удаления данных: " + ex);
         }
     }
 }

@@ -1,8 +1,10 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using Zenject;
 
-public class InputSystemManager : MonoBehaviour
+public class InputSystemManager : IInitializable, IDisposable
 {
     public UnityEvent<Vector2> OnTouchAtPosition { get; } = new();
     public UnityEvent OnTouch { get; } = new();
@@ -24,12 +26,12 @@ public class InputSystemManager : MonoBehaviour
 
     private InputSystem_Actions _inputSystem;
 
-    void Awake()
+    public InputSystemManager()
     {
         _inputSystem = new();
     }
 
-    void OnEnable()
+    public void Initialize()
     {
         _inputSystem.Enable();
 
@@ -45,7 +47,7 @@ public class InputSystemManager : MonoBehaviour
         _inputSystem.Player.Move.canceled += OnMoveCancelled;
     }
 
-    void OnDisable()
+    public void Dispose()
     {
         _inputSystem.Disable();
 

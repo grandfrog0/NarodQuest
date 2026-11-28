@@ -9,7 +9,6 @@ public class GameInstaller : MonoInstaller
     [SerializeField] private JoystickController _interactJoystick;
 
     [Header("Main")]
-    [SerializeField] private InputSystemManager _inputSystemManager;
     [SerializeField] private ObjectRegistrator _objectRegistrator;
     [SerializeField] private SaveManager _saveManager;
     [SerializeField] private StateSaver _stateSaver;
@@ -21,7 +20,6 @@ public class GameInstaller : MonoInstaller
     [SerializeField] private CameraConstraintsRegistrator _cameraConstraintsRegistrator;
     [SerializeField] private DroppedItemsRegistrator _droppedItemsRegistrator;
     [SerializeField] private DescriptablesRegistrator _descriptablesRegistrator;
-    [SerializeField] private OBSOLETE_QuestsRegistrator _questsRegistrator;
     [SerializeField] private StateObjectsRegistrator _stateObjectsRegistrator;
     [SerializeField] private ItemRegistrator _itemRegistrator;
 
@@ -42,7 +40,7 @@ public class GameInstaller : MonoInstaller
         Container.BindInstance(_interactJoystick).When(x => x.MemberName == "interactJoystick");
 
         // Main
-        Container.BindInstance(_inputSystemManager);
+        Container.BindInterfacesAndSelfTo<InputSystemManager>().AsSingle().NonLazy();
         Container.BindInstance(_objectRegistrator);
         Container.BindInstance(_saveManager);
         Container.BindInstance(_stateSaver);
@@ -51,23 +49,20 @@ public class GameInstaller : MonoInstaller
         Container.BindInstance(_dialogWindowManager);
 
         // Registrators
+        Container.Bind<TaggedObjectsContainer>().AsSingle();
         Container.BindInstance(_cameraConstraintsRegistrator);
         Container.BindInstance(_droppedItemsRegistrator);
         Container.BindInstance(_descriptablesRegistrator);
-        Container.BindInstance(_questsRegistrator);
         Container.BindInstance(_stateObjectsRegistrator);
         Container.BindInstance(_itemRegistrator);
 
-        Container.Bind<TaggedObjectsContainer>().FromNew().AsSingle();
-
         // Services
+        Container.Bind<HintService>().AsSingle();
         Container.BindInstance(_cameraController);
         Container.BindInstance(_bringableObjectController);
         Container.BindInstance(_playerMove);
         Container.BindInstance(_interactablesSelector);
         Container.BindInstance(_interactor);
         Container.BindInstance(_locatorManager);
-
-        Container.Bind<HintService>().FromNew().AsSingle();
     }
 }

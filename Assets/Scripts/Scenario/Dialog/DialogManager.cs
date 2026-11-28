@@ -59,6 +59,22 @@ public class DialogManager : MonoBehaviour
         ShowDialog();
     }
 
+    public void FinishPermanent(DialogConfig dialog)
+    {
+        if (_currentDialog != dialog)
+        {
+            return;
+        }
+
+        if (_dialogWindowManager.IsTyping)
+        {
+            _dialogWindowManager.FinishTyping();
+        }
+
+        _dialogWindowManager.HideWindow();
+        OnDialogComplete.Invoke();
+    }
+
     private void ShowDialog()
     {
         if (_dialogWindowManager.IsTyping)

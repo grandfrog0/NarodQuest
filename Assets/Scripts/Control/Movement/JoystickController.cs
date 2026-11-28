@@ -25,27 +25,12 @@ public class JoystickController : MonoBehaviour, IDragHandler, IEndDragHandler, 
 
     private bool _isCancelled;
 
-    [Inject] QuestLauncher _launcher;
-    [SerializeField] private QuestInfo _questInfo;
-
-    void Awake()
+    private void Awake()
     {
         Initialize();
-
-        if (_questInfo)
-        {
-            Debug.Log(_launcher);
-            _launcher.TryLaunch(_questInfo);
-
-            int a = 0;
-            OnPerformed += () =>
-            {
-                _launcher.SkipTo(_questInfo, ++a);
-            };
-        }
     }
 
-    void Initialize()
+    private void Initialize()
     {
         _joystick = GetComponent<RectTransform>();
         _startPosition = _joystick.anchoredPosition;

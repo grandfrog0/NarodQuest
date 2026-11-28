@@ -2,10 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class VisitGrannyQuest : OBSOLETE_AbstractQuest
+public class VisitGrannyQuest
 {
-    public override OBSOLETE_GameQuestStep GameStep => OBSOLETE_GameQuestStep.VisitGranny;
-
+    /*
     [Header("Preparing")]
     [SerializeField] private Transform _hutTransform;
     [Header("Main")]
@@ -76,7 +75,7 @@ public class VisitGrannyQuest : OBSOLETE_AbstractQuest
         
         //_isInsideHut = tags[^1] == "1";
 
-        //if (/*CurrentState is OBSOLETE_StateOfQuest.Started*/ false)
+        //if (CurrentState is OBSOLETE_StateOfQuest.Started false)
         //{
         //    ShowHintToStart();
         //}
@@ -86,8 +85,6 @@ public class VisitGrannyQuest : OBSOLETE_AbstractQuest
     {
         Mark.Target = CurrentTarget;
     }
+    */
 }
-public class OBSOLETE_StateOfQuest
-{
-    public class Started { }
-}
+    

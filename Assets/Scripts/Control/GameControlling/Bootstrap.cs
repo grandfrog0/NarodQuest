@@ -12,7 +12,6 @@ public class Bootstrap : MonoBehaviour
     private DroppedItemsRegistrator _droppedItemsRegistrator;
     private DescriptablesRegistrator _descriptablesRegistrator;
     private ItemRegistrator _itemRegistrator;
-    private OBSOLETE_QuestsRegistrator _questsRegistrator;
 
     [Inject]
     private void Construct(
@@ -23,8 +22,7 @@ public class Bootstrap : MonoBehaviour
         BringableObjectController bringableController,
         DroppedItemsRegistrator droppedItemsRegistrator,
         DescriptablesRegistrator descriptablesRegistrator,
-        ItemRegistrator itemRegistrator,
-        OBSOLETE_QuestsRegistrator questsRegistrator
+        ItemRegistrator itemRegistrator
         )
     {
         _saveManager = saveManager;
@@ -35,7 +33,6 @@ public class Bootstrap : MonoBehaviour
         _droppedItemsRegistrator = droppedItemsRegistrator;
         _descriptablesRegistrator = descriptablesRegistrator;
         _itemRegistrator = itemRegistrator;
-        _questsRegistrator = questsRegistrator;
     }
 
     private void Start()
@@ -58,9 +55,6 @@ public class Bootstrap : MonoBehaviour
 
         // Игрок
         _interactablesSelector.Initialize();
-            
-        // Другое
-        _questsRegistrator.Initialize();
     }
 
     private void OnApplicationQuit()

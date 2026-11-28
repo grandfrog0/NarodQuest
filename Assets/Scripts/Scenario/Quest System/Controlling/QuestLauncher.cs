@@ -5,48 +5,17 @@ using Zenject;
 
 public class QuestLauncher
 {
-    private HashSet<IQuest> _quests;
-    private IQuest.Factory _factory;
+    private QuestContainer _questContainer;
 
-    public QuestLauncher(IQuest.Factory factory)
+    public QuestLauncher(QuestContainer questContainer)
     {
-        _factory = factory;
-        _quests = new HashSet<IQuest>();
+        _questContainer = questContainer;
     }
 
     public void TryLaunch(QuestInfo info)
     {
-        IQuest quest = _quests.FirstOrDefault(x => x?.Info == info);
-
-        if (quest == null)
-        {
-            quest = _factory.Create(info);
-            quest.OnFinished += OnQuestFinished;
-            _quests.Add(quest);
-        }
-
+        IQuest quest = _questContainer.Get(info);
         quest.TryStart();
-
-        Debug.Log(_quests.Count);
-    }
-
-    public void SkipTo(QuestInfo info, int stepIndex)
-    {
-        IQuest quest = _quests.FirstOrDefault(x => x?.Info == info);
-
-        if (quest != null)
-        {
-            quest.SkipTo(stepIndex);
-        }
-    }
-
-    private void OnQuestFinished(object sender, System.EventArgs e)
-    {
-        if (sender is IQuest quest)
-        {
-            _quests.Remove(quest);
-            Debug.Log($"Quest {quest} finished.");
-        }
     }
 }
 

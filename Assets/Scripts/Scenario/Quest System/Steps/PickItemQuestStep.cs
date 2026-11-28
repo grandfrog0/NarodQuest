@@ -4,8 +4,17 @@ using Zenject;
 [CreateAssetMenu(fileName = "PickItemQuestStep", menuName = "SO/Quests/Quest Steps/Pick Item Quest Step")]
 public class PickItemQuestStep : RequireTargetQuestStep<DroppedItem>
 {
+    private InventoryManager _inventoryManager;
+
+    [Inject]
+    private void Construct(InventoryManager inventoryManager)
+    {
+        _inventoryManager = inventoryManager;
+    }
+
     public override void Start()
     {
+        Target.TryUnpick(_inventoryManager.Remove);
         Target.IsActive = true;
         Target.OnPicked += OnPicked;
 
@@ -27,6 +36,7 @@ public class PickItemQuestStep : RequireTargetQuestStep<DroppedItem>
 
     protected override void HandleFinish()
     {
+        HintService.Unmark(Target);
         Target.OnPicked -= OnPicked;
     }
 }
